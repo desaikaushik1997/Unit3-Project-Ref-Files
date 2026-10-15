@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reference library — projects and knowledge files</title>
+<style>
+  :root{
+    --ink:#1F1A36; --ink-soft:#463F63; --paper:#F4F2F8; --card:#FFFFFF; --line:#DDD8E8;
+    --muted:#6A6484; --wash:#ECE8F3; --purple:#5A2D82; --purple-light:#EEE6F7;
+    --teal:#0B6E5C; --teal-light:#DFF3EE; --amber:#8A5A00; --amber-light:#FFF3D6;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#EDE9F7; --ink-soft:#C7C0DD; --paper:#16131F; --card:#201C2D; --line:#3A3450;
+      --muted:#9E97B8; --wash:#2A2540; --purple:#C7A6EE; --purple-light:#33264A;
+      --teal:#7FD8C1; --teal-light:#173430; --amber:#F2C56B; --amber-light:#3A2E10;
+    }
+  }
+  *{box-sizing:border-box;}
+  html{scroll-padding-top:70px; scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:Charter,Georgia,"Iowan Old Style","Times New Roman",serif;
+    line-height:1.55; padding-left:230px;
+  }
+  .sans, nav, .card, .badge, .count, .tag{font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;}
+  a{color:inherit; text-decoration:none;}
+  :focus-visible{outline:2px solid var(--purple); outline-offset:2px; border-radius:4px;}
+
+  nav{
+    position:fixed; top:0; left:0; bottom:0; width:230px; padding:28px 12px;
+    display:flex; flex-direction:column; gap:2px;
+    border-right:1px solid var(--line); background:var(--paper); z-index:10; overflow-y:auto;
+  }
+  nav .nav-title{font-size:12px; font-weight:600; color:var(--muted); padding:0 14px 10px; letter-spacing:.04em; text-transform:uppercase;}
+  nav a{
+    font-size:14.5px; padding:11px 14px; color:var(--muted);
+    border-left:3px solid transparent; border-radius:0 6px 6px 0;
+  }
+  nav a:hover{color:var(--ink); background:var(--wash);}
+  nav a.active{color:var(--ink); border-left-color:var(--purple); background:var(--purple-light); font-weight:600;}
+
+  header{
+    max-width:920px; margin:0 auto; padding:52px 28px 28px; border-bottom:1px solid var(--line);
+  }
+  header h1{font-size:32px; font-weight:400; margin:0 0 8px; letter-spacing:-0.01em;}
+  header p{font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif; color:var(--muted); font-size:15px; margin:0; max-width:70ch;}
+
+  main{max-width:920px; margin:0 auto; padding:16px 28px 90px;}
+  section{padding-top:28px;}
+  .head{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:8px;}
+  .head h2{font-size:26px; font-weight:400; margin:0;}
+  .count{font-size:12px; color:var(--purple); background:var(--purple-light); padding:3px 9px; border-radius:20px;}
+  .lede{font-size:16.5px; color:var(--ink-soft); margin:12px 0 22px; max-width:72ch;}
+
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:14px;}
+  .card{
+    display:flex; flex-direction:column; background:var(--card); border:1px solid var(--line);
+    border-radius:10px; padding:18px 20px; transition:border-color .15s, box-shadow .15s;
+  }
+  .card:hover{border-color:var(--purple); box-shadow:inset 3px 0 0 var(--purple);}
+  .card-top{display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;}
+  .badge{font-size:12px; color:var(--purple); background:var(--purple-light); padding:2px 9px; border-radius:20px;}
+  .badge.ref{color:var(--teal); background:var(--teal-light);}
+  .version{font-size:12px; color:var(--muted); border:1px solid var(--line); padding:2px 9px; border-radius:20px;}
+  .card h3{margin:0 0 6px; font-size:17px; font-weight:600;}
+  .card p{margin:0 0 14px; font-size:13.5px; color:var(--ink-soft);}
+  .open{margin-top:auto; font-size:12.5px; font-weight:600; color:var(--purple);}
+  .card:hover .open{text-decoration:underline;}
+
+  footer{max-width:920px; margin:0 auto; padding:0 28px 40px; font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif; font-size:12.5px; color:var(--muted);}
+
+  @media (max-width:760px){
+    body{padding-left:0;}
+    nav{position:static; width:auto; flex-direction:row; flex-wrap:wrap; padding:12px; border-right:none; border-bottom:1px solid var(--line);}
+    nav .nav-title{display:none;}
+    nav a{border-left:none; border-bottom:3px solid transparent; border-radius:6px 6px 0 0; padding:8px 12px;}
+    nav a.active{border-bottom-color:var(--purple);}
+    header{padding-top:32px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-title">Contents</div>
+  <a href="#projects" class="active">Projects</a>
+  <a href="#knowledge">Knowledge files</a>
+</nav>
+
+<header>
+  <h1>Reference library</h1>
+  <p>Project references and background knowledge files in one place. Choose a card to open the full reference page.</p>
+</header>
+
+<main>
+
+  <!-- ============ SECTION 1: PROJECTS ============ -->
+  <section id="projects">
+    <div class="head">
+      <h2>Project references</h2>
+      <span class="count">3 projects</span>
+    </div>
+    <p class="lede">Reference pages for individual client projects: disease overview, product landscape, content plan and workflow.</p>
+
+    <div class="grid">
+      <a class="card" href="Edwards-reference-HTML_V1.7.html">
+        <div class="card-top"><span class="badge">Edwards</span><span class="version">v1.7</span></div>
+        <h3>Valvular heart disease — therapy reference</h3>
+        <p>Disease overview and Edwards Lifesciences product landscape. Current phase: III.</p>
+        <span class="open">Open reference →</span>
+      </a>
+
+      <a class="card" href="GSK-Seretide-reference-HTML_V1.1.html">
+        <div class="card-top"><span class="badge">GSK</span><span class="version">v1.1</span></div>
+        <h3>Asthma — Seretide project reference</h3>
+        <p>Asthma overview, product landscape and content plan. Current phase: I.</p>
+        <span class="open">Open reference →</span>
+      </a>
+
+      <a class="card" href="Servier-Daflon-reference-HTML_V1.0.html">
+        <div class="card-top"><span class="badge">Servier</span><span class="version">v1.0</span></div>
+        <h3>Haemorrhoids &amp; venous disease — Daflon</h3>
+        <p>Haemorrhoidal disease, chronic venous disease and content plan for Daflon (MPFF). Current phase: I.</p>
+        <span class="open">Open reference →</span>
+      </a>
+      <!-- Add new project cards above this line -->
+    </div>
+  </section>
+
+  <!-- ============ SECTION 2: KNOWLEDGE FILES ============ -->
+  <section id="knowledge">
+    <div class="head">
+      <h2>Disease area &amp; portfolio knowledge</h2>
+      <span class="count">1 file</span>
+    </div>
+    <p class="lede">Background files for understanding a disease area or a company portfolio. These are not tied to a single project.</p>
+
+    <div class="grid">
+      <a class="card" href="GSK-respiratory-treatment-pathway-complete_V1.4.html">
+        <div class="card-top"><span class="badge ref">GSK · Respiratory</span><span class="version">v1.4</span></div>
+        <h3>GSK respiratory treatment pathway</h3>
+        <p>Asthma and COPD treatment pathways, GSK brand positioning and the final escalation summary.</p>
+        <span class="open">Open reference →</span>
+      </a>
+      <!-- Add new knowledge-file cards above this line -->
+    </div>
+  </section>
+
+</main>
+
+<footer>Reference library · open any card to view the full page</footer>
+
+<script>
+  // Highlight the nav link for the section currently in view
+  (function(){
+    var links = document.querySelectorAll('nav a');
+    var secs = [].map.call(links, function(a){ return document.querySelector(a.getAttribute('href')); });
+    function update(){
+      var y = window.scrollY + 120, cur = 0;
+      secs.forEach(function(s,i){ if (s && s.offsetTop <= y) cur = i; });
+      links.forEach(function(a,i){ a.classList.toggle('active', i === cur); });
+    }
+    window.addEventListener('scroll', update, {passive:true});
+    update();
+  })();
+</script>
+</body>
+</html>

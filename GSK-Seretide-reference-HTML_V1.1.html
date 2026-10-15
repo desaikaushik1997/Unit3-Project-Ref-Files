@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asthma — Seretide project reference</title>
+<style>
+  :root{
+    --ink:#1F1A36;
+    --ink-soft:#463F63;
+    --paper:#F4F2F8;
+    --card:#FFFFFF;
+    --line:#DDD8E8;
+    --muted:#6A6484;
+    --wash:#ECE8F3;
+    --purple:#5A2D82;
+    --purple-light:#EEE6F7;
+    --orange:#B9431A;
+    --orange-light:#FCEBE2;
+    --teal:#0B6E5C;
+    --teal-light:#DFF3EE;
+    --blue:#1F5FA8;
+    --blue-light:#E4EEF9;
+    --amber:#8A5A00;
+    --amber-light:#FFF3D6;
+    --rose:#A8205F; --rose-light:#FBE4EE; --green:#2F7A1F; --green-light:#E2F3D9;
+    --cyan:#007A8C; --cyan-light:#D9F1F5; --gold:#6E5F00; --gold-light:#F7F0BF;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#EDE9F7; --ink-soft:#C7C0DD; --paper:#16131F; --card:#201C2D; --line:#3A3450;
+      --muted:#9E97B8; --wash:#2A2540; --purple:#C7A6EE; --purple-light:#33264A;
+      --orange:#F0A07E; --orange-light:#3B2419; --teal:#7FD8C1; --teal-light:#173430;
+      --blue:#9CC4F0; --blue-light:#1B2C42; --amber:#F2C56B; --amber-light:#3A2E10;
+      --rose:#F29BC0; --rose-light:#3E1D2D; --green:#9AD77F; --green-light:#1F3318; --cyan:#7FD3E2; --cyan-light:#12343A; --gold:#E6D86A; --gold-light:#363110;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#EDE9F7; --ink-soft:#C7C0DD; --paper:#16131F; --card:#201C2D; --line:#3A3450;
+    --muted:#9E97B8; --wash:#2A2540; --purple:#C7A6EE; --purple-light:#33264A;
+    --orange:#F0A07E; --orange-light:#3B2419; --teal:#7FD8C1; --teal-light:#173430;
+    --blue:#9CC4F0; --blue-light:#1B2C42; --amber:#F2C56B; --amber-light:#3A2E10;
+    --rose:#F29BC0; --rose-light:#3E1D2D; --green:#9AD77F; --green-light:#1F3318; --cyan:#7FD3E2; --cyan-light:#12343A; --gold:#E6D86A; --gold-light:#363110;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-padding-top:70px;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:Charter,Georgia,"Iowan Old Style","Times New Roman",serif;
+    line-height:1.55;
+  }
+  .sans, button, table, .card-body-inner, .facts, .badge, .chip{
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  button{color:inherit;}
+  :focus-visible{outline:2px solid var(--purple); outline-offset:2px; border-radius:4px;}
+
+  header{
+    max-width:920px; margin:0 auto; padding:52px 28px 28px;
+    border-bottom:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap;
+  }
+  header h1{font-size:32px; font-weight:400; margin:0 0 8px; letter-spacing:-0.01em;}
+  header p{font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif; color:var(--muted); font-size:15px; margin:0;}
+  .header-tags{display:flex; gap:8px; align-items:center; flex-wrap:wrap;}
+  .version-tag{
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif; font-size:12px; color:var(--muted);
+    border:1px solid var(--line); padding:3px 10px; border-radius:20px; white-space:nowrap;
+  }
+  .pending-tag{
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif; font-size:12px; font-weight:600;
+    color:var(--amber); background:var(--amber-light); padding:3px 10px; border-radius:20px; white-space:nowrap;
+  }
+
+  body{padding-left:230px;}
+  nav{
+    position:fixed; top:0; left:0; bottom:0; width:230px; padding:28px 12px; display:flex; flex-direction:column; gap:2px;
+    border-right:1px solid var(--line); background:var(--paper); z-index:10; overflow-y:auto;
+  }
+  nav button{
+    font-size:14.5px; background:none; border:none; padding:11px 14px; cursor:pointer; color:var(--muted);
+    border-left:3px solid transparent; border-radius:0 6px 6px 0; text-align:left;
+  }
+  nav button:hover{color:var(--ink); background:var(--wash);}
+  nav button.active{color:var(--ink); border-left-color:var(--purple); background:var(--purple-light); font-weight:600;}
+
+  nav button[data-panel="history"]{
+    margin-top:auto; font-size:12px; padding:8px 14px; opacity:.75; border-top:1px solid var(--line); border-radius:0;
+  }
+  nav button[data-panel="history"]:hover, nav button[data-panel="history"].active{opacity:1;}
+
+  .vh-entry{border:1px solid var(--line); border-radius:10px; background:var(--card); padding:16px 20px; margin-bottom:14px; font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;}
+  .vh-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:8px;}
+  .vh-top strong{font-size:16px;}
+  .vh-date{font-size:12.5px; color:var(--muted);}
+  .vh-entry ul{margin:0; padding-left:20px; font-size:13.5px; color:var(--ink-soft);}
+  .vh-entry li{margin-bottom:4px;}
+
+  main{max-width:920px; margin:0 auto; padding:40px 28px 90px;}
+  section.panel{display:none;}
+  section.panel.active{display:block;}
+
+  .head{margin-bottom:8px; display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;}
+  .head h2{font-size:26px; font-weight:400; margin:0;}
+  .phase-tag{
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif; font-size:12px; color:var(--purple);
+    background:var(--purple-light); padding:3px 9px; border-radius:20px; display:inline-block;
+  }
+  .phase-tag.warn{color:var(--amber); background:var(--amber-light);}
+  .lede{font-size:16.5px; margin:16px 0 8px; color:var(--ink-soft);}
+  .lede p{margin:0 0 14px; max-width:72ch;}
+
+  .facts{
+    display:grid; grid-template-columns:1fr 1fr; gap:10px 24px; margin:22px 0 32px; padding:18px 20px;
+    background:var(--card); border:1px solid var(--line); border-radius:10px; font-size:13.5px;
+  }
+  .facts dt{color:var(--muted); margin-bottom:2px;}
+  .facts dd{margin:0 0 10px; color:var(--ink); font-weight:600;}
+
+  h3.section-label{
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif; font-size:14px; color:var(--muted);
+    font-weight:600; margin:34px 0 14px;
+  }
+  h3.section-label:first-child{margin-top:0;}
+
+  .chips{display:flex; gap:8px; flex-wrap:wrap; margin:0 0 6px;}
+  .chip{
+    font-size:12.5px; border:1px solid var(--line); background:var(--card); color:var(--ink);
+    padding:4px 12px; border-radius:20px; cursor:default;
+  }
+  button.chip{cursor:pointer;}
+  button.chip:hover{border-color:var(--purple); color:var(--purple);}
+  button.chip.on{background:var(--purple); border-color:var(--purple); color:#fff;}
+  :root[data-theme="dark"] button.chip.on, :root:not([data-theme="light"]) button.chip.on{color:#16131F;}
+
+  .phase-grid{display:grid; gap:14px; margin:8px 0;}
+  .phase-card{
+    background:var(--card); border:1px solid var(--line); border-radius:10px; padding:18px 20px;
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  .phase-card.current{border-color:var(--purple); box-shadow:inset 3px 0 0 var(--purple);}
+  .phase-card.proposed{border-style:dashed; border-color:var(--amber);}
+  .phase-card-top{display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap;}
+  .phase-card h3{margin:0; font-size:17px; font-weight:600;}
+  .phase-status{font-size:12px; color:var(--purple); background:var(--purple-light); padding:2px 9px; border-radius:20px;}
+  .phase-status.warn{color:var(--amber); background:var(--amber-light);}
+  .phase-counts{display:flex; gap:28px; margin:14px 0 12px; flex-wrap:wrap;}
+  .count-num{font-size:26px; font-weight:600; line-height:1;}
+  .count-label{font-size:12.5px; color:var(--muted); margin-top:4px;}
+  .phase-note{font-size:13px; color:var(--ink-soft); margin:0 0 6px;}
+  .format-counts{font-size:12px; color:var(--muted); margin:8px 0 0;}
+  .go-btn{
+    font-size:12.5px; font-weight:600; cursor:pointer; border:1px solid var(--purple);
+    background:var(--purple-light); color:var(--purple); padding:5px 12px; border-radius:20px; margin-top:12px;
+  }
+  .go-btn:hover{background:var(--purple); color:#fff;}
+
+  .callout{
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif; font-size:13.5px;
+    background:var(--orange-light); color:var(--orange); border-radius:8px; padding:12px 16px; margin:20px 0 0;
+  }
+  .callout.info{background:var(--blue-light); color:var(--blue);}
+  .callout.warn{background:var(--amber-light); color:var(--amber);}
+  .callout strong{font-weight:700;}
+  .callout ul{margin:6px 0 0; padding-left:18px;}
+  .callout li{margin-bottom:3px;}
+
+  .tablewrap{overflow-x:auto; border:1px solid var(--line); border-radius:8px; background:var(--card);}
+  table{width:100%; border-collapse:collapse; font-size:13px;}
+  th{text-align:left; background:var(--wash); color:var(--muted); font-weight:600; padding:9px 12px; white-space:nowrap;}
+  td{padding:9px 12px; border-top:1px solid var(--line); vertical-align:top;}
+  td.nowrap{white-space:nowrap;}
+  td.muted{color:var(--muted);}
+
+  .card{border:1px solid var(--line); border-radius:10px; background:var(--card); margin-bottom:14px; overflow:hidden;}
+  .card-head, .ci-head{
+    width:100%; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:16px 20px;
+    cursor:pointer; background:none; border:none; text-align:left;
+  }
+  .card-head:hover, .ci-head:hover{background:var(--wash);}
+  .card-title-wrap{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+  .card-title{font-size:18px; font-weight:600;}
+  .badge{font-size:11.5px; padding:2px 8px; border-radius:20px; white-space:nowrap; display:inline-block;}
+  .badge.article{background:var(--purple-light); color:var(--purple);}
+  .badge.infographic{background:var(--orange-light); color:var(--orange);}
+  .badge.webinar{background:var(--rose-light); color:var(--rose);}
+  .badge.aware{background:var(--blue-light); color:var(--blue);}
+  .badge.consider{background:var(--gold-light); color:var(--gold);}
+  .badge.decide{background:var(--cyan-light); color:var(--cyan);}
+  .badge.published{background:var(--green-light); color:var(--green);}
+  .badge.pending{background:var(--amber-light); color:var(--amber);}
+  .badge.note{background:var(--wash); color:var(--muted);}
+  .chevron{color:var(--muted); font-size:12px; transition:transform .2s; flex-shrink:0;}
+  .open > .card-head .chevron, .open > .ci-head .chevron{transform:rotate(180deg);}
+  .fold{display:grid; grid-template-rows:0fr; transition:grid-template-rows .28s ease;}
+  .open > .fold{grid-template-rows:1fr;}
+  .fold > div{overflow:hidden;}
+  @media (prefers-reduced-motion: reduce){ .fold, .chevron{transition:none;} }
+
+  .card-body-inner{padding:0 20px 20px; font-size:14.5px; color:var(--ink-soft);}
+  .card-body-inner p{margin:0 0 10px;}
+  .card-body-inner ul, .card-body-inner ol{margin:0 0 4px; padding-left:20px;}
+  .card-body-inner li{margin-bottom:5px;}
+  .spec{display:grid; grid-template-columns:1fr 1fr; gap:6px 20px; margin:0 0 14px; font-size:13.5px;}
+  .spec div span{display:block; color:var(--muted); font-size:12px;}
+  .spec div strong{color:var(--ink);}
+
+  .evidence{margin-top:16px; padding-top:14px; border-top:1px solid var(--line);}
+  .evidence-label{font-size:12px; color:var(--muted); font-weight:600; margin-bottom:8px;}
+  .trial-list{list-style:none; margin:0; padding:0;}
+  .trial-list li{padding:9px 0; border-bottom:1px dashed var(--line); font-size:13.5px;}
+  .trial-list li:last-child{border-bottom:none;}
+  .trial-name{font-weight:600; color:var(--ink);}
+  .trial-theme{color:var(--purple); font-size:12px;}
+
+  .toolbar{display:flex; gap:10px; align-items:center; justify-content:space-between; flex-wrap:wrap; margin:0 0 14px;}
+  .toolbar .chips{margin:0;}
+  .link-btn{font-size:12.5px; background:none; border:none; color:var(--purple); cursor:pointer; text-decoration:underline; padding:4px;}
+
+  .content-items{display:flex; flex-direction:column; gap:8px;}
+  .content-item{border:1px solid var(--line); border-radius:8px; background:var(--card); overflow:hidden;}
+  .ci-head{padding:11px 14px; font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;}
+  .ci-head-left{display:flex; align-items:baseline; gap:10px; flex:1; min-width:0;}
+  .ci-num{font-size:12px; color:var(--muted); flex-shrink:0; min-width:26px;}
+  .ci-topic{font-size:13.5px; font-weight:600; color:var(--ink);}
+  .ci-badges{display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end;}
+  .ci-meta{font-size:12px; color:var(--muted); margin:0 0 12px;}
+  .ci-block-label{font-size:12px; color:var(--muted); font-weight:600; margin:14px 0 6px;}
+  .ci-block-label:first-of-type{margin-top:0;}
+  .ci-note{font-size:12.5px; color:var(--amber); background:var(--amber-light); border-radius:6px; padding:8px 10px; margin:10px 0 0;}
+  .pending-note{
+    font-size:13px; color:var(--muted); font-style:italic; padding:14px 16px;
+    border:1px dashed var(--line); border-radius:8px; margin-top:12px;
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+
+  .stage-row{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:8px 0 20px;}
+  .stage{
+    background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px;
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  .stage .count-num{font-size:24px;}
+  .stage p{font-size:12.5px; color:var(--muted); margin:6px 0 0;}
+  .stage.aware{border-top:3px solid var(--blue);}
+  .stage.consider{border-top:3px solid var(--gold);}
+  .stage.decide{border-top:3px solid var(--cyan);}
+
+  .check-list{list-style:none; margin:0; padding:0; font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;}
+  .check-list li{
+    display:grid; grid-template-columns:auto 1fr; gap:12px; padding:12px 14px; background:var(--card);
+    border:1px solid var(--line); border-radius:8px; margin-bottom:8px; font-size:13.5px; align-items:start;
+  }
+  .check-list li.done{background:var(--teal-light);}
+  .check-list li.done .step-title{text-decoration:line-through; text-decoration-color:var(--muted);}
+  .check-list input{margin-top:3px; width:17px; height:17px; accent-color:var(--purple);}
+  .step-title{font-weight:600; color:var(--ink);}
+  .step-no{color:var(--muted); font-weight:400; margin-right:6px;}
+  .step-text{color:var(--ink-soft); margin-top:2px;}
+  .step-text ul{margin:4px 0 0; padding-left:18px;}
+  .progress{
+    display:flex; align-items:center; gap:12px; margin:0 0 14px; font-size:13px; color:var(--muted);
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  .bar{flex:1; height:6px; background:var(--wash); border-radius:6px; overflow:hidden; max-width:320px;}
+  .bar i{display:block; height:100%; width:0; background:var(--purple); transition:width .25s;}
+  .donts{list-style:none; padding:0; margin:0; font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;}
+  .donts li{
+    padding:10px 14px; border-left:3px solid var(--orange); background:var(--orange-light); color:var(--orange);
+    border-radius:0 6px 6px 0; margin-bottom:6px; font-size:13.5px;
+  }
+  .role-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px;}
+  .role{
+    background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px; font-size:13.5px;
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  .role strong{display:block; color:var(--ink); margin-bottom:3px;}
+  .role span{color:var(--ink-soft);}
+
+  footer{
+    max-width:920px; margin:0 auto; padding:22px 28px 60px;
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif; font-size:12.5px; color:var(--muted);
+    border-top:1px solid var(--line);
+  }
+  footer p{margin:0 0 8px;}
+  footer ul{margin:4px 0 10px; padding-left:18px;}
+
+  @media (max-width:640px){
+    .facts, .spec, .role-grid, .stage-row{grid-template-columns:1fr;}
+    header{padding:40px 20px 22px;}
+    body{padding-left:0;}
+    nav{position:sticky; width:auto; bottom:auto; right:0; flex-direction:row; padding:0 14px; border-right:none; border-bottom:1px solid var(--line); overflow-x:auto; overflow-y:hidden;}
+    nav button[data-panel="history"]{margin-top:0; border-top:none;}
+    nav button{white-space:nowrap; border-left:none; border-bottom:2px solid transparent; border-radius:0;}
+    nav button.active{border-bottom-color:var(--purple); background:none;}
+    main{padding:30px 18px 80px;}
+    .ci-head{flex-wrap:wrap;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Asthma — Seretide project reference</h1>
+    <p>GSK Seretide project · asthma overview, product landscape and content plan · current phase: I</p>
+  </div>
+  <div class="header-tags">
+    <span class="pending-tag">Phase 2 strategy: not yet confirmed by client</span>
+    <span class="version-tag">v1.1</span>
+  </div>
+</header>
+
+<nav id="tabs" aria-label="Sections">
+  <button class="active" data-panel="overview">Project overview</button>
+  <button data-panel="phase1">Phase 1 contents</button>
+  <button data-panel="phase2">Phase 2 strategy</button>
+  <button data-panel="asthma">Asthma</button>
+  <button data-panel="seretide">Seretide</button>
+  <button data-panel="workflow">Publishing workflow</button>
+  <button data-panel="history">Version history</button>
+</nav>
+
+<main>
+
+  <!-- OVERVIEW -->
+  <section class="panel active" id="overview">
+    <div class="head">
+      <h2>Project overview</h2>
+      <span class="phase-tag">Currently in Phase 1</span>
+      <span class="phase-tag warn">Phase 2 proposed</span>
+    </div>
+    <div class="lede">
+      <p>The Seretide project produces medical content on asthma management for healthcare professionals (HCPs) across the Middle East, Turkey and Viet Nam, with Seretide (salmeterol/fluticasone propionate, an ICS/LABA) as the GSK product in focus. Content is created by Cactus Communications, approved by GSK through Content Lab, and published on MedSynapse under the Asthma Insights CxC and on iDoctus.</p>
+      <p>Phase 1 ran without a set content strategy. For Phase 2, we are recommending a structured plan to GSK, organised along the HCP journey from awareness to clinical decision making. GSK has not confirmed it yet.</p>
+    </div>
+
+    <dl class="facts">
+      <div><dt>Client</dt><dd>GSK</dd></div>
+      <div><dt>Product</dt><dd>Seretide (salmeterol/fluticasone propionate)</dd></div>
+      <div><dt>Therapy area</dt><dd>Asthma</dd></div>
+      <div><dt>Audience</dt><dd>HCPs — three specialties</dd></div>
+      <div><dt>Publishing platforms</dt><dd>MedSynapse (Asthma Insights CxC) and iDoctus</dd></div>
+      <div><dt>Client approval route</dt><dd>GSK Content Lab (CL)</dd></div>
+      <div><dt>Scope</dt><dd>14 RTP contents (12 originally; 2 more added in Sep 2026)</dd></div>
+      <div><dt>CXCenter</dt><dd>AsthmaInsight</dd></div>
+      <div><dt>Publication account</dt><dd>d8685e27-666b-4f56-b1a1-d6baa13415c8</dd></div>
+      <div><dt>KPIs</dt><dd>1992</dd></div>
+    </dl>
+
+    <h3 class="section-label">Regions (12)</h3>
+    <p class="sans" style="font-size:13px;color:var(--muted);margin:0 0 8px;">MedSynapse regions (9)</p>
+    <div class="chips">
+      <span class="chip">Bahrain</span><span class="chip">Egypt</span><span class="chip">Kuwait</span><span class="chip">Oman</span>
+      <span class="chip">Qatar</span><span class="chip">Saudi Arabia</span><span class="chip">Turkey</span>
+      <span class="chip">United Arab Emirates</span><span class="chip">Viet Nam</span>
+    </div>
+    <p class="sans" style="font-size:13px;color:var(--muted);margin:12px 0 8px;">iDoctus regions — LATAM (3)</p>
+    <div class="chips">
+      <span class="chip">Mexico</span><span class="chip">Brazil</span><span class="chip">Argentina</span>
+    </div>
+
+    <h3 class="section-label">Public specialties (3)</h3>
+    <div class="chips">
+      <span class="chip">Respiratory Medicine</span><span class="chip">General Medicine</span><span class="chip">Internal Medicine</span>
+    </div>
+
+    <h3 class="section-label">Internal specialties (3)</h3>
+    <div class="chips">
+      <span class="chip">Respiratory Medicine</span><span class="chip">General Medicine</span><span class="chip">Internal Medicine</span>
+    </div>
+
+    <h3 class="section-label">Phases</h3>
+    <div class="phase-grid">
+      <div class="phase-card current">
+        <div class="phase-card-top"><h3>Phase 1</h3><span class="phase-status">In progress</span></div>
+        <div class="phase-counts">
+          <div><div class="count-num">14</div><div class="count-label">Contents planned</div></div>
+          <div><div class="count-num">10</div><div class="count-label">Published (C1–C10)</div></div>
+          <div><div class="count-num">4</div><div class="count-label">Details to be added</div></div>
+        </div>
+        <p class="phase-note">No set content strategy. Content 10 is the latest to go live.</p>
+        <p class="format-counts">Published formats: 3 Article &middot; 6 Infographic &middot; 1 Webinar (recorded video plus a hosting page)</p>
+        <button class="go-btn" data-goto="phase1">View Phase 1 contents</button>
+      </div>
+      <div class="phase-card proposed">
+        <div class="phase-card-top"><h3>Phase 2</h3><span class="phase-status warn">Proposed — awaiting GSK confirmation</span></div>
+        <div class="phase-counts">
+          <div><div class="count-num">12</div><div class="count-label">Contents proposed</div></div>
+          <div><div class="count-num">3</div><div class="count-label">Journey stages</div></div>
+        </div>
+        <p class="phase-note">Our recommendation to GSK: 4 Awareness, 7 Consideration and 1 Clinical decision making content.</p>
+        <p class="format-counts">Proposed formats: 6 Infographic &middot; 5 Article &middot; 1 Webinar</p>
+        <button class="go-btn" data-goto="phase2">View Phase 2 strategy</button>
+      </div>
+    </div>
+    <p class="phase-note" style="margin-top:14px;font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;">If GSK confirms Phase 2, the programme totals 26 contents (14 + 12).</p>
+
+    <div class="callout info"><strong>No discussion questions or options.</strong> Content in this project is published without a discussion question or answer options, in both phases.</div>
+  </section>
+
+  <!-- PHASE 1 -->
+  <section class="panel" id="phase1">
+    <div class="head">
+      <h2>Phase 1 contents</h2>
+      <span class="phase-tag">10 of 14 published</span>
+    </div>
+    <div class="lede"><p>Phase 1 had no set strategy, so topics were commissioned individually. Contents C1 to C10 are live. Creators and dates come from the publication tracker; where a row was not in the tracker snip, it is marked as to be added.</p></div>
+
+    <h3 class="section-label">Publication tracker</h3>
+    <div class="tablewrap"><table id="tracker"></table></div>
+
+    <h3 class="section-label">Content detail</h3>
+    <div class="toolbar">
+      <div class="chips" id="p1-filter"></div>
+      <div><button class="link-btn" data-expand="p1-list">Expand all</button><button class="link-btn" data-collapse="p1-list">Collapse all</button></div>
+    </div>
+    <div class="content-items" id="p1-list"></div>
+    <div class="pending-note">Contents 11 to 14 are part of Phase 1 but their details have not been added yet.</div>
+  </section>
+
+  <!-- PHASE 2 -->
+  <section class="panel" id="phase2">
+    <div class="head">
+      <h2>Phase 2 strategy</h2>
+      <span class="phase-tag warn">Proposed — not confirmed by client</span>
+    </div>
+    <div class="callout warn"><strong>Status:</strong> this is our recommendation. GSK has not confirmed it, so titles, formats and sequence can still change.</div>
+    <div class="lede"><p>The plan moves HCPs along three stages: understand the topic (Awareness), weigh the evidence (Consideration), and apply it in practice (Clinical decision making). Each content has a marketing objective, focus points and an expected outcome. As in Phase 1, there are no discussion questions or options.</p></div>
+
+    <div class="stage-row">
+      <div class="stage aware"><div class="count-num">4</div><div class="count-label">Awareness</div><p>AI in asthma, uncontrolled asthma reassessment, ICS/LABA pharmacology</p></div>
+      <div class="stage consider"><div class="count-num">7</div><div class="count-label">Consideration</div><p>Real-world evidence, quality of life, adherence, safety, step-down, simulation</p></div>
+      <div class="stage decide"><div class="count-num">1</div><div class="count-label">Clinical decision making</div><p>AI across the asthma care pathway (webinar)</p></div>
+    </div>
+
+    <div class="toolbar">
+      <div class="chips" id="p2-filter"></div>
+      <div><button class="link-btn" data-expand="p2-list">Expand all</button><button class="link-btn" data-collapse="p2-list">Collapse all</button></div>
+    </div>
+    <div class="content-items" id="p2-list"></div>
+    <div class="callout info" style="margin-top:18px;"><strong>About the evidence anchors.</strong> They are suggestions from our research so the team has a starting source for each content. Where no source has been checked yet, the card says so. Confirm every anchor before content development.</div>
+  </section>
+
+  <!-- ASTHMA -->
+  <section class="panel" id="asthma">
+    <div class="head">
+      <h2>Asthma</h2>
+      <span class="phase-tag">Phase 1 and 2</span>
+    </div>
+    <div class="lede">
+      <p>Asthma is a chronic, heterogeneous disease of the lower airways. Ongoing inflammation and airway hyperreactivity cause cough, wheeze, breathlessness and chest tightness that vary over time. Worldwide, an estimated 260 million people are affected.</p>
+      <p>When inflammation is undertreated, lung function can decline, control worsens, exacerbation risk rises and the airways can remodel. Control has two linked domains: current symptom control and future risk. A patient can have few symptoms and still carry a high risk of exacerbation, which is why assessment covers both.</p>
+    </div>
+    <dl class="facts">
+      <div><dt>Nature</dt><dd>Chronic airway inflammation with variable airflow limitation</dd></div>
+      <div><dt>Typical symptoms</dt><dd>Cough, wheeze, breathlessness, chest tightness</dd></div>
+      <div><dt>Control domains</dt><dd>Symptom control and future risk</dd></div>
+      <div><dt>Common assessment tools</dt><dd>ACT, ACQ-5, FEV<sub>1</sub>, PEF</dd></div>
+    </dl>
+
+    <h3 class="section-label">Assessing control</h3>
+    <div class="card"><div class="card-body-inner" style="padding-top:18px;">
+      <p><strong>GINA symptom-control questions (past 4 weeks).</strong> Count the “yes” answers: none is well controlled, 1–2 partly controlled, 3–4 uncontrolled.</p>
+      <ul>
+        <li>Daytime asthma symptoms more than twice a week?</li>
+        <li>Any night waking due to asthma?</li>
+        <li>Reliever needed for symptoms more than twice a week?</li>
+        <li>Any activity limitation due to asthma?</li>
+      </ul>
+      <p style="margin-top:12px;"><strong>Asthma Control Test (ACT).</strong> Five items, scored 5 to 25. A score of 20 or more is well controlled, 16–19 not well controlled and 15 or less very poorly controlled. A change of 3 points is considered clinically meaningful.</p>
+    </div></div>
+    <div class="callout info"><strong>Perception gap (links to C5).</strong> Patients often underestimate symptoms and overestimate control. In one Asia-Pacific survey reported in the MERIT paper, 56% of Malaysian respondents described their asthma as controlled, while measured control was as low as 6%.</div>
+    <div class="callout info"><strong>Mild asthma is not always mild.</strong> In a Malaysian primary care cohort, about half of patients on GINA Step 1–2 treatment still had uncontrolled or partly controlled asthma, and around 46% had at least one severe exacerbation in the past year.</div>
+
+    <h3 class="section-label">GINA stepwise treatment for adults and adolescents</h3>
+    <p class="sans" style="font-size:13.5px;color:var(--ink-soft);margin:0 0 12px;">GINA 2025 and 2026 keep two tracks. Track 1 (preferred) uses ICS-formoterol as the reliever. Track 2 is the alternative, with a separate reliever. Seretide sits in Track 2.</p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Step</th><th>Track 1 (preferred)</th><th>Track 2 (alternative)</th></tr></thead>
+      <tbody>
+        <tr><td class="nowrap">Step 1</td><td>As-needed low-dose ICS-formoterol</td><td>ICS taken whenever SABA is taken (GINA 2026 also adds ICS-SABA as an anti-inflammatory reliever here)</td></tr>
+        <tr><td class="nowrap">Step 2</td><td>As-needed low-dose ICS-formoterol</td><td>Daily low-dose ICS, plus SABA as needed</td></tr>
+        <tr><td class="nowrap">Step 3</td><td>Low-dose maintenance ICS-formoterol with ICS-formoterol as reliever (MART)</td><td><strong>Low-dose maintenance ICS-LABA</strong>, plus SABA as needed</td></tr>
+        <tr><td class="nowrap">Step 4</td><td>Medium-dose maintenance ICS-formoterol (MART)</td><td><strong>Medium-dose maintenance ICS-LABA</strong>, plus SABA as needed. GINA 2025 replaced “medium–high” with “medium” to limit high-dose ICS exposure</td></tr>
+        <tr><td class="nowrap">Step 5</td><td>Add LAMA, assess phenotype, consider high-dose maintenance and biologics</td><td>Add LAMA, assess phenotype, consider high-dose ICS-LABA (ideally 3–6 months) and biologics</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 class="section-label">What is new in GINA 2026 (published 5 May 2026)</h3>
+    <div class="card"><div class="card-body-inner" style="padding-top:18px;">
+      <ul>
+        <li>Four new flowcharts for assessing and treating acute asthma in primary care and acute care settings, with ICS-formoterol added as an option and a lower oxygen threshold (supplemental oxygen only if saturation is below 92%).</li>
+        <li>Track 2 gains ICS-SABA as an anti-inflammatory reliever at Step 1.</li>
+        <li>Step 5 guidance updated, including a budesonide-formoterol-glycopyrronium triple option.</li>
+        <li>New biologic options: depemokimab and a generic anti-IgE.</li>
+        <li>A list of red flags for fatal or near-fatal asthma, and a push to minimise oral corticosteroid use.</li>
+        <li>New assessment tools such as the Chronic Airways Assessment Test (CAAT), and inhaled doses now mostly expressed as delivered doses.</li>
+      </ul>
+    </div></div>
+    <div class="callout"><strong>Reliever overuse.</strong> GINA 2025 notes that dispensing three or more SABA canisters a year is linked to a higher risk of emergency visits or hospitalisation, and twelve or more to a higher risk of death. In Track 2, check that patients are actually taking their maintenance ICS-containing therapy.</div>
+  </section>
+
+  <!-- SERETIDE -->
+  <section class="panel" id="seretide">
+    <div class="head">
+      <h2>Seretide (salmeterol/fluticasone propionate)</h2>
+      <span class="phase-tag">ICS/LABA</span>
+    </div>
+    <div class="lede">
+      <p>Seretide combines two drugs with different modes of action in one inhaler: fluticasone propionate (FP), an inhaled corticosteroid that reduces airway inflammation, and salmeterol, a long-acting β<sub>2</sub>-agonist (LABA) that relaxes airway smooth muscle for at least 12 hours. It is taken regularly, usually twice daily, and is not a reliever.</p>
+    </div>
+    <dl class="facts">
+      <div><dt>Class</dt><dd>ICS/LABA fixed-dose combination</dd></div>
+      <div><dt>Actives</dt><dd>Salmeterol (as xinafoate) and fluticasone propionate</dd></div>
+      <div><dt>Asthma use</dt><dd>Regular maintenance treatment</dd></div>
+      <div><dt>Dosing pattern</dt><dd>Twice daily, regularly, even when symptom-free</dd></div>
+      <div><dt>GINA position</dt><dd>Track 2 (maintenance ICS-LABA plus separate reliever)</dd></div>
+      <div><dt>Not for</dt><dd>Relief of acute symptoms</dd></div>
+    </dl>
+    <div class="callout warn"><strong>Check local labels.</strong> Details below come from the GSK Saudi Arabia Summary of Product Characteristics and GSK international product information. Approved strengths, ages and indications differ by country, so confirm against the current label for Bahrain, Egypt, Kuwait, Qatar, Saudi Arabia, the UAE, Oman, Viet Nam and Turkey before any claim is used.</div>
+
+    <h3 class="section-label">Devices and strengths</h3>
+
+    <div class="card open" data-card>
+      <button class="card-head" aria-expanded="true">
+        <span class="card-title-wrap"><span class="card-title">Seretide Evohaler</span><span class="badge article">Pressurised inhaler (pMDI)</span></span>
+        <span class="chevron">&#9660;</span>
+      </button>
+      <div class="fold"><div><div class="card-body-inner">
+        <div class="spec">
+          <div><span>Strengths (salmeterol/FP per actuation)</span><strong>25/50, 25/125, 25/250 µg</strong></div>
+          <div><span>Supply</span><strong>120 actuations per inhaler</strong></div>
+          <div><span>Adults and adolescents ≥12 years</span><strong>Two inhalations twice daily</strong></div>
+          <div><span>Children ≥4 years</span><strong>25/50 strength, two inhalations twice daily</strong></div>
+        </div>
+        <ul>
+          <li>Propellant is HFA 134a. A spacer can be used by patients who find it hard to coordinate actuation with breathing in.</li>
+          <li>Patients should rinse the mouth with water and spit after use, and should keep their reliever inhaler available at all times.</li>
+          <li>Store below 30°C and protect from frost and direct sunlight. Cold canisters may deliver less effect.</li>
+        </ul>
+      </div></div></div>
+    </div>
+
+    <div class="card" data-card>
+      <button class="card-head" aria-expanded="false">
+        <span class="card-title-wrap"><span class="card-title">Seretide Accuhaler / Diskus</span><span class="badge infographic">Dry-powder inhaler (DPI)</span></span>
+        <span class="chevron">&#9660;</span>
+      </button>
+      <div class="fold"><div><div class="card-body-inner">
+        <div class="spec">
+          <div><span>Strengths (salmeterol/FP per inhalation)</span><strong>50/100, 50/250, 50/500 µg</strong></div>
+          <div><span>Supply</span><strong>Foil strip of 60 blisters</strong></div>
+          <div><span>Dosing</span><strong>One inhalation, taken regularly twice daily</strong></div>
+          <div><span>Excipient</span><strong>Lactose monohydrate</strong></div>
+        </div>
+        <ul>
+          <li>Two-tone purple device; the 50/100 strength has pink lettering.</li>
+          <li>Paediatric use and age limits follow the local label.</li>
+        </ul>
+      </div></div></div>
+    </div>
+
+    <h3 class="section-label">How the strengths map to GINA Track 2 dose bands</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Dose band</th><th>Evohaler (2 puffs twice daily)</th><th>Accuhaler (1 inhalation twice daily)</th><th>Total FP per day</th></tr></thead>
+      <tbody>
+        <tr><td>Low (Step 3)</td><td>25/50</td><td>50/100</td><td class="nowrap">200 µg</td></tr>
+        <tr><td>Medium (Step 4)</td><td>25/125</td><td>50/250</td><td class="nowrap">500 µg</td></tr>
+        <tr><td>High (Step 5, ideally 3–6 months)</td><td>25/250</td><td>50/500</td><td class="nowrap">1,000 µg</td></tr>
+      </tbody>
+    </table></div>
+    <p class="sans" style="font-size:12.5px;color:var(--muted);margin:8px 0 0;">Bands use the metered-dose ranges in GINA 2025. GINA 2026 now expresses doses mainly as delivered doses, so confirm against the current dose table before publishing.</p>
+
+    <div class="callout info"><strong>Track 1 versus Track 2 in content.</strong> GINA prefers Track 1 (ICS-formoterol reliever). Patients whose maintenance ICS-LABA contains a non-formoterol LABA, such as salmeterol, should not use ICS-formoterol as their reliever. Any content that mentions MART should keep this distinction clear.</div>
+
+    <h3 class="section-label">Mechanism and pharmacology</h3>
+    <div class="card"><div class="card-body-inner" style="padding-top:18px;">
+      <ul>
+        <li><strong>Salmeterol</strong> is a selective long-acting β<sub>2</sub>-agonist (about 12 hours) with a long side chain that binds the receptor’s exo-site. It also inhibits release of mast-cell mediators and attenuates bronchial hyper-responsiveness.</li>
+        <li><strong>Fluticasone propionate</strong> has a potent local glucocorticoid anti-inflammatory action in the lungs, reducing symptoms and exacerbations without the effects seen with systemic steroids.</li>
+        <li>Fluticasone has very low oral bioavailability (under 1%), moderately high plasma protein binding (about 91%), high clearance and a terminal half-life of about 8 hours.</li>
+        <li>Absolute FP bioavailability in healthy adults is 5.3% for the Seretide Evohaler and 5.5% for the Seretide Accuhaler.</li>
+      </ul>
+    </div></div>
+
+    <h3 class="section-label">Safety points from the label</h3>
+    <div class="card"><div class="card-body-inner" style="padding-top:18px;">
+      <ul>
+        <li><strong>LABA warning.</strong> LABAs alone increase the risk of asthma-related death. Seretide should be prescribed for patients not adequately controlled on an inhaled corticosteroid, or whose severity clearly needs both. Once control is achieved, review regularly and step down if possible.</li>
+        <li><strong>Do not stop abruptly.</strong> Titrate down under physician supervision, to the lowest dose that keeps control.</li>
+        <li><strong>Common effects:</strong> headache (very common); oral candidiasis, hoarseness, muscle cramps and joint pain (common). Systemic corticosteroid effects are possible with high doses over long periods.</li>
+        <li><strong>Interactions:</strong> avoid fluticasone with ritonavir; take care with strong CYP3A4 inhibitors such as ketoconazole; avoid beta-blockers unless there is a compelling reason.</li>
+        <li><strong>Caution</strong> in thyrotoxicosis, pre-existing cardiovascular disease and patients prone to low potassium.</li>
+      </ul>
+    </div></div>
+
+    <h3 class="section-label">Clinical evidence</h3>
+    <div class="card open" data-card>
+      <button class="card-head" aria-expanded="true">
+        <span class="card-title-wrap"><span class="card-title">Trials and real-world studies</span><span class="badge note">6 sources</span></span>
+        <span class="chevron">&#9660;</span>
+      </button>
+      <div class="fold"><div><div class="card-body-inner">
+        <ul class="trial-list">
+          <li><span class="trial-name">GOAL</span> — 12-month study in 3,416 patients comparing Seretide with ICS alone, stepping treatment up every 12 weeks toward guideline-defined control. Well-controlled asthma was reached by 71% versus 59%, and total control by 41% versus 28%. Exacerbation rate was 29% lower with Seretide. In patients reaching control, 61% reported minimal or no quality-of-life impairment (8% at baseline). <span class="trial-theme">Asthma control and quality of life</span></li>
+          <li><span class="trial-name">MERIT</span> — real-world, retrospective study across ten Malaysian sites in 120 adults with uncontrolled asthma (ACT below 20) stepped up to regular Seretide from as-needed budesonide/formoterol (63%) or ICS whenever SABA was taken (37%). At a mean of 5.8 months, 91.7% were responders (ACT 20 or more, or a gain of 3 or more); mean ACT rose from 14.4 to 21.7. Moderate exacerbations fell from 50.8% to 29.2%, no patient reported a severe exacerbation at follow-up, and no adverse drug reactions were recorded. Limits: no comparator, short follow-up, retrospective, GSK-funded. <span class="trial-theme">Step-up in the real world</span></li>
+          <li><span class="trial-name">AUSTRI</span> — 26-week safety study in 11,679 adults and adolescents with moderate-to-severe asthma. Salmeterol-FP was non-inferior to FP alone for serious asthma-related events (0.6% in each arm). Exacerbations occurred in 8% versus 10% (hazard ratio 0.79). <span class="trial-theme">Safety and exacerbations</span></li>
+          <li><span class="trial-name">VESTRI</span> — the paediatric counterpart in 6,208 children aged 4–11. Non-inferiority for serious events was met (0.9% versus 0.7%); the exacerbation reduction (9% versus 10%) was not statistically significant. <span class="trial-theme">Paediatric safety</span></li>
+          <li><span class="trial-name">SMART (salmeterol alone)</span> — 28-week US study of salmeterol versus placebo added to usual therapy: 13 versus 3 asthma-related deaths among about 13,000 patients per arm. It was not designed to test the effect of concurrent ICS, and it underpins the LABA class warning. <span class="trial-theme">Safety context</span></li>
+          <li><span class="trial-name">Lower-ICS-dose studies</span> — two studies showed better lung function, more symptom-free days and less rescue use than ICS alone at a 60% lower ICS dose, with airway inflammation on biopsy and lavage staying controlled. <span class="trial-theme">ICS-sparing effect</span></li>
+        </ul>
+      </div></div></div>
+    </div>
+  </section>
+
+  <!-- WORKFLOW -->
+  <section class="panel" id="workflow">
+    <div class="head">
+      <h2>Publishing workflow</h2>
+      <span class="phase-tag">Phase 1 and 2</span>
+    </div>
+    <div class="lede"><p>From content development at Cactus to publication on MedSynapse and iDoctus. Tick the checklist as you go; ticks reset when the page is reloaded.</p></div>
+
+    <h3 class="section-label">Who does what</h3>
+    <div class="role-grid">
+      <div class="role"><strong>Client and contacts</strong><span>GSK — Dr Manish. Cactus team — Snehal and Abbas.</span></div>
+      <div class="role"><strong>Content creation</strong><span>Cactus Communications develops the RTP content.</span></div>
+      <div class="role"><strong>Review and approval</strong><span>GSK reviews and approves content through Content Lab (CL).</span></div>
+      <div class="role"><strong>Publishing on MedSynapse</strong><span>MedSynapse publishes under the Asthma Insights CxC.</span></div>
+      <div class="role"><strong>Publishing on iDoctus (LATAM region)</strong><span>Approved content is shared with the iDoctus team for publication on the iDoctus platform.</span></div>
+      <div class="role"><strong>Weekly client call</strong><span>GSK and Cactus agree deadlines and content each week; publication timelines follow that call.</span></div>
+    </div>
+
+    <h3 class="section-label">Stage by stage</h3>
+    <div class="tablewrap"><table id="stages"></table></div>
+
+    <h3 class="section-label">MedSynapse checklist</h3>
+    <div class="progress"><span id="prog-text">0 of 13 steps done</span><div class="bar"><i id="prog-bar"></i></div></div>
+    <ul class="check-list" id="checklist"></ul>
+    <div class="callout info"><strong>Same-day rule.</strong> Share everything required with iDoctus the same day it arrives from the Cactus team, so approval is not delayed.</div>
+
+    <h3 class="section-label">Don’ts</h3>
+    <ul class="donts">
+      <li>Don’t share the thumbnail with iDoctus without the GSK logo.</li>
+      <li>Don’t publish any content without the final distribution approval from GSK.</li>
+      <li>Don’t use unapproved or outdated content, images, thumbnails, CL codes or preparation dates.</li>
+      <li>Don’t modify client-approved content without prior approval.</li>
+      <li>Don’t leave the Default Discussion option enabled.</li>
+      <li>Don’t change the Campaign Copy from “General Content” unless instructed.</li>
+      <li>Don’t submit low-resolution post layouts or incomplete deliverables.</li>
+      <li>Don’t share the final deliverables with the client without verifying both the MedSynapse and iDoctus post layouts.</li>
+    </ul>
+  </section>
+
+  <!-- VERSION HISTORY -->
+  <section class="panel" id="history">
+    <div class="head">
+      <h2>Version history</h2>
+      <span class="phase-tag">Latest first</span>
+    </div>
+    <div class="vh-entry">
+      <div class="vh-top"><strong>v1.1</strong><span class="vh-date">1 Oct 2026</span><span class="badge published">Current</span></div>
+      <ul>
+        <li>Project overview: added Scope (14 RTP contents; 12 originally, 2 added in Sep 2026), CXCenter (AsthmaInsight), Publication account and KPIs (1992).</li>
+        <li>Regions expanded to 12: nine MedSynapse regions plus the iDoctus LATAM regions (Mexico, Brazil, Argentina).</li>
+        <li>Replaced the single Specialties list with Public specialties and Internal specialties (Respiratory Medicine, General Medicine, Internal Medicine).</li>
+        <li>Moved the top navigation bar to a left sidebar (it returns to a top bar on narrow screens).</li>
+        <li>Added this Version history tab.</li>
+        <li>Fixed overlapping tag colours: Published is green, Webinar is rose, Consideration is gold and Clinical decision making is cyan. Article, Infographic and Awareness keep their colours, and no two tags now share one.</li>
+      </ul>
+    </div>
+    <div class="vh-entry">
+      <div class="vh-top"><strong>v1.0</strong><span class="vh-date">Initial version</span></div>
+      <ul>
+        <li>First version of the Seretide project reference: project overview, Phase 1 contents (C1–C10), Phase 2 proposed strategy, Asthma, Seretide and Publishing workflow.</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p><strong>Sources used for the clinical sections</strong></p>
+  <ul>
+    <li>GSK Saudi Arabia, Summary of Product Characteristics, Seretide Evohaler (GDS34/IPI18); GSK international product information for Seretide Accuhaler.</li>
+    <li>GINA Summary Guide 2025 and the GINA 2026 Strategy Report (published 5 May 2026), with GINA 2025 update commentary.</li>
+    <li>Ismail AI et al. MERIT study, Pulmonary Therapy 2025;11:25–40 (also the source of the perception-gap and mild-asthma figures).</li>
+  </ul>
+  <p>Internal reference for the project team. It is a simplified summary, not a prescribing guide; confirm product details, doses and claims against current local labels and guidelines before client-facing use. The Phase 2 strategy is a proposal and has not been confirmed by GSK. Details for Phase 1 contents C11–C14 are still to be added.</p>
+</footer>
+
+<script>
+const P1 = [
+  {n:"C1", t:"Artificial Intelligence in Asthma Care: Opportunities and Considerations for Primary Care Practice", f:"Article", by:"Aboli Kulkarni", d:"28 Apr 2026",
+   c:"The role of AI in asthma care, including clinical decision support, early diagnosis, risk prediction, monitoring, documentation and AI-assisted support for primary-care practice. It also covered responsible use and limitations of AI.",
+   th:["Clinical decision support","Early diagnosis","Risk prediction","Monitoring","Documentation","Responsible use of AI"]},
+  {n:"C2", t:"Importance of Molecule Selection When Choosing an Inhaled Corticosteroid/Long-Acting β2-Agonist", f:"Infographic", by:"Aakanksha Apte", d:"2 Jun 2026",
+   c:"Why ICS/LABA combinations should not be considered therapeutically identical. It discussed factors influencing molecule selection, including glucocorticoid-receptor binding, therapeutic index, lung retention, lipophilicity, duration of bronchodilatory effect and oral bioavailability.",
+   th:["Glucocorticoid-receptor binding","Therapeutic index","Lung retention","Lipophilicity","Duration of bronchodilation","Oral bioavailability"]},
+  {n:"C3", t:"Artificial Intelligence in Asthma Management: Clinical Prompt Engineering for General Practitioners", f:"Infographic", by:"Aparna", d:"5 Jun 2026",
+   c:"How HCPs can use AI tools more effectively through clinical prompt engineering. It covered the SCOPE framework — specificity, contextual detail, ongoing/iterative refinement, privacy/ethical considerations and evidence-based practice — along with different prompting techniques.",
+   th:["SCOPE framework","Prompting techniques","Privacy and ethics","Evidence-based practice"]},
+  {n:"C4", t:"Optimizing the Use of Inhaled Corticosteroid/Long-Acting β2-Agonist Combinations in Patients With Moderate-to-Severe Asthma", f:"Webinar", by:"Aboli", d:"Hosting page 5 Jun 2026; recorded webinar 12 Jun 2026",
+   c:"Optimisation of ICS/LABA treatment in moderate-to-severe asthma, including appropriate selection, treatment initiation and escalation, patient-specific characteristics, preference, adherence and use of maintenance-and-reliever therapy.",
+   th:["Treatment selection","Initiation and escalation","Patient preference","Adherence","MART"],
+   note:"Published in two parts: a webinar hosting page (5 Jun 2026) and the recorded webinar content (12 Jun 2026)."},
+  {n:"C5", t:"Perception Gaps Between Patients and Physicians in Asthma Control: Implications for Clinical Practice", f:"Article", by:"Aakanksha Apte", d:"7 Jul 2026",
+   c:"Differences between patient and physician perceptions of asthma control, symptoms, treatment burden and exacerbation risk. It also highlighted the importance of objective assessment, shared decision-making and patient-centred communication.",
+   th:["Perception of control","Treatment burden","Exacerbation risk","Objective assessment","Shared decision-making"]},
+  {n:"C6", t:"Asthma Control or Clinical Remission—What Should Be the Target? Implications for General Practice", f:"Article", by:"", d:"",
+   c:"Asthma control as a multidimensional concept, including current symptom control, future risk, lung function and clinical remission. It covered assessment approaches and the need for personalised, patient-centred management targets.",
+   th:["Symptom control","Future risk","Lung function","Clinical remission"]},
+  {n:"C7", t:"What Can We Learn From Asthma Modeling Studies?", f:"Infographic", by:"", d:"",
+   c:"How asthma modelling studies use clinical-trial and patient-level data to assess treatment response, symptom control, reliever use and exacerbation risk. It emphasised risk-based and individualised management.",
+   th:["Clinical-trial data","Treatment response","Reliever use","Exacerbation risk"]},
+  {n:"C8", t:"Communication Is the Key: Yes, in Asthma Practice Too!", f:"Infographic", by:"", d:"",
+   c:"The role of effective HCP–patient communication in improving asthma management. It covered communication barriers, patient beliefs, shared decision-making, inhaler technique, adherence and the CONNECT framework.",
+   th:["Communication barriers","Patient beliefs","Inhaler technique","Adherence","CONNECT framework"]},
+  {n:"C9", t:"What Else Do Physicians Need to Do to Complement Guidelines With Practical Knowledge", f:"Infographic", by:"", d:"",
+   c:"The limitations of applying clinical guidelines alone in routine asthma care. It discussed real-world evidence, individual patient characteristics, treatment preferences, implementation barriers and the evidence-to-practice gap.",
+   th:["Real-world evidence","Patient characteristics","Implementation barriers","Evidence-to-practice gap"]},
+  {n:"C10", t:"There Is No “One-Size-Fits-All” in Asthma Management", f:"Infographic", by:"", d:"",
+   c:"A treatable-traits approach to personalised asthma care. It covered pulmonary, extrapulmonary and behavioural/environmental traits; relevant assessment measures; and how these can guide individualised treatment and follow-up.",
+   th:["Pulmonary traits","Extrapulmonary traits","Behavioural and environmental traits","Individualised follow-up"]}
+];
+
+const P2 = [
+  {n:1, f:"Infographic", j:"Awareness", t:"From Electronic Health Record (EHR) Data to Risk Prediction: Using Artificial Intelligence (AI) to Anticipate Asthma Exacerbations",
+   o:"Demonstrate how electronic health record (EHR) data and machine learning (ML) approaches can be used to assess future asthma exacerbation risk, helping healthcare professionals (HCPs) understand the potential of AI to identify patients at higher risk who may require closer monitoring.",
+   fp:["Explore the use of electronic health record (EHR) data for predicting future asthma exacerbations.","Identify clinical variables associated with exacerbation risk.","Understand how ML models analyse these variables to estimate exacerbation risk.","Consider the potential role of AI-based approaches in identifying higher-risk patients."],
+   e:"HCPs understand how clinical information from EHRs can be used by ML models to assess exacerbation risk and recognise the potential of AI-based approaches to support identification of higher-risk asthma patients.",
+   a:"Source to be finalised with the team."},
+  {n:2, f:"Article", j:"Awareness", t:"Can Digital Technologies Transform Asthma Diagnosis?",
+   o:"Strengthen HCP awareness of emerging AI-enabled approaches in asthma diagnosis by highlighting the potential of digital technologies, respiratory-sound analysis and deep-learning models to support more standardised or data-informed asthma detection and classification.",
+   fp:["Understand the role of digital technologies in asthma diagnosis and management.","Explore respiratory sounds and acoustic features relevant to asthma detection.","Understand deep-learning approaches for respiratory-sound-based asthma classification.","Consider HCP perspectives on the potential role of digital technologies in asthma diagnosis."],
+   e:"The emerging role of digital technologies in asthma diagnosis is understood, including how respiratory-sound data, acoustic features and deep-learning approaches could support AI-assisted asthma detection and assessment.",
+   a:"Source to be finalised with the team. GINA 2026 also simplified its diagnosis flowchart and revised bronchodilator-responsiveness criteria, which is useful context."},
+  {n:3, f:"Infographic", j:"Awareness", t:"When Asthma Remains Uncontrolled: What Should You Reassess Before Stepping Up?",
+   o:"Highlight that persistent uncontrolled asthma requires a structured reassessment before treatment escalation, while introducing dosing and treatment-response considerations that can help HCPs evaluate inhaled corticosteroid/long-acting beta₂-agonist (ICS/LABA) options when maintenance therapy needs to be modified.",
+   fp:["Identify factors contributing to uncontrolled asthma beyond inadequate pharmacological treatment.","Assess whether persistent poor control warrants modification of maintenance therapy.","Consider ICS/LABA dosing regimens and their impact on treatment effectiveness.","Consider clinical response, lung function, exacerbation risk and safety when reassessing maintenance therapy."],
+   e:"HCPs will recognise that persistent uncontrolled asthma may not always reflect inadequate treatment and understand the importance of reassessment before escalation. They will also gain awareness of how dosing regimens and key clinical outcomes can inform evaluation of ICS/LABA treatment options.",
+   a:"GINA stepwise principles (check diagnosis, adherence, technique and modifiable factors before stepping up) and the Seretide label dosing."},
+  {n:4, f:"Infographic", j:"Awareness", t:"Understanding the Pharmacological Rationale Behind ICS/LABA Therapy",
+   o:"Strengthen awareness of ICS/LABA therapy by highlighting the complementary roles of its ICS and LABA components and the pharmacological rationale for combining anti-inflammatory and bronchodilator effects in asthma.",
+   fp:["Characterise the anti-inflammatory effects of ICS and the bronchodilator effects of LABA.","Explain the complementary pharmacological actions of the ICS and LABA components.","Highlight the role of ICS/LABA therapy in asthma maintenance."],
+   e:"HCPs understand the complementary mechanisms of ICS and LABA and the pharmacological rationale for their use as an ICS/LABA therapy.",
+   a:"Seretide product information: mechanism of action and pharmacokinetics (see the Seretide tab)."},
+  {n:5, f:"Article", j:"Consideration", t:"Understanding ICS/LABA Step-Up Therapy in Uncontrolled Asthma Through Real-World Evidence",
+   o:"Enhance understanding of real-world outcomes following treatment step-up with ICS/LABA therapy in patients with previously uncontrolled asthma, focusing on asthma control, asthma control test (ACT) improvement, exacerbation outcomes, and healthcare utilisation.",
+   fp:["Assess treatment step-up with ICS/LABA therapy in patients with uncontrolled asthma, based on real-world findings from the MERIT study.","Explore the use of regular ICS/LABA therapy and its association with asthma control in patients with uncontrolled asthma.","Assess changes in ACT scores and achievement of asthma control.","Evaluate changes in systemic corticosteroid use and healthcare utilisation."],
+   e:"HCPs recognise improvements in ACT scores and asthma control following treatment step-up with ICS/LABA therapy, alongside reported outcomes related to exacerbations and healthcare utilisation.",
+   a:"MERIT (Ismail et al., Pulmonary Therapy 2025). Keep its limits visible: retrospective, no comparator, 3–6 month follow-up, GSK-funded."},
+  {n:6, f:"Article", j:"Consideration", t:"Beyond Asthma Control: What Does ICS/LABA Evidence Show About Quality of Life?",
+   o:"Build understanding of treatment outcomes beyond asthma control by highlighting health-related quality of life (HRQoL) and patient-reported health status, reinforcing the importance of patient-centred outcomes.",
+   fp:["Assess health status across asthma control levels using the asthma quality of life questionnaire (AQLQ).","Evaluate improvements in HRQoL with ICS/LABA therapy and assess clinically meaningful changes.","Explore the relationship between asthma control and HRQoL improvement."],
+   e:"HCPs recognise AQLQ and HRQoL as complementary measures of treatment benefit and understand the relationship between asthma control and quality of life.",
+   a:"GOAL: 61% of patients reaching control reported minimal or no quality-of-life impairment on an asthma-specific questionnaire (8% at baseline)."},
+  {n:7, f:"Article", j:"Consideration", t:"Optimising Adherence to Inhaled Therapy in Asthma: Sustaining Treatment Benefit",
+   o:"Build understanding of how adherence and persistence with inhaled therapy influence asthma control, clinical outcomes, and sustained medication use, while highlighting barriers and gaps between prescribed and actual treatment.",
+   fp:["Understand the role of adherence and persistence with inhaled therapy in achieving and maintaining asthma control.","Explore the relationship between treatment adherence and clinical outcomes.","Identify common treatment-related and behavioural barriers to sustained medication use.","Consider how gaps between prescribed and actual treatment use may affect outcomes."],
+   e:"HCPs recognise that adherence and persistence with inhaled therapy influence asthma control and clinical outcomes, and understand how treatment-related and behavioural barriers may contribute to gaps between prescribed and actual treatment use.",
+   a:"GINA 2025 (Track 2 relies on maintenance ICS being taken; SABA canister thresholds). Adherence-specific studies to be identified."},
+  {n:8, f:"Infographic", j:"Consideration", t:"From Prescription to Practice: How Can HCPs Support Sustained Inhaled-Therapy Use?",
+   o:"Highlight the importance of addressing modifiable barriers to adherence to inhaled therapy and persistence, including inhaler technique, treatment complexity, patient beliefs, and communication, to support consistent and sustained inhaled-therapy use in routine asthma care.",
+   fp:["Identify modifiable barriers to adherence and persistence with inhaled therapy.","Explore the role of inhaler technique, treatment complexity and patient beliefs.","Consider practical approaches to support consistent treatment use.","Discuss the role of HCP–patient communication and follow-up in sustaining adherence to inhaled therapy."],
+   e:"HCPs identify practical, patient-centred approaches to address modifiable adherence barriers and support sustained treatment use.",
+   a:"Builds on Phase 1 C8 (communication and inhaler technique). Sources to be finalised."},
+  {n:9, f:"Article", j:"Consideration", t:"Understanding Safety and Clinical Outcomes of ICS/LABA Therapies in Asthma",
+   o:"Strengthen HCP understanding of the safety and clinical outcomes associated with ICS/LABA therapies by examining asthma exacerbations, serious asthma-related events, safety across inhaler types and treatment components, and adherence and persistence.",
+   fp:["Describe the safety profiles of ICS/LABA therapies in patients with persistent asthma.","Evaluate asthma exacerbations and related clinical outcomes.","Examine serious asthma-related events with ICS/LABA therapies versus ICS monotherapy.","Explore safety across inhaler types and ICS/LABA components."],
+   e:"HCPs gain a clearer understanding of the safety profile of ICS/LABA therapies, including evidence on exacerbations and serious asthma-related events, as well as the influence of inhaler type, treatment components, adherence, and persistence on clinical outcomes.",
+   a:"AUSTRI and VESTRI (serious asthma-related events versus ICS alone) with SMART as context, all summarised in the Seretide label. Keep the LABA warning wording aligned with the local label."},
+  {n:10, f:"Infographic", j:"Consideration", t:"When Asthma Is Well Controlled, How Should Treatment Be Stepped Down?",
+   o:"Build awareness of evidence surrounding treatment step-down in well-controlled asthma, highlighting different step-down approaches and their effects on asthma control, lung function, symptoms, and quality of life.",
+   fp:["Explore different approaches to stepping down therapy in patients with well-controlled asthma.","Assess maintenance of asthma control following treatment step-down.","Evaluate changes in lung function following treatment step-down.","Explore the role of follow-up and monitoring during treatment step-down."],
+   e:"HCPs recognise key considerations when stepping down therapy in well-controlled asthma, including differences in asthma control, lung function, symptoms, and quality of life across treatment approaches.",
+   a:"Seretide label guidance (titrate to the lowest effective dose, never stop abruptly, step down under supervision). A registered 56-week trial (NCT01437995) compares reducing ICS, dropping the LABA, or continuing ICS/LABA; check for published results before citing it."},
+  {n:11, f:"Infographic", j:"Consideration", t:"Personalising Asthma Management: What Can Clinical Trial Simulation Tell Us?",
+   o:"Explore how clinical trial simulation can integrate baseline patient characteristics and treatment choice to project clinically relevant outcomes and support personalised treatment decisions in moderate-to-severe asthma.",
+   fp:["Understand how baseline patient characteristics can influence treatment response in moderate-to-severe asthma.","Explore the simulated impact of treatment choice on reliever medication use and symptom control.","Assess how patient characteristics and treatment choice may influence exacerbation risk over 12 months.","Consider how clinical trial simulation can integrate multiple treatment-response outcomes when evaluating asthma management."],
+   e:"HCPs understand how patient characteristics and treatment choice can influence reliever medication use, symptom control and exacerbation risk, and recognise the potential of clinical trial simulation to provide an integrated perspective on treatment response in moderate-to-severe asthma.",
+   a:"Likely related to “Effect of Individual Patient Characteristics and Treatment Choices on Reliever Medication Use in Moderate-Severe Asthma: A Poisson Analysis of Randomised Clinical Trials” (Adv Ther 2024). Confirm this is the intended paper. Extends Phase 1 C7."},
+  {n:12, f:"Webinar", j:"Clinical decision making", t:"Artificial Intelligence in Asthma: From Diagnosis to Personalised Management",
+   o:"Build awareness of the emerging evidence supporting AI as a potential tool for more data-driven, proactive and personalised asthma care.",
+   fp:["Explore the evolving role of AI in improving asthma diagnosis and diagnostic accuracy.","Discuss the use of AI for asthma classification and identification of clinically meaningful phenotypes.","Examine AI-enabled asthma monitoring and prediction of future exacerbations.","Consider the potential of AI to support clinical decision-making and more personalised asthma management."],
+   e:"HCPs understand the potential role of AI across the asthma care pathway, from diagnosis and phenotyping to monitoring and exacerbation prediction, while recognising the current limitations in validation, clinical impact and implementation.",
+   a:"Draws together items 1 and 2 and Phase 1 C1 and C3. Sources to be finalised."}
+];
+
+const STAGES = [
+  ["Content development","Cactus Communications creates the RTP content."],
+  ["Content review","The draft is reviewed by Dr. Manish Verma and Nitin of GSK, and approval is taken on CL."],
+  ["Final approval","GSK provides final approval for the content."],
+  ["Content handover","Cactus shares the approved content Word draft, thumbnail (JPEG), AI image files and all other media-related items with MedSynapse."],
+  ["Media processing","MedSynapse raises media requests to convert AI files into JPEGs and to add the GSK logo to the thumbnail that goes to iDoctus. The Media team shares the thumbnail in both AI and JPEG formats, which are then sent to the iDoctus team."],
+  ["MedSynapse post creation","MedSynapse creates the content post and takes the post layout (JPEG)."],
+  ["iDoctus","The approved content is shared with the iDoctus team for publishing on the iDoctus platform."],
+  ["iDoctus page layout","The iDoctus post layout for the same content is received by MedSynapse. The Media team converts it into a high-resolution JPEG."],
+  ["Consolidated PDF preparation","A consolidated PDF containing both the MedSynapse and iDoctus page layout JPEGs is created."],
+  ["Final submission","After validation, the MedSynapse JPEG, iDoctus JPEG and consolidated PDF are shared with the Engagement team to share with the client. Once approved, the content is published."]
+];
+
+const CHECK = [
+  ["Receive content from Cactus","Verify that all files received from the Cactus team are complete."],
+  ["Content verification","Check the thumbnail, content draft, images, CL code and date of preparation, and ensure the version is approved by the client (GSK)."],
+  ["Create post on MedSynapse","Create the post on the MedSynapse platform from the approved content."],
+  ["Post configuration","Apply all standard publishing settings. Keep <strong>Default Discussion = OFF</strong>. Set <strong>Campaign Copy = General Content</strong>."],
+  ["Post layout review","Verify that the approval code present as a widget is masked after taking the post layout."],
+  ["Generate MedSynapse assets","Convert the finalised MedSynapse post layout into a <strong>high-resolution JPEG</strong>."],
+  ["Share with iDoctus","Share with the iDoctus team:<ul><li>High-resolution JPEG of the MedSynapse post layout</li><li>AI file of the thumbnail containing the GSK logo, and its JPEG file (the thumbnail must be 975 px (W) × 628 px (H) before sharing)</li></ul>"],
+  ["Review iDoctus layout","Receive the iDoctus page layout and verify that all content, images, branding, formatting and information match the approved MedSynapse version."],
+  ["Generate iDoctus assets","Once verified, convert the iDoctus post layout into a <strong>high-resolution JPEG</strong>."],
+  ["Prepare final deliverables","Compile: the MedSynapse post layout (JPEG), the iDoctus post layout (JPEG) and a consolidated PDF containing both post layouts."],
+  ["Client submission","Share the final deliverables with GSK for Content Lab (CL) approval."],
+  ["Revision management","Address all client comments and changes promptly, update the deliverables, and reshare until final approval is received (approved for distribution)."],
+  ["Publication","Publish the content on the decided date."]
+];
+
+const fmtClass = f => f === "Article" ? "article" : f === "Infographic" ? "infographic" : "webinar";
+const jClass = j => j === "Awareness" ? "aware" : j === "Consideration" ? "consider" : "decide";
+
+/* Phase 1 tracker */
+document.getElementById("tracker").innerHTML =
+  "<thead><tr><th>Content</th><th>Topic</th><th>Format</th><th>Creator</th><th>Published</th></tr></thead><tbody>" +
+  P1.map(p => `<tr><td class="nowrap">${p.n}</td><td>${p.t}</td><td class="nowrap"><span class="badge ${fmtClass(p.f)}">${p.f}</span></td>` +
+    `<td class="${p.by ? "nowrap" : "muted"}">${p.by || "To be added"}</td><td class="${p.d ? "" : "muted"}">${p.d || "Published — date to be added"}</td></tr>`).join("") + "</tbody>";
+
+/* Content items */
+function itemHTML(o){
+  return `<div class="content-item" data-card data-f="${o.f}" data-j="${o.j || ""}">
+    <button class="ci-head" aria-expanded="false">
+      <span class="ci-head-left"><span class="ci-num">${o.n}</span><span class="ci-topic">${o.t}</span></span>
+      <span class="ci-badges">${o.j ? `<span class="badge ${jClass(o.j)}">${o.j}</span>` : `<span class="badge published">Published</span>`}<span class="badge ${fmtClass(o.f)}">${o.f}</span></span>
+      <span class="chevron">&#9660;</span>
+    </button>
+    <div class="fold"><div><div class="card-body-inner">${o.body}</div></div></div>
+  </div>`;
+}
+document.getElementById("p1-list").innerHTML = P1.map(p => {
+  const meta = [p.f, p.by ? "Creator: " + p.by : "Creator to be added", p.d ? "Published " + p.d : "Published (date to be added)"].join(" · ");
+  p.body = `<p class="ci-meta">${meta}</p><div class="ci-block-label">What it covered</div><p>${p.c}</p>` +
+    `<div class="ci-block-label">Key themes</div><div class="chips">${p.th.map(x => `<span class="chip">${x}</span>`).join("")}</div>` +
+    (p.note ? `<p class="ci-note">${p.note}</p>` : "");
+  return itemHTML(p);
+}).join("");
+document.getElementById("p2-list").innerHTML = P2.map(p => {
+  p.body = `<p class="ci-meta">${p.f} · ${p.j}</p>` +
+    `<div class="ci-block-label">Marketing objective</div><p>${p.o}</p>` +
+    `<div class="ci-block-label">Focus points</div><ol>${p.fp.map(x => `<li>${x}</li>`).join("")}</ol>` +
+    `<div class="ci-block-label">Expected outcome</div><p>${p.e}</p>` +
+    `<div class="ci-block-label">Suggested evidence anchor</div><p>${p.a}</p>`;
+  return itemHTML(p);
+}).join("");
+
+/* Workflow */
+document.getElementById("stages").innerHTML = "<thead><tr><th>Stage</th><th>Activity</th></tr></thead><tbody>" +
+  STAGES.map(s => `<tr><td class="nowrap"><strong>${s[0]}</strong></td><td>${s[1]}</td></tr>`).join("") + "</tbody>";
+document.getElementById("checklist").innerHTML = CHECK.map((c, i) =>
+  `<li><input type="checkbox" id="ck${i}" aria-labelledby="ct${i}"><label for="ck${i}"><div class="step-title" id="ct${i}"><span class="step-no">${i + 1}</span>${c[0]}</div><div class="step-text">${c[1]}</div></label></li>`).join("");
+const boxes = [...document.querySelectorAll("#checklist input")];
+function updateProgress(){
+  const done = boxes.filter(b => b.checked).length;
+  document.getElementById("prog-text").textContent = `${done} of ${boxes.length} steps done`;
+  document.getElementById("prog-bar").style.width = (done / boxes.length * 100) + "%";
+  boxes.forEach(b => b.closest("li").classList.toggle("done", b.checked));
+}
+boxes.forEach(b => b.addEventListener("change", updateProgress));
+
+/* Filters */
+function buildFilter(id, listId, attr, values){
+  const wrap = document.getElementById(id);
+  wrap.innerHTML = ["All", ...values].map((v, i) => `<button class="chip${i === 0 ? " on" : ""}" data-v="${v}">${v}</button>`).join("");
+  wrap.addEventListener("click", e => {
+    const b = e.target.closest("button"); if(!b) return;
+    wrap.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b));
+    document.querySelectorAll(`#${listId} .content-item`).forEach(it => {
+      it.style.display = (b.dataset.v === "All" || it.dataset[attr] === b.dataset.v) ? "" : "none";
+    });
+  });
+}
+buildFilter("p1-filter", "p1-list", "f", ["Article", "Infographic", "Webinar"]);
+buildFilter("p2-filter", "p2-list", "j", ["Awareness", "Consideration", "Clinical decision making"]);
+
+/* Tabs */
+const tabs = document.querySelectorAll("#tabs button");
+const panels = document.querySelectorAll(".panel");
+function showPanel(id){
+  tabs.forEach(b => b.classList.toggle("active", b.dataset.panel === id));
+  panels.forEach(p => p.classList.toggle("active", p.id === id));
+  window.scrollTo({top:0});
+}
+tabs.forEach(b => b.addEventListener("click", () => showPanel(b.dataset.panel)));
+document.querySelectorAll("[data-goto]").forEach(b => b.addEventListener("click", () => showPanel(b.dataset.goto)));
+
+/* Expand / collapse */
+document.addEventListener("click", e => {
+  const head = e.target.closest(".ci-head, .card-head");
+  if(head){
+    const card = head.parentElement;
+    const open = card.classList.toggle("open");
+    head.setAttribute("aria-expanded", open);
+    return;
+  }
+  const ex = e.target.closest("[data-expand]"), co = e.target.closest("[data-collapse]");
+  const id = ex ? ex.dataset.expand : co ? co.dataset.collapse : null;
+  if(id){
+    document.querySelectorAll(`#${id} .content-item`).forEach(it => {
+      if(it.style.display === "none") return;
+      it.classList.toggle("open", !!ex);
+      it.querySelector(".ci-head").setAttribute("aria-expanded", !!ex);
+    });
+  }
+});
+</script>
+</body>
+</html>

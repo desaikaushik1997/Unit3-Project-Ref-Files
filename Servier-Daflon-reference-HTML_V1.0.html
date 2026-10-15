@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Servier project reference — Daflon (MPFF)</title>
+<style>
+  :root{
+    --ink:#17203A;
+    --ink-soft:#3F4863;
+    --paper:#F3F5F9;
+    --card:#FFFFFF;
+    --line:#D9DEE8;
+    --muted:#626B84;
+    --wash:#E8ECF4;
+    --purple:#1B3F7A;
+    --purple-light:#E4ECF8;
+    --orange:#B9431A;
+    --orange-light:#FCEBE2;
+    --teal:#0B6E5C;
+    --teal-light:#DFF3EE;
+    --blue:#1F5FA8;
+    --blue-light:#E4EEF9;
+    --amber:#8A5A00;
+    --amber-light:#FFF3D6;
+    --rose:#A8205F; --rose-light:#FBE4EE; --green:#2F7A1F; --green-light:#E2F3D9;
+    --cyan:#007A8C; --cyan-light:#D9F1F5; --gold:#6E5F00; --gold-light:#F7F0BF;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#E8ECF7; --ink-soft:#C0C8DD; --paper:#121723; --card:#1B2231; --line:#333D52;
+      --muted:#97A0B8; --wash:#242C40; --purple:#9DBBF0; --purple-light:#1E2D4A;
+      --orange:#F0A07E; --orange-light:#3B2419; --teal:#7FD8C1; --teal-light:#173430;
+      --blue:#9CC4F0; --blue-light:#1B2C42; --amber:#F2C56B; --amber-light:#3A2E10;
+      --rose:#F29BC0; --rose-light:#3E1D2D; --green:#9AD77F; --green-light:#1F3318; --cyan:#7FD3E2; --cyan-light:#12343A; --gold:#E6D86A; --gold-light:#363110;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#E8ECF7; --ink-soft:#C0C8DD; --paper:#121723; --card:#1B2231; --line:#333D52;
+    --muted:#97A0B8; --wash:#242C40; --purple:#9DBBF0; --purple-light:#1E2D4A;
+    --orange:#F0A07E; --orange-light:#3B2419; --teal:#7FD8C1; --teal-light:#173430;
+    --blue:#9CC4F0; --blue-light:#1B2C42; --amber:#F2C56B; --amber-light:#3A2E10;
+    --rose:#F29BC0; --rose-light:#3E1D2D; --green:#9AD77F; --green-light:#1F3318; --cyan:#7FD3E2; --cyan-light:#12343A; --gold:#E6D86A; --gold-light:#363110;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-padding-top:70px;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:Charter,Georgia,"Iowan Old Style","Times New Roman",serif;
+    line-height:1.55;
+  }
+  .sans, button, table, .card-body-inner, .facts, .badge, .chip{
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  button{color:inherit;}
+  :focus-visible{outline:2px solid var(--purple); outline-offset:2px; border-radius:4px;}
+
+  header{
+    max-width:920px; margin:0 auto; padding:52px 28px 28px;
+    border-bottom:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap;
+  }
+  header h1{font-size:32px; font-weight:400; margin:0 0 8px; letter-spacing:-0.01em;}
+  header p{font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif; color:var(--muted); font-size:15px; margin:0;}
+  .header-tags{display:flex; gap:8px; align-items:center; flex-wrap:wrap;}
+  .version-tag{
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif; font-size:12px; color:var(--muted);
+    border:1px solid var(--line); padding:3px 10px; border-radius:20px; white-space:nowrap;
+  }
+  .pending-tag{
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif; font-size:12px; font-weight:600;
+    color:var(--amber); background:var(--amber-light); padding:3px 10px; border-radius:20px; white-space:nowrap;
+  }
+
+  body{padding-left:230px;}
+  nav{
+    position:fixed; top:0; left:0; bottom:0; width:230px; padding:28px 12px; display:flex; flex-direction:column; gap:2px;
+    border-right:1px solid var(--line); background:var(--paper); z-index:10; overflow-y:auto;
+  }
+  nav button{
+    font-size:14.5px; background:none; border:none; padding:11px 14px; cursor:pointer; color:var(--muted);
+    border-left:3px solid transparent; border-radius:0 6px 6px 0; text-align:left;
+  }
+  nav button:hover{color:var(--ink); background:var(--wash);}
+  nav button.active{color:var(--ink); border-left-color:var(--purple); background:var(--purple-light); font-weight:600;}
+
+  nav button[data-panel="history"]{
+    margin-top:auto; font-size:12px; padding:8px 14px; opacity:.75; border-top:1px solid var(--line); border-radius:0;
+  }
+  nav button[data-panel="history"]:hover, nav button[data-panel="history"].active{opacity:1;}
+
+  .vh-entry{border:1px solid var(--line); border-radius:10px; background:var(--card); padding:16px 20px; margin-bottom:14px; font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;}
+  .vh-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:8px;}
+  .vh-top strong{font-size:16px;}
+  .vh-date{font-size:12.5px; color:var(--muted);}
+  .vh-entry ul{margin:0; padding-left:20px; font-size:13.5px; color:var(--ink-soft);}
+  .vh-entry li{margin-bottom:4px;}
+
+  main{max-width:920px; margin:0 auto; padding:40px 28px 90px;}
+  section.panel{display:none;}
+  section.panel.active{display:block;}
+
+  .head{margin-bottom:8px; display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;}
+  .head h2{font-size:26px; font-weight:400; margin:0;}
+  .phase-tag{
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif; font-size:12px; color:var(--purple);
+    background:var(--purple-light); padding:3px 9px; border-radius:20px; display:inline-block;
+  }
+  .phase-tag.warn{color:var(--amber); background:var(--amber-light);}
+  .lede{font-size:16.5px; margin:16px 0 8px; color:var(--ink-soft);}
+  .lede p{margin:0 0 14px; max-width:72ch;}
+
+  .facts{
+    display:grid; grid-template-columns:1fr 1fr; gap:10px 24px; margin:22px 0 32px; padding:18px 20px;
+    background:var(--card); border:1px solid var(--line); border-radius:10px; font-size:13.5px;
+  }
+  .facts dt{color:var(--muted); margin-bottom:2px;}
+  .facts dd{margin:0 0 10px; color:var(--ink); font-weight:600;}
+
+  h3.section-label{
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif; font-size:14px; color:var(--muted);
+    font-weight:600; margin:34px 0 14px;
+  }
+  h3.section-label:first-child{margin-top:0;}
+
+  .chips{display:flex; gap:8px; flex-wrap:wrap; margin:0 0 6px;}
+  .chip{
+    font-size:12.5px; border:1px solid var(--line); background:var(--card); color:var(--ink);
+    padding:4px 12px; border-radius:20px; cursor:default;
+  }
+  button.chip{cursor:pointer;}
+  button.chip:hover{border-color:var(--purple); color:var(--purple);}
+  button.chip.on{background:var(--purple); border-color:var(--purple); color:#fff;}
+  :root[data-theme="dark"] button.chip.on, :root:not([data-theme="light"]) button.chip.on{color:#121723;}
+
+  .phase-grid{display:grid; gap:14px; margin:8px 0;}
+  .phase-card{
+    background:var(--card); border:1px solid var(--line); border-radius:10px; padding:18px 20px;
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  .phase-card.current{border-color:var(--purple); box-shadow:inset 3px 0 0 var(--purple);}
+  .phase-card.proposed{border-style:dashed; border-color:var(--amber);}
+  .phase-card-top{display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap;}
+  .phase-card h3{margin:0; font-size:17px; font-weight:600;}
+  .phase-status{font-size:12px; color:var(--purple); background:var(--purple-light); padding:2px 9px; border-radius:20px;}
+  .phase-status.warn{color:var(--amber); background:var(--amber-light);}
+  .phase-counts{display:flex; gap:28px; margin:14px 0 12px; flex-wrap:wrap;}
+  .count-num{font-size:26px; font-weight:600; line-height:1;}
+  .count-label{font-size:12.5px; color:var(--muted); margin-top:4px;}
+  .phase-note{font-size:13px; color:var(--ink-soft); margin:0 0 6px;}
+  .format-counts{font-size:12px; color:var(--muted); margin:8px 0 0;}
+  .go-btn{
+    font-size:12.5px; font-weight:600; cursor:pointer; border:1px solid var(--purple);
+    background:var(--purple-light); color:var(--purple); padding:5px 12px; border-radius:20px; margin-top:12px;
+  }
+  .go-btn:hover{background:var(--purple); color:#fff;}
+
+  .callout{
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif; font-size:13.5px;
+    background:var(--orange-light); color:var(--orange); border-radius:8px; padding:12px 16px; margin:20px 0 0;
+  }
+  .callout.info{background:var(--blue-light); color:var(--blue);}
+  .callout.warn{background:var(--amber-light); color:var(--amber);}
+  .callout strong{font-weight:700;}
+  .callout ul{margin:6px 0 0; padding-left:18px;}
+  .callout li{margin-bottom:3px;}
+
+  .tablewrap{overflow-x:auto; border:1px solid var(--line); border-radius:8px; background:var(--card);}
+  table{width:100%; border-collapse:collapse; font-size:13px;}
+  th{text-align:left; background:var(--wash); color:var(--muted); font-weight:600; padding:9px 12px; white-space:nowrap;}
+  td{padding:9px 12px; border-top:1px solid var(--line); vertical-align:top;}
+  td.nowrap{white-space:nowrap;}
+  td.muted{color:var(--muted);}
+
+  .card{border:1px solid var(--line); border-radius:10px; background:var(--card); margin-bottom:14px; overflow:hidden;}
+  .card-head, .ci-head{
+    width:100%; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:16px 20px;
+    cursor:pointer; background:none; border:none; text-align:left;
+  }
+  .card-head:hover, .ci-head:hover{background:var(--wash);}
+  .card-title-wrap{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+  .card-title{font-size:18px; font-weight:600;}
+  .badge{font-size:11.5px; padding:2px 8px; border-radius:20px; white-space:nowrap; display:inline-block;}
+  .badge.article{background:var(--purple-light); color:var(--purple);}
+  .badge.infographic{background:var(--orange-light); color:var(--orange);}
+  .badge.webinar{background:var(--rose-light); color:var(--rose);}
+  .badge.aware{background:var(--blue-light); color:var(--blue);}
+  .badge.consider{background:var(--gold-light); color:var(--gold);}
+  .badge.decide{background:var(--cyan-light); color:var(--cyan);}
+  .badge.published{background:var(--green-light); color:var(--green);}
+  .badge.pending{background:var(--amber-light); color:var(--amber);}
+  .badge.note{background:var(--wash); color:var(--muted);}
+  .chevron{color:var(--muted); font-size:12px; transition:transform .2s; flex-shrink:0;}
+  .open > .card-head .chevron, .open > .ci-head .chevron{transform:rotate(180deg);}
+  .fold{display:grid; grid-template-rows:0fr; transition:grid-template-rows .28s ease;}
+  .open > .fold{grid-template-rows:1fr;}
+  .fold > div{overflow:hidden;}
+  @media (prefers-reduced-motion: reduce){ .fold, .chevron{transition:none;} }
+
+  .card-body-inner{padding:0 20px 20px; font-size:14.5px; color:var(--ink-soft);}
+  .card-body-inner p{margin:0 0 10px;}
+  .card-body-inner ul, .card-body-inner ol{margin:0 0 4px; padding-left:20px;}
+  .card-body-inner li{margin-bottom:5px;}
+  .spec{display:grid; grid-template-columns:1fr 1fr; gap:6px 20px; margin:0 0 14px; font-size:13.5px;}
+  .spec div span{display:block; color:var(--muted); font-size:12px;}
+  .spec div strong{color:var(--ink);}
+
+  .evidence{margin-top:16px; padding-top:14px; border-top:1px solid var(--line);}
+  .evidence-label{font-size:12px; color:var(--muted); font-weight:600; margin-bottom:8px;}
+  .trial-list{list-style:none; margin:0; padding:0;}
+  .trial-list li{padding:9px 0; border-bottom:1px dashed var(--line); font-size:13.5px;}
+  .trial-list li:last-child{border-bottom:none;}
+  .trial-name{font-weight:600; color:var(--ink);}
+  .trial-theme{color:var(--purple); font-size:12px;}
+
+  .toolbar{display:flex; gap:10px; align-items:center; justify-content:space-between; flex-wrap:wrap; margin:0 0 14px;}
+  .toolbar .chips{margin:0;}
+  .link-btn{font-size:12.5px; background:none; border:none; color:var(--purple); cursor:pointer; text-decoration:underline; padding:4px;}
+
+  .content-items{display:flex; flex-direction:column; gap:8px;}
+  .content-item{border:1px solid var(--line); border-radius:8px; background:var(--card); overflow:hidden;}
+  .ci-head{padding:11px 14px; font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;}
+  .ci-head-left{display:flex; align-items:baseline; gap:10px; flex:1; min-width:0;}
+  .ci-num{font-size:12px; color:var(--muted); flex-shrink:0; min-width:26px;}
+  .ci-topic{font-size:13.5px; font-weight:600; color:var(--ink);}
+  .ci-badges{display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end;}
+  .ci-meta{font-size:12px; color:var(--muted); margin:0 0 12px;}
+  .ci-block-label{font-size:12px; color:var(--muted); font-weight:600; margin:14px 0 6px;}
+  .ci-block-label:first-of-type{margin-top:0;}
+  .ci-note{font-size:12.5px; color:var(--amber); background:var(--amber-light); border-radius:6px; padding:8px 10px; margin:10px 0 0;}
+  .pending-note{
+    font-size:13px; color:var(--muted); font-style:italic; padding:14px 16px;
+    border:1px dashed var(--line); border-radius:8px; margin-top:12px;
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+
+  .stage-row{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:8px 0 20px;}
+  .stage{
+    background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px;
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  .stage .count-num{font-size:24px;}
+  .stage p{font-size:12.5px; color:var(--muted); margin:6px 0 0;}
+  .stage.aware{border-top:3px solid var(--blue);}
+  .stage.consider{border-top:3px solid var(--gold);}
+  .stage.decide{border-top:3px solid var(--cyan);}
+
+  .check-list{list-style:none; margin:0; padding:0; font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;}
+  .check-list li{
+    display:grid; grid-template-columns:auto 1fr; gap:12px; padding:12px 14px; background:var(--card);
+    border:1px solid var(--line); border-radius:8px; margin-bottom:8px; font-size:13.5px; align-items:start;
+  }
+  .check-list li.done{background:var(--teal-light);}
+  .check-list li.done .step-title{text-decoration:line-through; text-decoration-color:var(--muted);}
+  .check-list input{margin-top:3px; width:17px; height:17px; accent-color:var(--purple);}
+  .step-title{font-weight:600; color:var(--ink);}
+  .step-no{color:var(--muted); font-weight:400; margin-right:6px;}
+  .step-text{color:var(--ink-soft); margin-top:2px;}
+  .step-text ul{margin:4px 0 0; padding-left:18px;}
+  .progress{
+    display:flex; align-items:center; gap:12px; margin:0 0 14px; font-size:13px; color:var(--muted);
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  .bar{flex:1; height:6px; background:var(--wash); border-radius:6px; overflow:hidden; max-width:320px;}
+  .bar i{display:block; height:100%; width:0; background:var(--purple); transition:width .25s;}
+  .donts{list-style:none; padding:0; margin:0; font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;}
+  .donts li{
+    padding:10px 14px; border-left:3px solid var(--orange); background:var(--orange-light); color:var(--orange);
+    border-radius:0 6px 6px 0; margin-bottom:6px; font-size:13.5px;
+  }
+  .role-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px;}
+  .role{
+    background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px; font-size:13.5px;
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  .role strong{display:block; color:var(--ink); margin-bottom:3px;}
+  .role span{color:var(--ink-soft);}
+
+  footer{
+    max-width:920px; margin:0 auto; padding:22px 28px 60px;
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif; font-size:12.5px; color:var(--muted);
+    border-top:1px solid var(--line);
+  }
+  footer p{margin:0 0 8px;}
+  footer ul{margin:4px 0 10px; padding-left:18px;}
+
+  @media (max-width:640px){
+    .facts, .spec, .role-grid, .stage-row{grid-template-columns:1fr;}
+    header{padding:40px 20px 22px;}
+    body{padding-left:0;}
+    nav{position:sticky; width:auto; bottom:auto; right:0; flex-direction:row; padding:0 14px; border-right:none; border-bottom:1px solid var(--line); overflow-x:auto; overflow-y:hidden;}
+    nav button[data-panel="history"]{margin-top:0; border-top:none;}
+    nav button{white-space:nowrap; border-left:none; border-bottom:2px solid transparent; border-radius:0;}
+    nav button.active{border-bottom-color:var(--purple); background:none;}
+    main{padding:30px 18px 80px;}
+    .ci-head{flex-wrap:wrap;}
+  }
+
+  .badge.video{background:var(--rose-light); color:var(--rose);}
+  .badge.listicle{background:var(--teal-light); color:var(--teal);}
+  .badge.casestudy{background:var(--card); color:var(--green); border:1px solid var(--green);}
+  .badge.poll{background:var(--wash); color:var(--ink-soft);}
+  .badge.engage{background:var(--green-light); color:var(--green);}
+  .badge.advocacy{background:var(--orange-light); color:var(--orange);}
+  .ci-block-label + ul{margin:0 0 4px; padding-left:20px;}
+  .card-body-inner a{color:var(--purple);}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Haemorrhoids &amp; venous disease — Servier project reference</h1>
+    <p>Servier project · Daflon (MPFF) · haemorrhoidal disease, chronic venous disease and content plan · current phase: I</p>
+  </div>
+  <div class="header-tags">
+    <span class="pending-tag">Phase 2 themes: proposed, not confirmed</span>
+    <span class="version-tag">v1.0</span>
+  </div>
+</header>
+
+<nav id="tabs" aria-label="Sections">
+  <button class="active" data-panel="overview">Project overview</button>
+  <button data-panel="phase1">Phase 1 contents</button>
+  <button data-panel="phase2">Phase 2 themes</button>
+  <button data-panel="hd">Haemorrhoidal disease</button>
+  <button data-panel="cvd">Chronic venous disease</button>
+  <button data-panel="daflon">Daflon (MPFF)</button>
+  <button data-panel="evidence">Evidence &amp; trials</button>
+  <button data-panel="claims">Claims watch-outs</button>
+  <button data-panel="history">Version history</button>
+</nav>
+
+<main>
+
+  <!-- OVERVIEW -->
+  <section class="panel active" id="overview">
+    <div class="head">
+      <h2>Project overview</h2>
+      <span class="phase-tag">Currently in Phase 1</span>
+      <span class="phase-tag warn">Phase 2 themes proposed</span>
+    </div>
+    <div class="lede">
+      <p>The Servier project produces medical content for healthcare professionals (HCPs) in India on haemorrhoidal disease (HD) and, to a smaller extent, chronic venous disease (CVD), with Daflon (micronized purified flavonoid fraction, MPFF) as the Servier product in focus. Content is published on MedSynapse through the Venosphere CxCenter and is built on Content Strategy V3.1.</p>
+      <p>Phase 1 is a 9-month programme of 18 contents plus one pre-campaign survey. Contents 1 to 10 have been published; Contents 11 to 18 are still to come.</p>
+    </div>
+
+    <dl class="facts">
+      <div><dt>Client</dt><dd>Servier (Daflon / MPFF)</dd></div>
+      <div><dt>Product</dt><dd>Daflon 500 mg and Daflon 1000 mg tablets</dd></div>
+      <div><dt>Therapy areas</dt><dd>Haemorrhoidal disease (primary), chronic venous disease (secondary)</dd></div>
+      <div><dt>Target country</dt><dd>India</dd></div>
+      <div><dt>Phase 1 scope</dt><dd>18 contents over 9 months, plus 1 pre-campaign survey</dd></div>
+      <div><dt>CxCenter</dt><dd>Venosphere</dd></div>
+      <div><dt>Content strategy</dt><dd>V3.1</dd></div>
+      <div><dt>Platform</dt><dd>MedSynapse</dd></div>
+    </dl>
+
+    <h3 class="section-label">Objectives (Phase 1 SOW)</h3>
+    <div class="card"><div class="card-body-inner" style="padding-top:18px;">
+      <ul>
+        <li><strong>Reach.</strong> Expand reach to general physicians and general surgeons across the region, with a special focus on Tier 2 and Tier 3 cities and geographies where the field force has limited presence.</li>
+        <li><strong>Brand awareness.</strong> Build Daflon awareness among gynaecologists, general practitioners, general surgeons, gastroenterologists, gastro surgeons, vascular surgeons and interventional radiologists.</li>
+        <li><strong>Content focus.</strong> Primary focus haemorrhoids (about 90% of content); secondary focus chronic venous disease (about 10%).</li>
+        <li><strong>Positioning.</strong> Position Daflon (MPFF) as the venoactive drug for comprehensive management of haemorrhoidal disease.</li>
+      </ul>
+    </div></div>
+    <div class="callout warn"><strong>The 90/10 split does not match the strategy.</strong> The SOW says about 90% haemorrhoids and 10% CVD. The Project Overview deck says 13 HD and 5 CVD contents (72% / 28%). The deck's split fits the strategy sheet when Contents 3 to 15 are counted as HD and Contents 1, 2, 16, 17 and 18 as CVD or mixed. Confirm with the client which figure governs.</div>
+
+    <h3 class="section-label">Specialties (8)</h3>
+    <div class="chips">
+      <span class="chip">General Medicine</span><span class="chip">Consulting Physician</span><span class="chip">Gastroenterology</span><span class="chip">Gastrointestinal Surgery</span>
+      <span class="chip">General Surgery</span><span class="chip">Obstetrics &amp; Gynaecology</span><span class="chip">Radiology</span><span class="chip">Vascular Surgery</span>
+    </div>
+    <p class="sans" style="font-size:12.5px;color:var(--muted);margin:10px 0 0;">The SOW objective also names interventional radiologists as an awareness audience; the specialty list above is the one in the Project Overview deck.</p>
+
+    <h3 class="section-label">Phases</h3>
+    <div class="phase-grid">
+      <div class="phase-card current">
+        <div class="phase-card-top"><h3>Phase 1</h3><span class="phase-status">In progress</span></div>
+        <div class="phase-counts">
+          <div><div class="count-num">18</div><div class="count-label">Contents in SOW</div></div>
+          <div><div class="count-num">10</div><div class="count-label">Published (C1–C10)</div></div>
+          <div><div class="count-num">8</div><div class="count-label">To come (C11–C18)</div></div>
+          <div><div class="count-num">1</div><div class="count-label">Pre-campaign survey</div></div>
+        </div>
+        <p class="phase-note">Published so far: 2 KOL videos, 2 articles, 3 infographics, 1 poll, 1 listicle, 1 case study.</p>
+        <p class="format-counts">Planned mix in the strategy: 2 KOL video &middot; 2 Article &middot; 4 Infographic &middot; 3 Poll &middot; 2 Listicle &middot; 5 Case study (inferred from the strategy sheet)</p>
+        <button class="go-btn" data-goto="phase1">View Phase 1 contents</button>
+      </div>
+      <div class="phase-card proposed">
+        <div class="phase-card-top"><h3>Phase 2</h3><span class="phase-status warn">Themes in strategy — confirmation not recorded</span></div>
+        <div class="phase-counts">
+          <div><div class="count-num">12</div><div class="count-label">Content themes</div></div>
+          <div><div class="count-num">3</div><div class="count-label">Extra case studies</div></div>
+        </div>
+        <p class="phase-note">Strategy V3.1 carries a Phase II themes sheet and proposed case studies. The SOW covers Phase 1 only, so treat these as proposals.</p>
+        <p class="format-counts">Themes: 4 KOL video &middot; 4 Webinar &middot; 3 Case study &middot; 1 Listicle</p>
+        <button class="go-btn" data-goto="phase2">View Phase 2 themes</button>
+      </div>
+    </div>
+
+    <div class="callout info"><strong>Writing rules from the Project Overview deck.</strong>
+      <ul>
+        <li>References in superscript throughout the draft.</li>
+        <li>Highlight important points using the brand colours.</li>
+        <li>Avoid repetitive information.</li>
+        <li>Content must be relevant to both General Medicine and General Surgery.</li>
+        <li>Where appropriate, add open-ended discussion questions to understand HCP views and MPFF prescribing practice.</li>
+        <li>Case studies should closely reflect real-world presentations and clinical practice.</li>
+      </ul>
+    </div>
+    <div class="callout info"><strong>Core references listed for content creation.</strong> ACRSI Practice Guidelines for the Management of Haemorrhoids 2016 (executive summary); IMPACT-HD (proctoscopic assessment with patient experience of MPFF in Grade I–II haemorrhoids); “Micronized purified flavonoid fraction in the treatment of hemorrhoidal disease”; and the MPFF in haemorrhoid disease systematic review and meta-analysis.</div>
+  </section>
+
+  <!-- PHASE 1 -->
+  <section class="panel" id="phase1">
+    <div class="head">
+      <h2>Phase 1 contents</h2>
+      <span class="phase-tag">10 of 18 published</span>
+    </div>
+    <div class="lede"><p>Topics, objectives and focus points below come from Content Strategy V3.1. Creators and publication dates were not available to us, so they are marked as to be added. Published titles can differ slightly from the strategy wording; check against the live posts.</p></div>
+
+    <h3 class="section-label">Publication tracker</h3>
+    <div class="tablewrap"><table id="tracker"></table></div>
+
+    <h3 class="section-label">Content detail — published (C1–C10)</h3>
+    <div class="toolbar">
+      <div class="chips" id="p1-filter"></div>
+      <div><button class="link-btn" data-expand="p1-list">Expand all</button><button class="link-btn" data-collapse="p1-list">Collapse all</button></div>
+    </div>
+    <div class="content-items" id="p1-list"></div>
+
+    <h3 class="section-label">Still to come (C11–C18) and the pre-campaign survey</h3>
+    <div class="tablewrap"><table id="remaining"></table></div>
+    <div class="callout warn"><strong>Numbering conflict for C14 and C15.</strong> The first strategy table lists C14 as a CVD article and C15 as the ESVS 2022 guideline infographic. A later table in the same workbook lists C14 and C15 as two new HD case studies. The 13 HD / 5 CVD split in the overview deck only works if the case studies replaced the CVD article and ESVS infographic. We have assumed that. Confirm before planning.</div>
+    <div class="callout info"><strong>C11 and C12 were revised.</strong> After the 30 June call, C11 became a listicle on medical management (relevant to physicians and surgeons, no repeated points) and C12 became a Grade III–IV case study covering MPFF-based medical management and the relevant surgical procedures.</div>
+    <div class="toolbar" style="margin-top:18px;">
+      <div class="chips" id="p1r-filter"></div>
+      <div><button class="link-btn" data-expand="p1r-list">Expand all</button><button class="link-btn" data-collapse="p1r-list">Collapse all</button></div>
+    </div>
+    <div class="content-items" id="p1r-list"></div>
+    <div class="pending-note">The pre-campaign survey is part of the SOW, but no questions or timing were in the files provided. Details to be added.</div>
+  </section>
+
+  <!-- PHASE 2 -->
+  <section class="panel" id="phase2">
+    <div class="head">
+      <h2>Phase 2 themes</h2>
+      <span class="phase-tag warn">Proposed — outside current SOW</span>
+    </div>
+    <div class="callout warn"><strong>Status:</strong> these come from the “Phase II Content Themes” and “Case Studies” sheets of Strategy V3.1. The current SOW covers Phase 1 only, and we have no record of client confirmation, so titles, formats and order can change.</div>
+    <div class="lede"><p>Phase 2 moves from early diagnosis towards treatment selection, complex presentations, long-term management and advocacy. It adds webinars, a format not used in Phase 1.</p></div>
+
+    <h3 class="section-label">Twelve proposed content themes</h3>
+    <div class="toolbar">
+      <div class="chips" id="p2-filter"></div>
+      <div><button class="link-btn" data-expand="p2-list">Expand all</button><button class="link-btn" data-collapse="p2-list">Collapse all</button></div>
+    </div>
+    <div class="content-items" id="p2-list"></div>
+
+    <h3 class="section-label">Proposed Phase 2 case studies (from the Case Studies sheet)</h3>
+    <div class="content-items" id="p2c-list"></div>
+    <div class="callout info" style="margin-top:18px;"><strong>Overlap to watch.</strong> Several Phase 2 themes (recurrence, comorbidities, constipation) can repeat points already covered in published Phase 1 contents. Check against C1–C10 before development.</div>
+  </section>
+
+  <!-- HD -->
+  <section class="panel" id="hd">
+    <div class="head">
+      <h2>Haemorrhoidal disease (HD)</h2>
+      <span class="phase-tag">Primary focus</span>
+    </div>
+    <div class="lede">
+      <p>HD is a common anorectal disorder in which the natural anal cushions expand and are displaced distally, causing symptoms. It is classed as internal (above the dentate line) or external (below it). Internal HD is graded by degree of prolapse. The ACRSI practice guidelines (2016) propose the grading used in this project; they are written for general practitioners, general surgeons, colorectal surgeons and gastrointestinal surgeons in India.</p>
+    </div>
+    <dl class="facts">
+      <div><dt>Lifetime occurrence</dt><dd>Up to 75% of people at some point</dd></div>
+      <div><dt>Age</dt><dd>More than half of people over 50 have had haemorrhoidal problems</dd></div>
+      <div><dt>Sex</dt><dd>Men seek treatment more often; pregnancy makes women more prone to symptomatic HD</dd></div>
+      <div><dt>Typical symptoms</dt><dd>Bleeding, prolapse, pain, discomfort, pruritus, discharge</dd></div>
+    </dl>
+    <div class="callout info"><strong>Under-reported and under-treated.</strong> The Project Overview deck notes that stigma and self-management keep many patients from care, with effects on quality of life, discomfort, bleeding and work productivity. This supports the early-diagnosis angle of Phase 1 and the Phase 2 theme on stigma and delayed presentation.</div>
+
+    <h3 class="section-label">Grading of internal HD (ACRSI 2016, as shown in the project deck)</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Grade</th><th>Description</th><th>Usual starting point</th></tr></thead>
+      <tbody>
+        <tr><td class="nowrap">Grade I</td><td>Bleeding, no prolapse</td><td>Lifestyle measures and MPFF; office procedure if persistent</td></tr>
+        <tr><td class="nowrap">Grade II</td><td>Prolapse that reduces spontaneously</td><td>Lifestyle measures and MPFF; office procedures (rubber band ligation, sclerotherapy, infrared coagulation)</td></tr>
+        <tr><td class="nowrap">Grade III</td><td>Prolapse needing manual reduction</td><td>MPFF for selected or minor cases; office procedures for selected cases; surgery for others</td></tr>
+        <tr><td class="nowrap">Grade IV</td><td>Irreducible prolapse</td><td>Surgical management, with MPFF as an adjunct</td></tr>
+      </tbody>
+    </table></div>
+    <p class="sans" style="font-size:12.5px;color:var(--muted);margin:8px 0 0;">The “usual starting point” column simplifies the management slides in the project deck. It is not a treatment algorithm.</p>
+
+    <h3 class="section-label">Management approach (project deck, citing ACRSI 2016)</h3>
+    <div class="card open" data-card>
+      <button class="card-head" aria-expanded="true">
+        <span class="card-title-wrap"><span class="card-title">Step 1 — Lifestyle and dietary measures</span><span class="badge note">All grades</span></span>
+        <span class="chevron">&#9660;</span>
+      </button>
+      <div class="fold"><div><div class="card-body-inner">
+        <ul>
+          <li>Dietary modification with more fibre and adequate fluid as first-line treatment.</li>
+          <li>Manage predominant constipation with polyethylene glycol, lactulose or bulking agents.</li>
+        </ul>
+      </div></div></div>
+    </div>
+    <div class="card open" data-card>
+      <button class="card-head" aria-expanded="true">
+        <span class="card-title-wrap"><span class="card-title">Step 2 — Medical management with MPFF</span><span class="badge article">Daflon</span></span>
+        <span class="chevron">&#9660;</span>
+      </button>
+      <div class="fold"><div><div class="card-body-inner">
+        <ul>
+          <li>First-line for Grade I–II, and for selected or minor Grade III.</li>
+          <li>Acutely bleeding HD can be treated effectively.</li>
+          <li>Adjunct to office-based and surgical procedures.</li>
+          <li>The deck states that other venoactive drugs have lower evidence support (a comparative statement; see Claims watch-outs).</li>
+        </ul>
+        <div class="spec" style="margin-top:12px;">
+          <div><span>Acute HD attack (MPFF 1000 mg)</span><strong>3 tablets a day for 4 days, then 2 tablets a day for 3 days</strong></div>
+          <div><span>Maintenance (MPFF 1000 mg)</span><strong>1 tablet once daily; the deck says a minimum of 2 months or more at physician’s discretion</strong></div>
+        </div>
+      </div></div></div>
+    </div>
+    <div class="card" data-card>
+      <button class="card-head" aria-expanded="false">
+        <span class="card-title-wrap"><span class="card-title">Step 3 — Office-based procedures</span><span class="badge infographic">Grade I–II and selected III</span></span>
+        <span class="chevron">&#9660;</span>
+      </button>
+      <div class="fold"><div><div class="card-body-inner">
+        <ul>
+          <li>Rubber band ligation.</li>
+          <li>Injection sclerotherapy.</li>
+          <li>Infrared coagulation.</li>
+        </ul>
+      </div></div></div>
+    </div>
+    <div class="card" data-card>
+      <button class="card-head" aria-expanded="false">
+        <span class="card-title-wrap"><span class="card-title">Step 4 — Surgical management</span><span class="badge webinar">Grade II–IV by procedure</span></span>
+        <span class="chevron">&#9660;</span>
+      </button>
+      <div class="fold"><div><div class="card-body-inner">
+        <ul>
+          <li><strong>Stapled haemorrhoidopexy</strong> (Grade III–IV): more effective for pain control.</li>
+          <li><strong>Haemorrhoidectomy</strong> (Grade III–IV).</li>
+          <li><strong>DGHAL / THD</strong> (Grade II–IV): recurrence in Grade III–IV remains a limitation; combining DGHAL with anopexy or mucopexy may reduce recurrence and extend its use to advanced disease.</li>
+          <li>MPFF can be used as an adjunct to both office-based procedures and surgery.</li>
+        </ul>
+      </div></div></div>
+    </div>
+
+    <h3 class="section-label">How MPFF acts in HD (project deck, adapted from Porwal 2025)</h3>
+    <div class="card"><div class="card-body-inner" style="padding-top:18px;">
+      <ul>
+        <li><strong>Venous tone and microcirculation:</strong> increases venous tone and tightens endothelial junctions.</li>
+        <li><strong>Capillary permeability:</strong> inhibits plasma leakage and reduces endothelial permeability.</li>
+        <li><strong>Leukocyte–endothelial adhesion:</strong> reduces leukocyte adhesion and limits release of inflammatory mediators.</li>
+        <li><strong>Lymphatic drainage:</strong> improves lymphatic clearance and relieves tissue oedema.</li>
+      </ul>
+    </div></div>
+
+    <h3 class="section-label">Who the HD content speaks to</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Audience</th><th>What matters to them</th><th>Where it shows up</th></tr></thead>
+      <tbody>
+        <tr><td class="nowrap">General physicians and consulting physicians</td><td>Early diagnosis, grading, first-line medical therapy, when to refer</td><td>C3, C4, C6, C10, C11</td></tr>
+        <tr><td class="nowrap">General surgeons, GI surgeons, gastroenterologists</td><td>Procedure choice, peri-procedural and postoperative care, recurrence</td><td>C2, C5, C12, C15</td></tr>
+        <tr><td class="nowrap">Obstetrics &amp; gynaecology</td><td>Haemorrhoids in pregnancy and postpartum; capillary-fragility bleeding (DUB, IUCD) is also a Daflon 500 mg indication</td><td>Original C12 pregnancy case (since replaced); see Claims watch-outs</td></tr>
+        <tr><td class="nowrap">Vascular surgery, radiology</td><td>Shared venous pathology and CVD overlap</td><td>C1, C2, C17</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- CVD -->
+  <section class="panel" id="cvd">
+    <div class="head">
+      <h2>Chronic venous disease (CVD)</h2>
+      <span class="phase-tag">Secondary focus</span>
+    </div>
+    <div class="lede">
+      <p>CVD covers long-standing abnormalities of the venous system, mainly of the lower limbs, from heavy legs and oedema to skin changes and ulcers. The project deck says CVD is estimated to affect over half the population and that men seek treatment for it more often than women, although pregnancy makes women more prone to symptomatic disease. It also notes that haemorrhoids and CVD share risk factors, which underpins the dual-burden case study (C17).</p>
+    </div>
+    <dl class="facts">
+      <div><dt>Daflon strength for CVD</dt><dd>Daflon 500 mg only (the 1000 mg label covers haemorrhoids only)</dd></div>
+      <div><dt>CVD indications (500 mg label)</dt><dd>Chronic organic and functional venous insufficiency of the lower limbs (heavy legs, pain, night cramps, oedema); varicose veins; sequelae of phlebitis</dd></div>
+      <div><dt>Label dose</dt><dd>2 tablets a day (one at lunch, one at dinner)</dd></div>
+      <div><dt>Label duration</dt><dd>3 months in early CVD, 6 months in advanced stages</dd></div>
+    </dl>
+    <div class="callout warn"><strong>Verify the 4% figure.</strong> The deck says about 4% of adults over 65 have CVD, next to “over 50% of the population”. These two figures sit uneasily together. Check the source and definition (for example CEAP class) before using either in content.</div>
+
+    <h3 class="section-label">CVD contents in the plan</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Content</th><th>Topic</th><th>Format</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td class="nowrap">C1</td><td>Medical versus surgical therapy in haemorrhoids and venous disease (shared)</td><td><span class="badge video">KOL video</span></td><td><span class="badge published">Published</span></td></tr>
+        <tr><td class="nowrap">C2</td><td>Surgical intervention and long-term care in haemorrhoids and venous disease (shared)</td><td><span class="badge video">KOL video</span></td><td><span class="badge published">Published</span></td></tr>
+        <tr><td class="nowrap">C16</td><td>VEIN STEP study: clinical outcomes of MPFF in CVD</td><td><span class="badge infographic">Infographic</span></td><td><span class="badge pending">Planned</span></td></tr>
+        <tr><td class="nowrap">C17</td><td>Dual burden of haemorrhoids and CVD in a 65-year-old patient</td><td><span class="badge casestudy">Case study</span></td><td><span class="badge pending">Planned</span></td></tr>
+        <tr><td class="nowrap">C18</td><td>Role and integration of MPFF for CVD in routine practice</td><td><span class="badge poll">Poll</span></td><td><span class="badge pending">Planned</span></td></tr>
+      </tbody>
+    </table></div>
+    <p class="sans" style="font-size:12.5px;color:var(--muted);margin:8px 0 0;">Dropped from the earlier plan (inferred): a CVD burden article and an ESVS 2022 guideline infographic.</p>
+
+    <h3 class="section-label">VEIN STEP — the study behind C16</h3>
+    <div class="card open" data-card>
+      <button class="card-head" aria-expanded="true">
+        <span class="card-title-wrap"><span class="card-title">VEIN STEP (NCT04574375)</span><span class="badge note">Servier-sponsored, observational</span></span>
+        <span class="chevron">&#9660;</span>
+      </button>
+      <div class="fold"><div><div class="card-body-inner">
+        <div class="spec">
+          <div><span>Design</span><strong>Prospective, observational, international, real life</strong></div>
+          <div><span>Analysis set</span><strong>6,084 patients, 78% women, nine countries</strong></div>
+          <div><span>Mean age / BMI</span><strong>50.6 years / 28.0 kg/m²</strong></div>
+          <div><span>Follow-up</span><strong>Weeks 2 and 4 (optional week 8)</strong></div>
+        </div>
+        <ul>
+          <li>Most common CEAP classes: C1 23.0%, C2 31.6%, C3 30.7%.</li>
+          <li>Treatment: oral venoactive drugs in 95.8% (MPFF 75.5%, diosmin 18.8%), compression 52.0%, topicals 31.5%.</li>
+          <li>Global symptom improvement in 89% at 2 weeks and 96% at 4 weeks. Pain, leg heaviness, cramps and swelling improved in 82%, 71%, 45.5% and 46%.</li>
+          <li>MPFF-based therapy was linked to the greatest reduction in symptoms and signs, and the greatest CIVIQ-14 improvement.</li>
+          <li>Post-hoc type 2 diabetes subanalysis (702 of 6,084 patients): MPFF reduced global symptom intensity more than diosmin (−2.7 vs −2.0, p=0.004).</li>
+        </ul>
+        <p class="ci-note">The Phase 1 strategy describes VEIN STEP as “randomised controlled trial (RCT) data”. The registry record and the publication both describe it as an observational study with no randomised comparator. Reword the C16 brief before development.</p>
+      </div></div></div>
+    </div>
+  </section>
+
+  <!-- DAFLON -->
+  <section class="panel" id="daflon">
+    <div class="head">
+      <h2>Daflon (micronized purified flavonoid fraction)</h2>
+      <span class="phase-tag">Venoactive · C05CA53</span>
+    </div>
+    <div class="lede">
+      <p>Daflon is a micronized purified flavonoid fraction: 90% diosmin and 10% flavonoids expressed as hesperidin, in micronized form to improve bioavailability. It is described as a vasoprotective and capillary-stabilising agent. The project deck says it was first introduced 37 years ago and is available as 500 mg and 1000 mg tablets. Servier India Private Limited manufactures it in India under licence from Les Laboratoires Servier, France.</p>
+    </div>
+    <div class="callout warn"><strong>Source and version.</strong> Details below come from the Daflon 500 mg and 1000 mg prescribing information (both Ver 4.0, April 2022) supplied with the project. Check for a newer approved label before any claim is used.</div>
+
+    <h3 class="section-label">Strengths at a glance</h3>
+    <div class="card open" data-card>
+      <button class="card-head" aria-expanded="true">
+        <span class="card-title-wrap"><span class="card-title">Daflon 500 mg</span><span class="badge article">Film-coated tablet</span></span>
+        <span class="chevron">&#9660;</span>
+      </button>
+      <div class="fold"><div><div class="card-body-inner">
+        <div class="spec">
+          <div><span>Composition per tablet</span><strong>MPFF 500 mg: diosmin 450 mg, hesperidin 50 mg</strong></div>
+          <div><span>Pack</span><strong>Box of 5 × 2 × 10 tablets</strong></div>
+          <div><span>Usual dose</span><strong>2 tablets a day, one at lunch and one at dinner</strong></div>
+          <div><span>Acute haemorrhoidal attack</span><strong>6 tablets a day for 4 days, then 4 a day for 3 days</strong></div>
+        </div>
+        <p><strong>Indications</strong></p>
+        <ul>
+          <li><strong>Phlebology:</strong> chronic organic and functional venous insufficiency of the lower limbs (heavy legs, pain, night cramps, oedema), varicose veins, sequelae of phlebitis.</li>
+          <li><strong>Proctology:</strong> haemorrhoids and acute haemorrhoidal attacks.</li>
+          <li><strong>Gynaecology:</strong> clinical manifestations of capillary fragility: dysfunctional uterine bleeding (DUB) and intrauterine contraceptive device (IUCD) induced bleeding.</li>
+        </ul>
+        <p style="margin-top:10px;"><strong>Other doses.</strong> Maintenance after an acute attack is 2 tablets a day for as long as the physician decides. CVD: 2 tablets a day for 3 months (early) or 6 months (advanced). IUCD bleeding: 2 tablets a day for 3 consecutive cycles. DUB: 2 tablets a day from 5 days before expected menstruation to the end of bleeding, for 3 consecutive cycles.</p>
+      </div></div></div>
+    </div>
+    <div class="card" data-card>
+      <button class="card-head" aria-expanded="false">
+        <span class="card-title-wrap"><span class="card-title">Daflon 1000 mg</span><span class="badge infographic">Film-coated tablet</span></span>
+        <span class="chevron">&#9660;</span>
+      </button>
+      <div class="fold"><div><div class="card-body-inner">
+        <div class="spec">
+          <div><span>Composition per tablet</span><strong>MPFF 1000 mg: diosmin 900 mg, hesperidin 100 mg</strong></div>
+          <div><span>Pack</span><strong>Box of 6 blisters × 10 tablets (not all pack sizes may be marketed)</strong></div>
+          <div><span>Haemorrhoids, maintenance</span><strong>1 tablet daily, duration at physician’s discretion</strong></div>
+          <div><span>Acute haemorrhoidal attack</span><strong>3 tablets a day for 4 days, then 2 a day for 3 days</strong></div>
+        </div>
+        <p><strong>Indication</strong>: treatment of haemorrhoids and acute haemorrhoidal attacks only. There is no venous or gynaecological indication on this label.</p>
+      </div></div></div>
+    </div>
+
+    <div class="callout info"><strong>Same total daily MPFF, two strengths.</strong> The acute-attack regimen is 3,000 mg a day for 4 days then 2,000 mg a day for 3 days on the 1000 mg label, which is the same as 6 then 4 tablets of the 500 mg. Content should name the strength it refers to.</div>
+
+    <h3 class="section-label">Mechanism and pharmacology</h3>
+    <div class="card"><div class="card-body-inner" style="padding-top:18px;">
+      <ul>
+        <li><strong>Dual action on venous return:</strong> at vein and venule level it increases parietal tone and has an anti-stasis action; at microcirculation level it strengthens capillary resistance and normalises capillary permeability.</li>
+        <li><strong>Venous tone:</strong> venous occlusion plethysmography showed a shorter venous emptying time. Dose–effect relationships were significant for capacitance, distensibility and emptying time, and the best dose–effect ratio was with 2 tablets (500 mg label).</li>
+        <li><strong>Microcirculation:</strong> double-blind studies versus placebo showed higher capillary resistance in patients with capillary fragility.</li>
+        <li><strong>Pharmacokinetics (carbon-14 diosmin):</strong> excretion mainly in faeces; urinary excretion averages 14% of the dose; elimination half-life 11 hours; highly metabolised (phenol acids in urine).</li>
+        <li><strong>Preclinical:</strong> no special hazard in repeat-dose, genotoxicity or reproductive toxicity studies.</li>
+      </ul>
+    </div></div>
+
+    <h3 class="section-label">Safety points from the label</h3>
+    <div class="card"><div class="card-body-inner" style="padding-top:18px;">
+      <ul>
+        <li><strong>Contraindication:</strong> hypersensitivity to the active substance or any excipient.</li>
+        <li><strong>Acute attack:</strong> treatment must be short-term and does not exclude treatment of other anal conditions. If symptoms do not settle quickly, do a proctological examination and review treatment.</li>
+        <li><strong>Pregnancy:</strong> limited data; animal studies show no reproductive toxicity. As a precaution, the label says it is preferable to avoid Daflon during pregnancy.</li>
+        <li><strong>Breast-feeding:</strong> not known whether it is excreted in milk; a risk to the infant cannot be excluded. Decide whether to stop breast-feeding or abstain from Daflon.</li>
+        <li><strong>Interactions:</strong> no interaction studies have been done; no clinically relevant interaction has been reported from post-marketing experience.</li>
+        <li><strong>Driving:</strong> no or negligible influence.</li>
+        <li><strong>Paediatric:</strong> safety and efficacy under 18 years not established.</li>
+        <li><strong>Adverse effects:</strong> common — diarrhoea, dyspepsia, nausea, vomiting; uncommon — colitis; rare — dizziness, headache, malaise, rash, pruritus, urticaria; unknown frequency — abdominal pain, face/lip/eyelid oedema, exceptionally Quincke’s oedema.</li>
+        <li><strong>Overdose:</strong> limited experience; mainly gastrointestinal and skin events; treat symptoms.</li>
+        <li><strong>Reporting:</strong> suspected adverse reactions via PvPI, ADR helpline 1800 180 3024.</li>
+      </ul>
+    </div></div>
+    <p class="sans" style="font-size:12.5px;color:var(--muted);margin:10px 0 0;">Shelf life 36 months; no special storage conditions; excipients include gelatin, microcrystalline cellulose, talc, sodium starch glycolate, magnesium stearate, sodium lauryl sulphate and polyethylene glycol 6000.</p>
+  </section>
+
+  <!-- EVIDENCE -->
+  <section class="panel" id="evidence">
+    <div class="head">
+      <h2>Evidence and clinical trials</h2>
+      <span class="phase-tag">Phase 1 and 2</span>
+    </div>
+    <div class="lede"><p>A starting list of sources for content teams, built from the project references, PubMed, ClinicalTrials.gov and the two Servier websites. It is a research aid, not a vetted reference pack. Confirm each source, and its wording, before it goes into content.</p></div>
+
+    <h3 class="section-label">Guidelines and systematic reviews</h3>
+    <div class="card open" data-card>
+      <button class="card-head" aria-expanded="true">
+        <span class="card-title-wrap"><span class="card-title">Haemorrhoid evidence</span><span class="badge note">5 sources</span></span>
+        <span class="chevron">&#9660;</span>
+      </button>
+      <div class="fold"><div><div class="card-body-inner">
+        <ul class="trial-list">
+          <li><span class="trial-name">ACRSI Practice Guidelines 2016</span> — Agarwal N et al. Executive summary, Indian J Surg 2017;79(1):58–61. Covers diagnosis and dietary, non-surgical and surgical management; written for GPs, general surgeons, colorectal and GI surgeons in India. <a href="https://doi.org/10.1007/s12262-016-1578-7" target="_blank" rel="noopener">DOI</a> <span class="trial-theme">C4, C5, C10, C12</span></li>
+          <li><span class="trial-name">MPFF in HD: systematic review and meta-analysis</span> — Sheikh P, Lohsiriwat V, Shelygin Y. Adv Ther 2020;37(6):2792–2812. 11 RCTs (13 articles) versus placebo or no treatment. Pooled analysis of four studies: bleeding OR 0.082 (95% CI 0.027–0.250), discharge/leakage OR 0.12, overall improvement OR 5.25 (patients) and 5.51 (investigators); pain tended to fall (OR 0.11, p=0.06). <a href="https://doi.org/10.1007/s12325-020-01353-7" target="_blank" rel="noopener">DOI</a> <span class="trial-theme">C7, C8</span></li>
+          <li><span class="trial-name">MPFF after haemorrhoidectomy: meta-analysis</span> — Fu H et al. Phytomedicine 2022;104:154244. 22 RCTs, 2,335 participants. MPFF improved clinical efficacy and reduced bleeding, pain and oedema scores after haemorrhoidectomy; dose and duration mattered. Small samples; no standard regimen could be set. <a href="https://doi.org/10.1016/j.phymed.2022.154244" target="_blank" rel="noopener">DOI</a> <span class="trial-theme">C5, C12</span></li>
+          <li><span class="trial-name">Recurrence and pharmacological treatment: systematic review</span> — Lohsiriwat V et al. Adv Ther 2022;40(1):117–132. 44 publications. Recurrence 0–56.5% after surgery or phlebotonics, most studies 20% or less. MPFF improved main symptoms more than other pharmacological treatments. No real-world study of recurrence on systemic or topical treatment was found. <a href="https://doi.org/10.1007/s12325-022-02351-7" target="_blank" rel="noopener">DOI</a> <span class="trial-theme">C9, C12, C14</span></li>
+          <li><span class="trial-name">MPFF for haemorrhoids: earlier meta-analysis (a more cautious view)</span> — Aziz Z et al. Complement Ther Med 2018;39:49–55. 10 RCTs, 1,164 participants. Bleeding favoured MPFF (RR 1.46, p=0.008), but evidence was low quality and other outcomes were not significant. Useful to know before claiming broad benefit. <a href="https://doi.org/10.1016/j.ctim.2018.05.011" target="_blank" rel="noopener">DOI</a> <span class="trial-theme">Balance check</span></li>
+        </ul>
+        <p class="ci-note">IMPACT-HD, and the MPFF in HD review in the project reference list, are named in the Project Overview deck. We could not match them to PubMed records in this pass; take the full citations from the team’s reference pack.</p>
+      </div></div></div>
+    </div>
+
+    <h3 class="section-label">Servier-sponsored studies on ClinicalTrials.gov (HD and CVD)</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Study</th><th>NCT ID</th><th>Design</th><th>Size</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td><strong>CHORALIS</strong> — international study of conservative treatments in acute HD. Primary outcomes at week 4: PGIC, VAS symptom severity (pain, discomfort, bleeding, prolapse, swelling, itching, soiling) and HEMO-FISS-QoL.</td><td class="nowrap">NCT04578730</td><td>Observational, international</td><td class="nowrap">3,592</td><td>Completed (Nov 2022)</td></tr>
+        <tr><td><strong>VEIN STEP</strong> — conservative treatments in CVD (see CVD tab)</td><td class="nowrap">NCT04574375</td><td>Observational, international</td><td class="nowrap">6,419 enrolled</td><td>Completed (Mar 2022)</td></tr>
+        <tr><td>Russian multicentre programme on quality of life with different treatments in acute and chronic HD</td><td class="nowrap">NCT03743311</td><td>Observational</td><td class="nowrap">1,032</td><td>Completed</td></tr>
+        <tr><td>Hemorrhoid Disease Questionnaire (HDQ) for diagnosing HD, Russia</td><td class="nowrap">NCT04943666</td><td>Observational</td><td class="nowrap">725</td><td>Completed</td></tr>
+        <tr><td>MPFF as part of conservative therapy in patients with HD undergoing minimally invasive surgery, Russia</td><td class="nowrap">NCT07647172</td><td>Observational</td><td class="nowrap">200</td><td>Recruiting (from Jun 2026)</td></tr>
+        <tr><td>Venoactive drugs in combination therapy, CVD CEAP C4a/C4b, Russia</td><td class="nowrap">NCT04138576</td><td>Observational</td><td class="nowrap">381</td><td>Completed</td></tr>
+        <tr><td>Venoactive drugs in CEAP C6, Russia (VAP-PRO-C6)</td><td class="nowrap">NCT04757766</td><td>Observational</td><td class="nowrap">350</td><td>Completed</td></tr>
+        <tr><td>Detralex in chronic venous oedema, CEAP C3, Russia</td><td class="nowrap">NCT03722836</td><td>Observational</td><td class="nowrap">708</td><td>Completed</td></tr>
+        <tr><td>AIVARIX AI application to detect CEAP C1–C2 CVD, Russia</td><td class="nowrap">NCT05612217</td><td>Observational</td><td class="nowrap">433</td><td>Completed</td></tr>
+      </tbody>
+    </table></div>
+    <p class="sans" style="font-size:12.5px;color:var(--muted);margin:8px 0 0;">Detralex is the name Servier uses for the same MPFF in some markets, including Russia. Use “Daflon” in India content.</p>
+
+    <h3 class="section-label">Other registered MPFF trials worth knowing</h3>
+    <div class="card"><div class="card-body-inner" style="padding-top:18px;">
+      <ul>
+        <li><strong>NCT06184438</strong> — randomised, placebo-controlled phase 4 trial of MPFF (Daflon 1000 mg) after anal fistula surgery, Taipei Medical University Shuang Ho Hospital; 106 patients; completed.</li>
+        <li><strong>NCT04290351</strong> — band ligation plus a phlebotonic versus phlebotonic alone in bleeding internal haemorrhoids (450 mg diosmin + 50 mg hesperidin), Konya, Türkiye; 69 patients; observational, completed. Relevant to the Phase 2 rubber-band-ligation adjuvant case.</li>
+        <li><strong>NCT06363513 / NCT06748014</strong> — aescin plus MPFF for bleeding in acute internal haemorrhoids, Chiang Mai University; small trials.</li>
+        <li><strong>NCT03833024</strong> (MUFFIN-PTS) — MPFF in post-thrombotic syndrome; <strong>NCT04335617</strong> — MPFF in radiation proctitis. Outside the project scope but show wider interest in MPFF.</li>
+      </ul>
+      <p class="ci-note" style="margin-top:12px;">These are registry entries, many with unknown or unreported results. They are leads, not evidence to cite.</p>
+    </div></div>
+
+    <h3 class="section-label">What the two Servier websites hold</h3>
+    <div class="card open" data-card>
+      <button class="card-head" aria-expanded="true">
+        <span class="card-title-wrap"><span class="card-title">myservier.in and clinicaltrials.servier.com</span><span class="badge note">Checked 14 Oct 2026</span></span>
+        <span class="chevron">&#9660;</span>
+      </button>
+      <div class="fold"><div><div class="card-body-inner">
+        <p><strong>myservier.in — Servier’s content hub for HCPs in India.</strong></p>
+        <ul>
+          <li>Most content needs a sign-in or registration. We could read only the public landing page.</li>
+          <li>Therapeutic areas listed: Cardiology, Diabetes, Oncology and Venous Disease, with a Hemorrhoids category. There are also Events, Clinical Programs (for example the ACT T2D Program), Videos, Podcasts and a Products page.</li>
+          <li>Venous-related item seen on the public page: a video titled “Is there a link between cardiovascular diseases and chronic venous disease?” (16.06.2026).</li>
+          <li>Site notice: promotional content on the site cannot be shared with patients. External links may not meet local regulatory requirements.</li>
+          <li>No Daflon prescribing detail or haemorrhoid article was visible without logging in. A team member with access should review the Venous Disease and Hemorrhoids categories and the Products page so MedSynapse content does not repeat or contradict them.</li>
+        </ul>
+        <p style="margin-top:12px;"><strong>clinicaltrials.servier.com — Servier’s trial portal.</strong></p>
+        <ul>
+          <li>Lists 253 Servier trials, filterable by NCT ID, protocol code, condition, therapeutic area, phase and status. It also links to the EU Clinical Trials Register, ClinicalTrials.gov and ISRCTN.</li>
+          <li>It is dominated by oncology (IDH inhibitors, glioma, AML, cholangiocarcinoma), diabetes (gliclazide MR bioequivalence studies), hypertension and neurology studies.</li>
+          <li>A keyword search for “hemorrhoid”, “venous” and “flavonoid” on 14 Oct 2026 returned no results. The Servier HD and CVD studies above are held on ClinicalTrials.gov, not on this portal. We did not search the portal for other terms such as “Daflon”.</li>
+        </ul>
+      </div></div></div>
+    </div>
+  </section>
+
+  <!-- CLAIMS -->
+  <section class="panel" id="claims">
+    <div class="head">
+      <h2>Claims watch-outs</h2>
+      <span class="phase-tag">Check before writing</span>
+    </div>
+    <div class="lede"><p>Points where the strategy wording, the project deck or past content can run ahead of the Daflon label or the evidence. This is a drafting aid for the team, not a compliance ruling; the client’s medical and regulatory reviewers decide.</p></div>
+
+    <div class="tablewrap"><table>
+      <thead><tr><th>Topic</th><th>What the strategy or deck says</th><th>What the label or evidence says</th><th>Suggested handling</th></tr></thead>
+      <tbody>
+        <tr><td class="nowrap"><strong>Pregnancy</strong></td><td>Original C12 aimed to show safety “without fetal risks”; Phase 2 themes are not affected.</td><td>Label: limited data, no reproductive toxicity in animals, but it is “preferable to avoid” Daflon in pregnancy as a precaution. Breast-feeding: infant risk cannot be excluded.</td><td>Do not claim safety in pregnancy or lactation beyond the label wording.</td></tr>
+        <tr><td class="nowrap"><strong>Drug interactions</strong></td><td>Older-adult and comorbidity cases say “no adverse drug interactions”.</td><td>Label: no interaction studies done; none reported clinically in post-marketing use.</td><td>Use the label wording; avoid “no interactions”.</td></tr>
+        <tr><td class="nowrap"><strong>Superiority over other drugs</strong></td><td>C8 listicle: MPFF superior to non-MPFF therapies, better absorption, fewer adverse effects. Deck: other venoactive drugs have lower evidence support.</td><td>Not on the label. The Lohsiriwat review says MPFF improved symptoms more than other pharmacological treatments; the 2018 Aziz review rated evidence low.</td><td>Needs a substantiating comparative source for each claim. Check how published C8 was worded.</td></tr>
+        <tr><td class="nowrap"><strong>Preventing recurrence</strong></td><td>C9, C11, C12 and C14 talk about reducing recurrence and progression.</td><td>The 2022 systematic review found no real-world study of recurrence on systemic treatment and called for more research on optimal treatment duration.</td><td>Use “may help”, tie it to a named study, and avoid implying prevention.</td></tr>
+        <tr><td class="nowrap"><strong>Reducing the need for surgery</strong></td><td>C9 objective: reduce the need for surgical intervention.</td><td>Not a label claim; the label says to examine and review treatment if symptoms do not settle quickly.</td><td>Frame as appropriate conservative care with timely referral.</td></tr>
+        <tr><td class="nowrap"><strong>Treatment duration</strong></td><td>Deck: maintenance of at least 2 months “or more”. Strategy talks of long-term MPFF therapy.</td><td>Label: acute attack treatment must be short-term; maintenance is at the physician’s discretion; CVD 3 or 6 months.</td><td>Keep long-term language tied to the label and to named studies.</td></tr>
+        <tr><td class="nowrap"><strong>VEIN STEP described as an RCT</strong></td><td>Strategy C16 asks for “randomised controlled trial” data.</td><td>VEIN STEP is observational with no randomised comparator.</td><td>Call it a prospective observational study.</td></tr>
+        <tr><td class="nowrap"><strong>Strength and indication</strong></td><td>CVD and HD content shares one brand voice.</td><td>Daflon 1000 mg is indicated for haemorrhoids only; CVD and gynaecological indications sit on the 500 mg label.</td><td>State the strength whenever a dose or indication is named.</td></tr>
+        <tr><td class="nowrap"><strong>Doses for acute attack</strong></td><td>Deck gives the 1000 mg regimen only.</td><td>500 mg: 6 tablets a day for 4 days, then 4 a day for 3 days. 1000 mg: 3 a day for 4 days, then 2 a day for 3 days.</td><td>Show both, labelled by strength.</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 class="section-label">Standing reminders</h3>
+    <ul class="donts">
+      <li>Superscript references throughout; no unreferenced efficacy or safety statements.</li>
+      <li>Don’t use outdated prescribing information; both PI files provided are April 2022 (Ver 4.0).</li>
+      <li>Don’t describe observational data as randomised or as proof of causation.</li>
+      <li>Don’t repeat points already covered in published C1–C10 (the deck asks for non-repetitive content).</li>
+      <li>Don’t write content only for surgeons or only for physicians; it must work for both General Medicine and General Surgery.</li>
+      <li>Don’t include patient-facing promotional material; the Servier site states promotional content cannot be shared with patients.</li>
+    </ul>
+  </section>
+
+  <!-- VERSION HISTORY -->
+  <section class="panel" id="history">
+    <div class="head">
+      <h2>Version history</h2>
+      <span class="phase-tag">Latest first</span>
+    </div>
+    <div class="vh-entry">
+      <div class="vh-top"><strong>v1.0</strong><span class="vh-date">14 Oct 2026</span><span class="badge published">Current</span></div>
+      <ul>
+        <li>First version of the Servier project reference: project overview, Phase 1 contents (C1–C10 published, C11–C18 planned), Phase 2 themes, haemorrhoidal disease, chronic venous disease, Daflon, evidence and trials, and claims watch-outs.</li>
+        <li>Built from the SOW details, Strategy V3.1, the Project Overview deck, the Daflon 500 mg and 1000 mg PIs, PubMed, ClinicalTrials.gov and the myservier.in and clinicaltrials.servier.com sites.</li>
+        <li>Open items: creators and publication dates for C1–C10, pre-campaign survey details, the C14/C15 numbering, and the 90/10 versus 13/5 content split.</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p><strong>Sources used</strong></p>
+  <ul>
+    <li>Servier Content Strategy V3.1 (Phase 1 sheet, theme flow, Case Studies, Phase II Content Themes) and the Servier Project Overview deck.</li>
+    <li>Daflon 500 mg and Daflon 1000 mg prescribing information, Servier India Private Limited, Ver 4.0, April 2022.</li>
+    <li>PubMed records cited on the Evidence tab (DOIs linked there); ClinicalTrials.gov records (NCT IDs as listed).</li>
+    <li>myservier.in public landing page and clinicaltrials.servier.com trial list, viewed 14 Oct 2026.</li>
+  </ul>
+  <p>Internal reference for the project team. It is a simplified summary, not a prescribing guide; confirm product details, doses and claims against the current approved label and guidelines before client-facing use. Phase 2 themes are proposals from the strategy file. Items marked “inferred” are our reading of the files and need confirmation.</p>
+</footer>
+
+<script>
+const P1 = [
+  {n:"C1", t:"Medical versus Surgical Therapy in Hemorrhoids and Venous Disease: Finding the Right Balance", f:"KOL video", j:"Disease Awareness + Consideration", d:"Haemorrhoids and CVD",
+   o:"Present expert insights to guide HCPs in clinical decision-making for haemorrhoid and venous disease management, emphasising early diagnosis, use of venoactive drugs and timely surgical referral when indicated.",
+   fp:["Signs and symptoms","Early diagnosis and timely referral","First-line management with venoactive drugs (MPFF)"],
+   e:"HCPs gain practical insights on how to tell cases needing medical from surgical intervention, understand the benefit of starting venoactive therapy early and make confident, evidence-based treatment decisions."},
+  {n:"C2", t:"Surgical Intervention and Long-Term Care in Hemorrhoids and Venous Disease: Achieving Lasting Outcomes", f:"KOL video", j:"Clinical decision making", d:"Haemorrhoids and CVD",
+   o:"Present expert insights on surgical indications, procedural choices and best practice in postoperative management for haemorrhoids and venous disease.",
+   fp:["Indications for intervention and the various procedures","Choosing the right approach for haemorrhoid management","Postoperative care","Lifestyle modification to prevent recurrence"],
+   e:"HCPs understand surgical approaches, how to choose between them, postoperative strategies and lifestyle measures that improve outcomes and reduce recurrence."},
+  {n:"C3", t:"Hemorrhoidal Disease: Clinical Implications of Disease Progression and Management", f:"Article", j:"Disease Awareness", d:"Haemorrhoids",
+   o:"Raise awareness of haemorrhoids as a public health concern and strengthen HCP confidence in early, accurate diagnosis and differentiation.",
+   fp:["Prevalence, pathophysiology and major risk factors","Progression from mild to severe grades","Diagnostic tools for early identification and for telling haemorrhoids from other anorectal conditions","Role of MPFF in managing haemorrhoids"],
+   e:"HCPs see haemorrhoids as a significant public health concern, understand the burden and gain confidence in early, accurate diagnosis for timely, evidence-based medical management."},
+  {n:"C4", t:"Association of Colon & Rectal Surgeons of India (ACRSI) Guided Approach to Hemorrhoidal Disease (HD) Management", f:"Infographic", j:"Consideration", d:"Haemorrhoids",
+   o:"Familiarise HCPs with the latest practice guidelines.",
+   fp:["Review of the latest guidelines for diagnosis and grading","Why MPFF is evidence-based first-line therapy for early HD management","Overview of in-office and surgical treatment guidelines: which procedures are most effective and when they are indicated"],
+   e:"HCPs integrate clinical guidelines into practice, positioning MPFF as a first-line therapy."},
+  {n:"C5", t:"MPFF in Hemorrhoid Management and Postoperative Recovery", f:"Article", j:"Consideration", d:"Haemorrhoids",
+   o:"Educate HCPs on the role of MPFF from first-line therapy in haemorrhoid management to better postoperative outcomes after haemorrhoidectomy.",
+   fp:["What MPFF is: composition, mechanism of action, uses and prescribing information","MPFF’s role in postoperative recovery after haemorrhoidectomy"],
+   e:"HCPs understand MPFF’s composition, mechanism of action and clinical efficacy in haemorrhoid management and postoperative care."},
+  {n:"C6", t:"Clinical Approach to Diagnosis and Management of Hemorrhoidal Disease", f:"Poll", j:"Engagement", d:"Haemorrhoids",
+   o:"Assess HCP perception of their real-world approach to HD management and their confidence in early diagnosis, accurate grading and guideline-aligned first-line medical management.",
+   fp:["Current clinical approach to managing HD, considering early diagnosis, guideline recommendations, use of venoactive therapy (MPFF) and referral for surgery when indicated"],
+   e:"Clear insight into HCP confidence and real-world practice patterns in early diagnosis, grading and guideline-aligned first-line medical management."},
+  {n:"C7", t:"Clinical Outcomes of MPFF in Hemorrhoid Management", f:"Infographic", j:"Consideration", d:"Haemorrhoids",
+   o:"Position MPFF as a clinically reliable treatment in haemorrhoid management.",
+   fp:["Randomised controlled trial data on MPFF reducing bleeding and pain in acute haemorrhoid episodes","Improved quality of life in diverse patient populations"],
+   e:"HCPs trust MPFF more and integrate it into treatment protocols."},
+  {n:"C8", t:"Clinical Benefits of MPFF Over Non-MPFF Treatments in the Management of Hemorrhoids", f:"Listicle", j:"Consideration", d:"Haemorrhoids",
+   o:"Position MPFF as superior to non-MPFF therapies in haemorrhoid management.",
+   fp:["MPFF’s efficacy, better absorption over non-MPFF molecules in symptom resolution and lower adverse effect rates"],
+   e:"HCPs see MPFF as more effective than other non-MPFF venoactive agents, leading to its preferred use.",
+   note:"Comparative claim: see Claims watch-outs."},
+  {n:"C9", t:"Managing Acute Hemorrhoids with MPFF", f:"Case study", j:"Clinical decision making", d:"Haemorrhoids",
+   o:"Show MPFF’s efficacy in acute haemorrhoid symptoms and position it as effective for symptom relief and for reducing the need for surgery.",
+   fp:["How acute haemorrhoids affect quality of life","Successful management of acute haemorrhoids with MPFF","Role of long-term MPFF therapy in preventing recurrence and minimising progression"],
+   e:"HCPs see MPFF as an effective conservative therapy for acute haemorrhoids and use it early to reduce surgical intervention.",
+   note:"Recurrence and surgery-avoidance wording: see Claims watch-outs."},
+  {n:"C10", t:"Patient Referral Pathway in Hemorrhoidal Disease", f:"Infographic", j:"Clinical decision making", d:"Haemorrhoids",
+   o:"Guide HCPs in applying a structured referral pathway for HD and reinforce appropriate MPFF use across disease stages.",
+   fp:["Stepwise management and referral: primary care, outpatient procedures, surgery","Referral criteria: persistent symptoms, higher-grade disease, complications","MPFF as first-line therapy in Grade I–II and as an adjunct to procedural or surgical management"],
+   e:"HCPs understand stepwise management and referral criteria, start MPFF with confidence and integrate it across the pathway to optimise symptom control and reduce recurrence."}
+];
+
+const REM = [
+  {n:"C11", t:"Clinical Considerations in the Medical Management of Hemorrhoidal Disease", f:"Listicle", j:"Clinical decision making", d:"Haemorrhoids", s:"Revised after 30 June call",
+   o:"Highlight practical, evidence-based medical management of HD, relevant to both physicians and surgeons, positioning MPFF as a useful option across routine scenarios.",
+   fp:["Identify patients suitable for conservative medical management","Individualise therapy by clinical presentation and symptom burden","Integrate MPFF into routine medical management across general physician and surgical practice","Optimise peri-procedural care through appropriate medical management"],
+   e:"HCPs recognise the role of structured medical management in HD and where MPFF fits into routine practice.",
+   note:"Reviewer remark: keep it relevant to both physicians and surgeons and include non-repetitive points."},
+  {n:"C12", t:"Managing Grade III–IV Hemorrhoids in Clinical Practice: Integrating Medical and Surgical Management", f:"Case study", j:"Clinical decision making", d:"Haemorrhoids", s:"Revised after 30 June call",
+   o:"Highlight timely escalation of treatment and the role of MPFF in supporting procedural and surgical management of Grade III–IV haemorrhoids.",
+   fp:["Case of Grade III–IV haemorrhoids with persistent symptoms despite initial conservative management","Clinical indications for procedural or surgical intervention","Role of MPFF before and after procedural or surgical treatment","Individualised choice of intervention by grade and patient characteristics","Follow-up and recurrence prevention in long-term care"],
+   e:"HCPs recognise appropriate pathways for Grade III–IV haemorrhoids and consider MPFF alongside procedural or surgical management.",
+   note:"Reviewer remark: cover both MPFF-based medical management and the relevant surgical procedures, and keep it practical for routine settings."},
+  {n:"C13", t:"Current Treatment Practices and Confidence in MPFF Use", f:"Poll", j:"Engagement", d:"Haemorrhoids", s:"Planned",
+   o:"Assess prescribing patterns, treatment preferences and confidence in MPFF as part of haemorrhoid management.",
+   fp:["HCP confidence in prescribing MPFF compared with other options","Perceived safety, tolerability and effectiveness of MPFF","Key factors influencing therapy selection"],
+   e:"Identify real-world prescribing patterns and confidence in MPFF, and opportunities to reinforce evidence-based use."},
+  {n:"C14", t:"The 21-Day Therapeutic Journey with MPFF: Serial Proctoscopic Evidence in Grade I–II Hemorrhoidal Disease", f:"Case study", j:"Clinical decision making", d:"Haemorrhoids", s:"Planned — numbering to confirm",
+   o:"Demonstrate the progressive response to MPFF through serial proctoscopic evidence over 21 days in Grade I–II HD.",
+   fp:["Presentation of acute HD: bleeding, pain, anal discomfort, pruritus, discharge","Serial proctoscopic monitoring of response to MPFF","Progressive resolution of mucosal redness, swelling and inflammation","Baseline, Day 7, Day 14 and Day 21 assessment","Real-world evidence for MPFF in Grade I–II HD"],
+   e:"Strengthen confidence in MPFF by visualising the response documented through serial proctoscopy, supporting early conservative management of Grade I–II HD.",
+   note:"Links to the IMPACT-HD reference in the project deck. Check how any imagery is sourced and consented."},
+  {n:"C15", t:"Measuring Clinical Response to MPFF in Grade III–IV Hemorrhoidal Disease", f:"Case study", j:"Clinical decision making", d:"Haemorrhoids", s:"Planned — numbering to confirm",
+   o:"Reinforce physician confidence in monitoring response to MPFF by combining validated clinical and patient-reported measures during conservative management.",
+   fp:["Define baseline Grade III–IV disease burden before starting MPFF","Monitor severity with VAS, PGI-C and HEMO-FISS-QoL","Track pain, bleeding, swelling and discomfort over time","Evaluate early response during conservative management","Assess patient and physician satisfaction","Combine objective and patient-reported outcomes to guide decisions"],
+   e:"Position MPFF as showing measurable improvement across validated clinical and patient-reported endpoints.",
+   note:"The same three measures (PGIC, VAS, HEMO-FISS-QoL) are the primary outcomes of CHORALIS; see Evidence tab. Check that the case reflects the label: Grade III–IV is mostly surgical, and MPFF is first-line for Grade I–II and selected Grade III."},
+  {n:"C16", t:"VEIN STEP Study: Clinical Outcomes of MPFF in CVD", f:"Infographic", j:"Consideration", d:"CVD", s:"Planned",
+   o:"Establish MPFF’s clinical efficacy in CVD patients.",
+   fp:["Data showing significant clinical efficacy of MPFF in CVD","Sustained quality of life benefits in diverse CVD cases"],
+   e:"HCPs rely on trial outcomes showing MPFF improves symptoms and quality of life.",
+   note:"VEIN STEP is observational, not an RCT, and follow-up was 4 weeks (optional 8). Avoid “sustained” unless a longer-term source is used."},
+  {n:"C17", t:"Managing the Dual Burden of Hemorrhoids and CVD in a 65-Year-Old Patient", f:"Case study", j:"Clinical decision making", d:"Haemorrhoids and CVD", s:"Planned",
+   o:"Highlight shared risk factors and the need for integrated treatment with MPFF for both conditions.",
+   fp:["The link between haemorrhoids and CVD, raising symptom severity and recurrence","Shared risk factors","Impact of comorbidities on bleeding and prolapse burden"],
+   e:"HCPs recognise shared pathophysiology and risk factors and see MPFF as a preferred therapy addressing both conditions.",
+   note:"“Bidirectional link” needs a source. A dual-indication case needs Daflon 500 mg, because the 1000 mg label covers haemorrhoids only."},
+  {n:"C18", t:"Role and Integration of MPFF for Management of CVD in Routine Practice", f:"Poll", j:"Engagement", d:"CVD", s:"Planned",
+   o:"Assess real-world decision-making in CVD and HCP awareness, confidence and frequency of MPFF use against current guidelines.",
+   fp:["Factors influencing the choice of MPFF: symptom severity, adherence, safety profile","Awareness and application of guideline recommendations supporting MPFF","Likelihood of using MPFF in routine practice"],
+   e:"Insight into real-world adoption, confidence and guideline-aligned MPFF use in CVD."}
+];
+
+const P2 = [
+  {n:1, f:"KOL video", j:"Clinical decision making", th:"Early diagnosis and recognition", t:"Breaking Barriers to Early Diagnosis in Hemorrhoidal Disease: Addressing Stigma and Delayed Presentation", k:"Role of patient communication and timely clinical evaluation in early diagnosis, so appropriate treatment, including MPFF, starts on time."},
+  {n:2, f:"Listicle", j:"Clinical decision making", th:"Early diagnosis and recognition (theme cell blank in sheet)", t:"Common Pitfalls in the Clinical Management of Hemorrhoidal Disease", k:"Common challenges in assessment, treatment choice and follow-up, with evidence-based strategies, including use of MPFF."},
+  {n:3, f:"KOL video", j:"Clinical decision making", th:"Treatment selection", t:"Clinical Considerations for Individualizing Treatment in Hemorrhoidal Disease", k:"Patient-specific factors that shape treatment: age, occupation, lifestyle, symptom profile and expectations."},
+  {n:4, f:"KOL video", j:"Clinical decision making", th:"Treatment selection (theme cell blank in sheet)", t:"Managing the Mismatch: When Symptoms and Disease Grade Do Not Correlate", k:"Treatment selection when symptom severity and disease grade do not match."},
+  {n:5, f:"Webinar", j:"Clinical decision making", th:"Treatment selection (theme cell blank in sheet)", t:"Making the Right Treatment Decisions in Hemorrhoidal Disease: Where Does MPFF Fit?", k:"Current evidence and expert views on where MPFF fits in treatment sequencing across clinical scenarios."},
+  {n:6, f:"Case study", j:"Clinical decision making", th:"Management of complex clinical presentations", t:"Managing Hemorrhoidal Disease in Patients with Chronic Constipation", k:"Strategies for coexisting chronic constipation and HD, including MPFF within a comprehensive approach."},
+  {n:7, f:"Case study", j:"Clinical decision making", th:"Management of complex clinical presentations (theme cell blank in sheet)", t:"Managing Hemorrhoidal Disease in High-Risk Patients Receiving Antiplatelet or Anticoagulant Therapy", k:"Evidence-based management in patients on antiplatelet or anticoagulant therapy, including MPFF while balancing bleeding and thrombotic risks."},
+  {n:8, f:"Case study", j:"Clinical decision making", th:"Long-term disease management", t:"Managing Recurrent Hemorrhoidal Disease: Optimizing Treatment Following Symptom Recurrence", k:"Assessing symptom recurrence and its contributing factors, and the role of MPFF in later management."},
+  {n:9, f:"KOL video", j:"Advocacy", th:"Long-term disease management (theme cell blank in sheet)", t:"Improving Long-Term Clinical Outcomes in Hemorrhoidal Disease", k:"Expert views on long-term symptom control and fewer recurrences, including MPFF in long-term strategies."},
+  {n:10, f:"Webinar", j:"Advocacy", th:"Evidence integration into clinical practice", t:"Challenging Clinical Scenarios in Hemorrhoidal Disease", k:"Individualised approaches across challenging scenarios."},
+  {n:11, f:"Webinar", j:"Advocacy", th:"Evidence integration into clinical practice (theme cell blank in sheet)", t:"Missed Opportunities Across the Hemorrhoidal Disease Care Pathway", k:"Expert discussion on improving assessment, treatment planning and continuity of care."},
+  {n:12, f:"Webinar", j:"Advocacy", th:"Evidence integration into clinical practice (theme cell blank in sheet)", t:"Clinical Perspectives on MPFF in Hemorrhoidal Disease: Bridging Evidence and Clinical Experience", k:"Expert views on how RCT evidence applies to routine practice with MPFF."}
+];
+
+const P2C = [
+  {n:"CS-A", f:"Case study", j:"Clinical decision making", t:"Clinical Perspectives on MPFF in Symptomatic Hemorrhoidal Disease: A Case Series",
+   o:"Show the benefit of MPFF in optimising conservative management of thrombosed and inflamed Grade II–III HD through real-world cases.",
+   fp:["Conservative management of thrombosed and inflamed Grade II–III HD","MPFF for pain, bleeding, oedema and local inflammation","Individualised treatment by severity and inflammatory presentation","Symptom resolution and clinical improvement after MPFF-based management"],
+   e:"HCPs use MPFF in conservative management of thrombosed and inflamed Grade II–III HD and decide based on presentation and response."},
+  {n:"CS-B", f:"Case study", j:"Clinical decision making", t:"Optimizing Outcomes and Reducing Recurrence with MPFF as an Adjuvant to Rubber Band Ligation",
+   o:"Highlight MPFF as an adjunct to office-based procedures and its role in long-term symptom control in Grade II–III HD.",
+   fp:["Assessment and treatment planning for Grade II–III HD","Adjunctive MPFF to support recovery after office-based procedures","Clinical recovery and symptom resolution after combined therapy","Long-term management to limit recurrence"],
+   e:"HCPs see the benefit of combining MPFF with office-based procedures for recovery, symptom control and long-term management."},
+  {n:"CS-C", f:"Case study", j:"Clinical decision making", t:"Clinical Approach to Hemorrhoidal Disease with Multiple Comorbidities",
+   o:"Highlight individualised conservative management of HD in patients with comorbidities, supported by MPFF.",
+   fp:["HD in patients with type 2 diabetes, hypertension and chronic constipation","Impact of comorbidities on treatment choice and symptom management","MPFF as part of individualised conservative management","Safety of MPFF in polypharmacy, with no clinically significant interactions"],
+   e:"HCPs individualise HD management in patients with multiple comorbidities and include MPFF in conservative plans.",
+   note:"“No clinically significant interactions”: the label says no interaction studies were done. See Claims watch-outs."}
+];
+
+const fmtClass = f => ({"Article":"article","Infographic":"infographic","KOL video":"video","Webinar":"video","Listicle":"listicle","Case study":"casestudy","Poll":"poll"})[f] || "note";
+const jClass = j => /Awareness/.test(j) ? "aware" : j === "Consideration" ? "consider" : j === "Engagement" ? "engage" : j === "Advocacy" ? "advocacy" : "decide";
+
+function itemHTML(o, badgeExtra){
+  return `<div class="content-item" data-card data-f="${o.f}" data-j="${o.j || ""}">
+    <button class="ci-head" aria-expanded="false">
+      <span class="ci-head-left"><span class="ci-num">${o.n}</span><span class="ci-topic">${o.t}</span></span>
+      <span class="ci-badges">${badgeExtra || ""}<span class="badge ${jClass(o.j)}">${o.j}</span><span class="badge ${fmtClass(o.f)}">${o.f}</span></span>
+      <span class="chevron">&#9660;</span>
+    </button>
+    <div class="fold"><div><div class="card-body-inner">${o.body}</div></div></div>
+  </div>`;
+}
+function bodyHTML(o, metaParts){
+  return `<p class="ci-meta">${metaParts.join(" · ")}</p>` +
+    `<div class="ci-block-label">Marketing objective</div><p>${o.o}</p>` +
+    `<div class="ci-block-label">Focus points</div><ul>${o.fp.map(x => `<li>${x}</li>`).join("")}</ul>` +
+    `<div class="ci-block-label">Expected outcome</div><p>${o.e}</p>` +
+    (o.note ? `<p class="ci-note">${o.note}</p>` : "");
+}
+
+/* Phase 1 tracker */
+document.getElementById("tracker").innerHTML =
+  "<thead><tr><th>Content</th><th>Topic</th><th>Format</th><th>Segment</th><th>Disease</th><th>Creator / date</th></tr></thead><tbody>" +
+  P1.map(p => `<tr><td class="nowrap">${p.n}</td><td>${p.t}</td><td class="nowrap"><span class="badge ${fmtClass(p.f)}">${p.f}</span></td>` +
+    `<td class="nowrap"><span class="badge ${jClass(p.j)}">${p.j}</span></td><td class="nowrap">${p.d}</td><td class="muted">Published — to be added</td></tr>`).join("") + "</tbody>";
+
+document.getElementById("p1-list").innerHTML = P1.map(p => {
+  p.body = bodyHTML(p, [p.f, p.d, "Published (creator and date to be added)"]);
+  return itemHTML(p, `<span class="badge published">Published</span>`);
+}).join("");
+
+document.getElementById("remaining").innerHTML =
+  "<thead><tr><th>Content</th><th>Topic</th><th>Format</th><th>Disease</th><th>Status</th></tr></thead><tbody>" +
+  REM.map(p => `<tr><td class="nowrap">${p.n}</td><td>${p.t}</td><td class="nowrap"><span class="badge ${fmtClass(p.f)}">${p.f}</span></td><td class="nowrap">${p.d}</td><td><span class="badge pending">${p.s}</span></td></tr>`).join("") +
+  `<tr><td class="nowrap">Survey</td><td>Pre-campaign survey</td><td class="nowrap"><span class="badge note">Survey</span></td><td class="nowrap muted">To be added</td><td><span class="badge pending">Details to be added</span></td></tr></tbody>`;
+
+document.getElementById("p1r-list").innerHTML = REM.map(p => {
+  p.body = bodyHTML(p, [p.f, p.d, p.s]);
+  return itemHTML(p, `<span class="badge pending">Planned</span>`);
+}).join("");
+
+document.getElementById("p2-list").innerHTML = P2.map(p => {
+  p.body = `<p class="ci-meta">${p.f} · ${p.j} · Theme: ${p.th}</p><div class="ci-block-label">Key message / focus</div><p>${p.k}</p>`;
+  return itemHTML(p);
+}).join("");
+
+document.getElementById("p2c-list").innerHTML = P2C.map(p => {
+  p.body = bodyHTML(p, [p.f, p.j, "Proposed for Phase 2"]);
+  return itemHTML(p);
+}).join("");
+
+/* Filters */
+function buildFilter(id, listId, attr, values){
+  const wrap = document.getElementById(id);
+  wrap.innerHTML = ["All", ...values].map((v, i) => `<button class="chip${i === 0 ? " on" : ""}" data-v="${v}">${v}</button>`).join("");
+  wrap.addEventListener("click", e => {
+    const b = e.target.closest("button"); if(!b) return;
+    wrap.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b));
+    document.querySelectorAll(`#${listId} .content-item`).forEach(it => {
+      it.style.display = (b.dataset.v === "All" || it.dataset[attr] === b.dataset.v) ? "" : "none";
+    });
+  });
+}
+buildFilter("p1-filter", "p1-list", "f", ["KOL video", "Article", "Infographic", "Poll", "Listicle", "Case study"]);
+buildFilter("p1r-filter", "p1r-list", "f", ["Listicle", "Case study", "Poll", "Infographic"]);
+buildFilter("p2-filter", "p2-list", "f", ["KOL video", "Webinar", "Case study", "Listicle"]);
+
+/* Tabs */
+const tabs = document.querySelectorAll("#tabs button");
+const panels = document.querySelectorAll(".panel");
+function showPanel(id){
+  tabs.forEach(b => b.classList.toggle("active", b.dataset.panel === id));
+  panels.forEach(p => p.classList.toggle("active", p.id === id));
+  window.scrollTo({top:0});
+}
+tabs.forEach(b => b.addEventListener("click", () => showPanel(b.dataset.panel)));
+document.querySelectorAll("[data-goto]").forEach(b => b.addEventListener("click", () => showPanel(b.dataset.goto)));
+
+/* Expand / collapse */
+document.addEventListener("click", e => {
+  const head = e.target.closest(".ci-head, .card-head");
+  if(head){
+    const card = head.parentElement;
+    const open = card.classList.toggle("open");
+    head.setAttribute("aria-expanded", open);
+    return;
+  }
+  const ex = e.target.closest("[data-expand]"), co = e.target.closest("[data-collapse]");
+  const id = ex ? ex.dataset.expand : co ? co.dataset.collapse : null;
+  if(id){
+    document.querySelectorAll(`#${id} .content-item`).forEach(it => {
+      if(it.style.display === "none") return;
+      it.classList.toggle("open", !!ex);
+      it.querySelector(".ci-head").setAttribute("aria-expanded", !!ex);
+    });
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,2023 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valvular heart disease — Edwards therapy reference</title>
+<style>
+  :root{
+    --ink:#16213E;
+    --ink-soft:#3C4B70;
+    --paper:#F7F5EF;
+    --card:#FFFFFF;
+    --line:#DEDACE;
+    --teal:#0F6E56;
+    --teal-light:#E1F5EE;
+    --coral:#993C1D;
+    --coral-light:#FAECE7;
+    --muted:#6B6A63;
+    --imgbg:#EFEDE4;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:Charter,Georgia,"Iowan Old Style","Times New Roman",serif;
+    line-height:1.55;
+  }
+  .sans{font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;}
+  .layout{ display:flex; min-height:100vh; align-items:flex-start; }
+  .content{ flex:1; min-width:0; }
+  .sidebar{
+    width:236px;
+    flex-shrink:0;
+    position:sticky;
+    top:0;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    padding:32px 14px 20px;
+    border-right:1px solid var(--line);
+    background:var(--paper);
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+    z-index:10;
+  }
+  .side-brand{ padding:0 12px 22px; }
+  .side-brand strong{ display:block; font-size:15px; font-weight:600; color:var(--ink); }
+  .side-brand span{ display:block; font-size:12px; color:var(--muted); margin-top:2px; }
+  .side-version{
+    margin-top:auto;
+    padding-top:14px;
+    border-top:1px solid var(--line);
+  }
+  header{
+    max-width:940px;
+    margin:0 auto;
+    padding:56px 28px 32px;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  header h1{
+    font-size:32px;
+    font-weight:400;
+    margin:0 0 8px;
+    letter-spacing:-0.01em;
+  }
+  header p{
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+    color:var(--muted);
+    font-size:15px;
+    margin:0;
+  }
+  .version-tag{
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-size:12px;
+    color:var(--muted);
+    border:1px solid var(--line);
+    padding:3px 10px;
+    border-radius:20px;
+    white-space:nowrap;
+  }
+  nav{
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+  }
+  nav button{
+    font-family:inherit;
+    font-size:14.5px;
+    text-align:left;
+    background:none;
+    border:none;
+    padding:10px 12px;
+    cursor:pointer;
+    color:var(--muted);
+    border-left:3px solid transparent;
+    border-radius:0 8px 8px 0;
+    transition:color .15s, background .15s;
+  }
+  nav button:hover{ color:var(--ink); background:#EFEDE4; }
+  nav button.active{
+    color:var(--ink);
+    background:var(--teal-light);
+    border-left-color:var(--teal);
+    font-weight:600;
+  }
+  nav button.vh-btn{
+    font-size:12.5px;
+    padding:7px 12px;
+    color:var(--muted);
+  }
+  nav button.vh-btn.active{
+    background:#EFEDE4;
+    border-left-color:var(--muted);
+    font-weight:500;
+  }
+  main{
+    max-width:940px;
+    margin:0 auto;
+    padding:40px 28px 100px;
+  }
+  section.panel{ display:none; }
+  section.panel.active{ display:block; animation:fade .25s ease; }
+  @keyframes fade{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);} }
+
+  .disease-head{ margin-bottom:8px; }
+  .disease-head h2{ font-size:26px; font-weight:400; margin:0 0 4px; }
+  .phase-tag{
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-size:12px;
+    color:var(--teal);
+    background:var(--teal-light);
+    padding:3px 9px;
+    border-radius:20px;
+    display:inline-block;
+  }
+  .disease-body{ font-size:16.5px; margin:18px 0 8px; color:var(--ink-soft); }
+  .disease-body p{ margin:0 0 14px; }
+
+  .facts{
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px 24px;
+    margin:20px 0 36px;
+    padding:18px 20px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    font-size:13.5px;
+  }
+  .facts dt{ color:var(--muted); margin-bottom:2px; }
+  .facts dd{ margin:0 0 10px; color:var(--ink); font-weight:600; }
+
+  h3.section-label{
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    color:var(--muted);
+    font-weight:600;
+    margin:0 0 14px;
+  }
+
+  .card{
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--card);
+    margin-bottom:14px;
+    overflow:hidden;
+  }
+  .product-img-wrap{
+    background:var(--imgbg);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:14px 20px;
+  }
+  .product-img-wrap img{
+    max-width:100%;
+    max-height:150px;
+    object-fit:contain;
+    display:block;
+  }
+  .card-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:16px 20px;
+    cursor:pointer;
+  }
+  .card-head:hover{ background:#FCFBF8; }
+  .card-title-wrap{ display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; }
+  .card-title{ font-size:18px; font-weight:600; }
+  .badge{
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-size:11.5px;
+    padding:2px 8px;
+    border-radius:20px;
+    white-space:nowrap;
+  }
+  .badge.surgical{ background:var(--coral-light); color:var(--coral); }
+  .badge.transcatheter{ background:var(--teal-light); color:var(--teal); }
+  .badge.note{ background:#EFECE3; color:var(--muted); }
+  .chevron{
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+    color:var(--muted);
+    font-size:13px;
+    transition:transform .2s;
+    flex-shrink:0;
+  }
+  .card.open .chevron{ transform:rotate(180deg); }
+  .card-body{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .3s ease;
+  }
+  .card.open .card-body{ max-height:1400px; }
+  .card-body-inner{
+    padding:0 20px 20px;
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-size:14.5px;
+    color:var(--ink-soft);
+  }
+  .card-body-inner p{ margin:0 0 10px; }
+  .card-body-inner ul{ margin:0 0 4px; padding-left:18px; }
+  .card-body-inner li{ margin-bottom:4px; }
+
+  .evidence{
+    margin-top:16px;
+    padding-top:14px;
+    border-top:1px solid var(--line);
+  }
+  .evidence-label{
+    font-size:11.5px;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    color:var(--muted);
+    font-weight:600;
+    margin-bottom:8px;
+  }
+  .trial-list{ list-style:none; margin:0; padding:0; }
+  .trial-list li{
+    padding:8px 0;
+    border-bottom:1px dashed var(--line);
+    font-size:13.5px;
+  }
+  .trial-list li:last-child{ border-bottom:none; }
+  .trial-name{ font-weight:600; color:var(--ink); }
+  .trial-theme{ color:var(--teal); font-size:12px; }
+
+
+  .phase-grid{ display:grid; gap:14px; margin:24px 0 8px; }
+  .phase-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:18px 20px;
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  .phase-card.current{ border-color:var(--teal); box-shadow:inset 3px 0 0 var(--teal); }
+  .phase-card-top{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; }
+  .phase-card h3{ margin:0; font-size:17px; font-weight:600; color:var(--ink); }
+  .phase-status{ font-size:12px; color:var(--teal); background:var(--teal-light); padding:2px 9px; border-radius:20px; }
+  .phase-counts{ display:flex; gap:28px; margin:14px 0 12px; }
+  .count-num{ font-size:26px; font-weight:600; color:var(--ink); line-height:1; }
+  .count-label{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  .phase-diseases{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; font-size:12.5px; color:var(--muted); }
+  .format-counts{
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-size:12px; color:var(--muted); margin:8px 0 0;
+  }
+  .chip{
+    font-family:inherit; font-size:12.5px; cursor:pointer;
+    border:1px solid var(--line); background:var(--paper); color:var(--ink);
+    padding:3px 11px; border-radius:20px;
+  }
+  .chip:hover{ border-color:var(--teal); color:var(--teal); }
+  .totals{
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-size:13.5px; color:var(--ink-soft); margin:14px 0 0;
+  }
+
+
+  .phase-toggle-btn{
+    font-family:inherit; font-size:12.5px; font-weight:600; cursor:pointer;
+    border:1px solid var(--teal); background:var(--teal-light); color:var(--teal);
+    padding:5px 12px; border-radius:20px; margin-top:2px;
+  }
+  .phase-toggle-btn:hover{ background:var(--teal); color:#fff; }
+  .content-list{ max-height:0; overflow:hidden; transition:max-height .3s ease; }
+  .content-list.open{ max-height:3000px; margin-top:16px; }
+  .content-table-wrap{ overflow-x:auto; border:1px solid var(--line); border-radius:8px; }
+  table.content-table{
+    width:100%; border-collapse:collapse; font-size:12.5px;
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  table.content-table th{
+    text-align:left; background:var(--imgbg); color:var(--muted);
+    font-weight:600; padding:8px 10px; white-space:nowrap;
+    position:sticky; top:0;
+  }
+  table.content-table td{
+    padding:7px 10px; border-top:1px solid var(--line); vertical-align:top;
+  }
+  table.content-table td.num{ color:var(--muted); white-space:nowrap; }
+  table.content-table td.fmt{ white-space:nowrap; }
+
+  .content-items{ display:flex; flex-direction:column; gap:8px; }
+  .content-item.open .chevron{ transform:rotate(180deg); }
+  .content-item.open .card-body{ max-height:1600px; }
+  .content-item{
+    border:1px solid var(--line); border-radius:8px; background:var(--paper); overflow:hidden;
+  }
+  .ci-head{
+    display:flex; align-items:center; gap:10px; padding:10px 14px; cursor:pointer;
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  .ci-head:hover{ background:#FCFBF8; }
+  .ci-head-left{ display:flex; align-items:baseline; gap:10px; flex:1; min-width:0; }
+  .ci-num{ font-size:12px; color:var(--muted); flex-shrink:0; min-width:22px; }
+  .ci-topic{ font-size:13.5px; font-weight:600; color:var(--ink); }
+  .ci-meta{ font-size:12px; color:var(--muted); margin:0 0 12px; }
+  .ci-block-label{
+    font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted);
+    font-weight:600; margin:14px 0 6px;
+  }
+  .ci-block-label:first-of-type{ margin-top:0; }
+  .ci-question{ font-size:13.5px; color:var(--ink); font-weight:600; margin:0 0 6px; }
+  .ci-options{ margin:0 0 4px; padding-left:20px; font-size:13px; color:var(--ink-soft); }
+  .ci-options li{ margin-bottom:4px; }
+  .ci-note{ font-size:12.5px; color:var(--coral); background:var(--coral-light); border-radius:6px; padding:8px 10px; margin:10px 0 0; }
+
+  .pending-note{
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-size:13px; color:var(--muted); font-style:italic;
+    padding:14px 16px; border:1px dashed var(--line); border-radius:8px; margin-top:16px;
+  }
+
+  .callout{
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-size:13.5px;
+    background:var(--coral-light);
+    color:var(--coral);
+    border-radius:8px;
+    padding:12px 16px;
+    margin:20px 0 0;
+  }
+
+  /* THV - Digital Brochures */
+  .thv-stats{ display:flex; gap:28px; flex-wrap:wrap; margin:18px 0 8px; }
+  .thv-source{
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-size:12px; color:var(--muted); margin:6px 0 22px;
+  }
+  .badge.approved{ background:var(--teal-light); color:var(--teal); }
+  .badge.na{ background:#EFECE3; color:var(--muted); }
+  table.thv-table td.remark{ color:var(--ink-soft); min-width:180px; border-left:1px solid var(--line); }
+  table.thv-table td.title{ font-weight:600; color:var(--ink); min-width:220px; }
+  table.thv-table td.link a{ color:var(--teal); text-decoration:none; font-weight:600; white-space:nowrap; }
+  table.thv-table td.link a:hover{ text-decoration:underline; }
+  .thv-ref{ font-size:11px; color:var(--teal); background:var(--teal-light); border-radius:20px; padding:1px 7px; white-space:nowrap; flex-shrink:0; }
+  .ci-links{ margin:12px 0 0; font-size:13px; }
+  .ci-links a{ color:var(--teal); font-weight:600; text-decoration:none; }
+  .ci-links a:hover{ text-decoration:underline; }
+  .thv-heading{ margin-top:36px; }
+
+  /* Version history */
+  .vh-list{ display:flex; flex-direction:column; gap:10px; margin-top:20px; font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+  .vh-item{ border:1px solid var(--line); border-radius:8px; background:var(--card); padding:14px 18px; }
+  .vh-item.latest{ border-color:var(--teal); box-shadow:inset 3px 0 0 var(--teal); }
+  .vh-top{ display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:6px; }
+  .vh-ver{ font-size:15px; font-weight:600; color:var(--ink); }
+  .vh-date{ font-size:12px; color:var(--muted); }
+  .vh-item ul{ margin:0; padding-left:18px; font-size:13.5px; color:var(--ink-soft); }
+  .vh-item li{ margin-bottom:3px; }
+
+  footer{
+    max-width:940px;
+    margin:0 auto;
+    padding:20px 28px 60px;
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-size:12.5px;
+    color:var(--muted);
+    border-top:1px solid var(--line);
+  }
+  footer p{ margin:0 0 6px; }
+
+  @media (max-width:820px){
+    .layout{ flex-direction:column; }
+    .sidebar{
+      width:100%; height:auto; position:sticky; top:0;
+      flex-direction:row; align-items:center; gap:8px;
+      padding:8px 12px; border-right:none; border-bottom:1px solid var(--line);
+      overflow-x:auto;
+    }
+    .side-brand{ display:none; }
+    nav{ flex-direction:row; gap:2px; }
+    nav button{ white-space:nowrap; border-left:none; border-bottom:2px solid transparent; border-radius:0; padding:10px 12px; }
+    nav button.active, nav button.vh-btn.active{ border-bottom-color:var(--teal); border-left-color:transparent; }
+    .side-version{ margin-top:0; padding-top:0; border-top:none; }
+    .content{ width:100%; }
+  }
+  @media (max-width:600px){
+    .facts{ grid-template-columns:1fr; }
+    header{ padding:40px 20px 24px; }
+    main{ padding:32px 20px 80px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+<aside class="sidebar">
+  <div class="side-brand">
+    <strong>Edwards project</strong>
+    <span>Therapy reference</span>
+  </div>
+  <nav id="tabs">
+    <button class="active" data-panel="overview">Project overview</button>
+    <button data-panel="as">Aortic stenosis</button>
+    <button data-panel="ar">Aortic regurgitation</button>
+    <button data-panel="mr">Mitral regurgitation</button>
+    <button data-panel="thv">THV - Digital Brochures</button>
+  </nav>
+  <div class="side-version">
+    <nav>
+      <button class="vh-btn" data-panel="history">Version history</button>
+    </nav>
+  </div>
+</aside>
+
+<div class="content">
+
+<header>
+  <div>
+    <h1>Valvular heart disease — therapy reference</h1>
+    <p class="sans">Edwards project · disease overview and Edwards Lifesciences product landscape · current phase: III</p>
+  </div>
+  <span class="version-tag sans">v1.7</span>
+</header>
+
+<main>
+
+
+  <!-- PROJECT OVERVIEW -->
+  <section class="panel active" id="overview">
+    <div class="disease-head">
+      <h2>Project overview</h2>
+      <span class="phase-tag">Currently in Phase III</span>
+    </div>
+    <div class="disease-body">
+      <p>The Edwards project produces medical content on acquired valvular heart disease across three phases. Aortic stenosis and aortic regurgitation have been covered since Phase I; mitral regurgitation is new in Phase III.</p>
+    </div>
+
+    <div class="phase-grid">
+      <div class="phase-card">
+        <div class="phase-card-top"><h3>Phase I</h3></div>
+        <div class="phase-counts">
+          <div><div class="count-num">24</div><div class="count-label">Contents</div></div>
+          <div><div class="count-num">2</div><div class="count-label">Surveys</div></div>
+        </div>
+        <div class="phase-diseases">Diseases covered:
+          <button class="chip" data-goto="as">Aortic stenosis</button>
+          <button class="chip" data-goto="ar">Aortic regurgitation</button>
+        </div>
+        <p class="format-counts">Formats: 13 Video &middot; 6 Infographic &middot; 5 Patient case &middot; 2 Survey</p>
+        <button class="phase-toggle-btn" data-toggle-content="phase1">View content list ▾</button>
+        
+        <div class="content-list" data-content-list>
+          <div class="content-items">
+          <div class="content-item" data-card>
+            <div class="ci-head" data-toggle>
+              <div class="ci-head-left">
+                <span class="ci-num">1</span>
+                <span class="ci-topic">Understanding VHD: Burden, Symptoms, and Management</span>
+              </div>
+              <span class="badge note">Infographic</span>
+              <span class="chevron">&#9660;</span>
+            </div>
+            <div class="card-body">
+              <div class="card-body-inner">
+                <p class="ci-meta">Infographic · Apr 2024 (date/month needs to be confirmed)</p>
+                <div class="ci-block-label">What was covered</div>
+                <ul>
+                  <li>Global burden of VHD, comparing rheumatic heart disease, calcific AS and degenerative mitral valve disease (2019 figures for cases, mortality and DALYs).</li>
+                  <li>Symptoms: angina, heart murmur, syncope, heart failure, exertional dyspnoea and pulmonary edema.</li>
+                  <li>Management: repair or replacement, and SAVR vs TAVR compared.</li>
+                  <li>Pros and cons of mechanical vs tissue valves: durability, anticoagulation, bleeding risk, monitoring, lifestyle and clicking sound.</li>
+                  <li>RESILIA tissue, a bovine pericardium bioprosthesis, with reduced calcification and improved durability.</li>
+                  <li>Key takeaways, abbreviations and references.</li>
+                </ul>
+                <div class="ci-block-label">Discussion question</div>
+                <p class="ci-question">In your clinical practice, what is your ideal approach for managing patients with VHD?</p>
+                <div class="ci-block-label">Options</div>
+                <ol class="ci-options">
+                  <li>Regular monitoring of symptoms without intervention</li>
+                  <li>Management using medications only</li>
+                  <li>Surgical intervention such as valve repair or replacement</li>
+                  <li>I refer patients to specialists for managing VHD</li>
+                  <li>I need more information on VHD management strategies</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="content-item" data-card>
+            <div class="ci-head" data-toggle>
+              <div class="ci-head-left">
+                <span class="ci-num">2</span>
+                <span class="ci-topic">Current and Emerging Treatment Paradigms for VHD</span>
+              </div>
+              <span class="badge transcatheter">Video</span>
+              <span class="chevron">&#9660;</span>
+            </div>
+            <div class="card-body">
+              <div class="card-body-inner">
+                <p class="ci-meta">Video · 12:09 · May 2024 (date/month needs to be confirmed)</p>
+                <div class="ci-block-label">What was covered</div>
+                <ul>
+                  <li>VHD, particularly aortic stenosis, has a major global impact.</li>
+                  <li>Surgical aortic valve replacement is the current standard of care, and TAVI offers a safe alternative.</li>
+                  <li>Video by Dr. Taweesak Chotivatanapong, focused on four questions: how treatment of severe AS has evolved over 20 years; lifetime management options for AVR patients, especially the 50–65 “grey zone”; experience with INSPIRIS in AVR patients; how to make Heart Teams more functional and collaborative.</li>
+                </ul>
+                <div class="ci-block-label">Discussion question</div>
+                <p class="ci-question">Which aspects of valvular heart disease (VHD) would you like to know more about?</p>
+                <div class="ci-block-label">Options</div>
+                <ol class="ci-options">
+                  <li>Risk factors</li>
+                  <li>Diagnostic techniques</li>
+                  <li>Surgical management approaches using SAVR or TAVR</li>
+                  <li>Patient stratification for choosing optimal management approach</li>
+                  <li>How to create or manage Heart Teams in practice</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="content-item" data-card>
+            <div class="ci-head" data-toggle>
+              <div class="ci-head-left">
+                <span class="ci-num">3</span>
+                <span class="ci-topic">Bioprosthetic Tissue Valve Replacement in a 51-year-old Patient with Prior Mitral Valve Repair</span>
+              </div>
+              <span class="badge transcatheter">Video</span>
+              <span class="chevron">&#9660;</span>
+            </div>
+            <div class="card-body">
+              <div class="card-body-inner">
+                <p class="ci-meta">Video · 5:41 · Jul 2024 (date/month needs to be confirmed)</p>
+                <div class="ci-block-label">What was covered</div>
+                <ul>
+                  <li>Valve replacement (surgical or transcatheter) is the treatment for VHD, using biological/bioprosthetic or mechanical valves.</li>
+                  <li>Case of a 51-year-old woman with prior mitral valve repair who presented with dyspnea. Echocardiography showed recurrent mitral stenosis, and the surgeon suggested valve replacement.</li>
+                  <li>She chose a bioprosthetic tissue valve because it avoids life-long anticoagulants and gives a better quality of life.</li>
+                  <li>Video by Dr. Wiroon Napa-Umporn on her experience with the treatment.</li>
+                </ul>
+                <div class="ci-block-label">Discussion question</div>
+                <p class="ci-question">Are bioprosthetic tissue valves a better option for treating valvular heart disease?</p>
+                <div class="ci-block-label">Options</div>
+                <ol class="ci-options">
+                  <li>Yes, as they do not require life-long anticoagulation</li>
+                  <li>Yes, as they have a lower risk of bleeding complications compared to mechanical valves</li>
+                  <li>Yes, as they are associated with more natural heart function</li>
+                  <li>No, as mechanical valves are more durable</li>
+                  <li>Maybe, I need more information on bioprosthetic tissue valves</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="content-item" data-card>
+            <div class="ci-head" data-toggle>
+              <div class="ci-head-left">
+                <span class="ci-num">4</span>
+                <span class="ci-topic">Ensuring Appropriate Diagnosis of VHD – 75-year-old with AS</span>
+              </div>
+              <span class="badge surgical">Patient case</span>
+              <span class="chevron">&#9660;</span>
+            </div>
+            <div class="card-body">
+              <div class="card-body-inner">
+                <p class="ci-meta">Patient case · Jul 2024 (date/month needs to be confirmed)</p>
+                <div class="ci-block-label">What was covered</div>
+                <ul>
+                  <li>AS as the most prevalent valve lesion, and the diagnostic challenges it poses, including an inadequate acoustic window.</li>
+                  <li>Fictional case of a 75-year-old woman with breathlessness and chest pain, with chronic kidney disease, coronary disease and obesity.</li>
+                  <li>Signs and symptoms of VHD (the “LISTEN” infographic) and the role of auscultation.</li>
+                  <li>Referral to a cardiologist and heart team, then TTE/Doppler, which showed AVA 0.8 cm² and Vmax 6 m/s, confirming severe AS.</li>
+                  <li>AHA/ACC diagnostic parameters and stages of AS (A to D).</li>
+                  <li>SAVR vs TAVI, with TAVI recommended because she was at high surgical risk.</li>
+                  <li>Key highlights: TTE as the gold standard, and improved stroke volume, exercise tolerance and survival after TAVI.</li>
+                </ul>
+                <p class="ci-note">Source note: The case infographic lists “Gradient Mean PG (mmHG) = 100”—kept as written in the source; check before reuse.</p>
+                <div class="ci-block-label">Discussion question</div>
+                <p class="ci-question">What challenges do you face in diagnosing AS in elderly patients?</p>
+                <div class="ci-block-label">Options</div>
+                <ol class="ci-options">
+                  <li>Reduced aortic valve area</li>
+                  <li>Detection if VHD via Auscultation (as written in the source)</li>
+                  <li>Differentiating between age-related changes</li>
+                  <li>Managing comorbidities that complicate the clinical presentation</li>
+                  <li>I need more information on the diagnosis of VHD</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="content-item" data-card>
+            <div class="ci-head" data-toggle>
+              <div class="ci-head-left">
+                <span class="ci-num">5</span>
+                <span class="ci-topic">Understanding the Diagnosis and Treatment of AS</span>
+              </div>
+              <span class="badge transcatheter">Video</span>
+              <span class="chevron">&#9660;</span>
+            </div>
+            <div class="card-body">
+              <div class="card-body-inner">
+                <p class="ci-meta">Video · 5:09 · Aug 2024 (date/month needs to be confirmed)</p>
+                <div class="ci-block-label">What was covered</div>
+                <ul>
+                  <li>AS as the most common type of VHD in the elderly, where the narrowing valve restricts blood flow.</li>
+                  <li>Symptoms: heart murmur, chest pain, shortness of breath, dizziness and fatigue.</li>
+                  <li>Diagnosis with auscultation, transthoracic echocardiogram, chest x-ray and stress test.</li>
+                  <li>Mild cases may only need monitoring, while moderate to severe AS often needs valve replacement (SAVR or TAVR).</li>
+                  <li>ACC/AHA 2020 guidelines recommend both SAVR and TAVR for adults aged 65 to 80. The choice depends on vascular access, comorbidities, expected functional status and patient preferences.</li>
+                  <li>Video by Asst. Prof. Narathip Chunhamaneewat.</li>
+                </ul>
+                <div class="ci-block-label">Discussion question</div>
+                <p class="ci-question">How do you decide whether a patient with aortic stenosis needs surgical or transcatheter interventions? (Select all that apply)</p>
+                <div class="ci-block-label">Options</div>
+                <ol class="ci-options">
+                  <li>By assessing the severity of AS from echocardiography results</li>
+                  <li>By identifying heart murmur while auscultating &amp; referring it to specialists</li>
+                  <li>By medically managing the patient with drugs</li>
+                  <li>I need more information on identifying heart murmur with auscultation</li>
+                  <li>I need more information about identifying severe AS by echocardiography</li>
+                  <li>I need more information about the roles of surgical &amp; transcatheter interventions depending on patient profile</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="content-item" data-card>
+            <div class="ci-head" data-toggle>
+              <div class="ci-head-left">
+                <span class="ci-num">6</span>
+                <span class="ci-topic">From Heart Murmur to Diagnosis: MR in a 40-year-old</span>
+              </div>
+              <span class="badge surgical">Patient case</span>
+              <span class="chevron">&#9660;</span>
+            </div>
+            <div class="card-body">
+              <div class="card-body-inner">
+                <p class="ci-meta">Patient case · Aug 2024 (date/month needs to be confirmed)</p>
+                <div class="ci-block-label">What was covered</div>
+                <ul>
+                  <li>MR is the third most common VHD, affecting about 24.2 million people. It is primary or secondary, and auscultation is a key screening tool.</li>
+                  <li>Hypothetical case of a 40-year-old man with 6 months of reduced exercise tolerance, plus nocturia, palpitations and lightheadedness.</li>
+                  <li>The GP heard high regurgitant murmurs, and ECG showed atrial fibrillation. He was referred to a cardiologist.</li>
+                  <li>The soft S1 and holosystolic blowing apical murmur radiating to the axilla suggested MR.</li>
+                </ul>
+                <div class="ci-block-label">Discussion question</div>
+                <p class="ci-question">Are auscultation and ECG helpful to you in diagnosing cardiovascular abnormalities that lead to a suspicion of MR?</p>
+                <div class="ci-block-label">Options</div>
+                <ol class="ci-options">
+                  <li>Yes, they are helpful in the initial assessment</li>
+                  <li>No, I prefer other diagnostic tools</li>
+                  <li>Sometimes, though it can be challenging</li>
+                  <li>I need more information on auscultation and MR diagnosis</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="content-item" data-card>
+            <div class="ci-head" data-toggle>
+              <div class="ci-head-left">
+                <span class="ci-num">7</span>
+                <span class="ci-topic">Expert Insights on MR: Diagnosis to Effective Treatments</span>
+              </div>
+              <span class="badge transcatheter">Video</span>
+              <span class="chevron">&#9660;</span>
+            </div>
+            <div class="card-body">
+              <div class="card-body-inner">
+                <p class="ci-meta">Video · 6:42 · Aug 2024 (date/month needs to be confirmed)</p>
+                <div class="ci-block-label">What was covered</div>
+                <ul>
+                  <li>MR is incomplete mitral closure causing backflow from LV to LA in systole and a systolic murmur, identified by auscultation.</li>
+                  <li>Video by Dr. John Chan Kok Meng on seven questions: what MR is, its prevalence and causes, and whether there is a gender bias; how to diagnose it; when to repair and when to replace; advice to GPs for increasing diagnosis, since MR is mostly asymptomatic.</li>
+                </ul>
+                <div class="ci-block-label">Discussion question</div>
+                <p class="ci-question">Which diagnostic tool do you find most effective for evaluating mitral regurgitation?</p>
+                <div class="ci-block-label">Options</div>
+                <ol class="ci-options">
+                  <li>Cardiac auscultation</li>
+                  <li>Echocardiography</li>
+                  <li>Cardiac MRI</li>
+                  <li>Cardiac Catheterization</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="content-item" data-card>
+            <div class="ci-head" data-toggle>
+              <div class="ci-head-left">
+                <span class="ci-num">8</span>
+                <span class="ci-topic">Selecting the Right Treatment Option for AS Patients</span>
+              </div>
+              <span class="badge surgical">Patient case</span>
+              <span class="chevron">&#9660;</span>
+            </div>
+            <div class="card-body">
+              <div class="card-body-inner">
+                <p class="ci-meta">Patient case · Sep 2024 (date/month needs to be confirmed)</p>
+                <div class="ci-block-label">What was covered</div>
+                <ul>
+                  <li>AS is often asymptomatic early, and symptoms guide management. SAVR is the traditional gold standard, and TAVR is now well established. Patient selection depends on risk, frailty and comorbidities.</li>
+                  <li>Hypothetical case of a 75-year-old woman with 30 years of hypertension, chest pain, fatigue, CKD and a CABG 5 years earlier. The GP heard a murmur and referred her to a cardiologist.</li>
+                  <li>Echo/TTE: AVA 0.8 cm², Vmax 2 m/s, SV index 29 mL/m², LVEF 30%. The cardiologist confirmed severe symptomatic low-gradient AS.</li>
+                  <li>AS affects about 3% of people over 65. TAVR is favoured for shorter stays and for inoperable and intermediate-risk patients. SAVR suits younger patients and those needing concomitant surgery.</li>
+                </ul>
+                <p class="ci-note">Source note: The case infographic lists “Gradient Mean PG (mmHG) = 100”, which looks inconsistent with low-gradient AS—kept as written in the source; check before reuse.</p>
+                <div class="ci-block-label">Discussion question</div>
+                <p class="ci-question">What would be the most important factor in determining whether to proceed with TAVR or SAVR for this patient?</p>
+                <div class="ci-block-label">Options</div>
+                <ol class="ci-options">
+                  <li>Patient's age and comorbidities</li>
+                  <li>Surgical risk</li>
+                  <li>Severity of AS</li>
+                  <li>Recovery period</li>
+                  <li>Post-procedural hospital stays</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="content-item" data-card>
+            <div class="ci-head" data-toggle>
+              <div class="ci-head-left">
+                <span class="ci-num">9</span>
+                <span class="ci-topic">AS Treatment: Expert Insights on TAVI and SAVR Approaches</span>
+              </div>
+              <span class="badge transcatheter">Video</span>
+              <span class="chevron">&#9660;</span>
+            </div>
+            <div class="card-body">
+              <div class="card-body-inner">
+                <p class="ci-meta">Video · 7:58</p>
+                <div class="ci-block-label">What was covered</div>
+                <ul>
+                  <li>AS is treated with SAVR or TAVI. SAVR is the long-standing gold standard, especially in younger patients.</li>
+                  <li>TAVI is preferred for shorter hospital stays and for failed bioprosthetic aortic or mitral valves. Only balloon-expanded TAVI is approved for failed mitral bioprosthetic valves.</li>
+                  <li>Video by Datuk Dr. Shaiful Azmi Yahaya on what AS is, TAVI indications, TAVI vs SAVR, patient selection, durability, proof of therapy, advances and effective management.</li>
+                </ul>
+                <div class="ci-block-label">Discussion question</div>
+                <p class="ci-question">What are the biggest challenges you face when selecting patients for TAVI or SAVR?</p>
+                <div class="ci-block-label">Options</div>
+                <ol class="ci-options">
+                  <li>Assessing patient frailty</li>
+                  <li>Balancing risks and benefits</li>
+                  <li>Evaluating anatomical suitability for TAVI</li>
+                  <li>Limited long-term data for specific cases</li>
+                  <li>Managing patient expectations and preferences</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="content-item" data-card>
+            <div class="ci-head" data-toggle>
+              <div class="ci-head-left">
+                <span class="ci-num">10</span>
+                <span class="ci-topic">Considerations in Selecting the Right Intervention for AS Patients</span>
+              </div>
+              <span class="badge transcatheter">Video</span>
+              <span class="chevron">&#9660;</span>
+            </div>
+            <div class="card-body">
+              <div class="card-body-inner">
+                <p class="ci-meta">Video · 10:00</p>
+                <div class="ci-block-label">What was covered</div>
+                <ul>
+                  <li>SAVR is the long-standing standard for severe symptomatic AS, and TAVR suits a wide range of patients. Candidate selection depends on risk, frailty and comorbidities.</li>
+                  <li>Video by Dato Dr. Jeffrey Jeswant Dhillon on factors influencing the choice of intervention, how often lifetime management is considered, and TAVR or SAVR.</li>
+                </ul>
+                <div class="ci-block-label">Discussion question</div>
+                <p class="ci-question">In your opinion, what impact does patient life expectancy have on the choice between SAVR and TAVR?</p>
+                <div class="ci-block-label">Options</div>
+                <ol class="ci-options">
+                  <li>SAVR for patients with longer life expectancies due to its durability</li>
+                  <li>TAVR is generally preferred for patients with shorter life expectancies</li>
+                  <li>Both SAVR and TAVR are considered equally</li>
+                  <li>Other factors, like frailty and comorbidities, play a larger role in decision-making</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="content-item" data-card>
+            <div class="ci-head" data-toggle>
+              <div class="ci-head-left">
+                <span class="ci-num">11</span>
+                <span class="ci-topic">TAVI for Low-flow Low-gradient AS</span>
+              </div>
+              <span class="badge surgical">Patient case</span>
+              <span class="chevron">&#9660;</span>
+            </div>
+            <div class="card-body">
+              <div class="card-body-inner">
+                <p class="ci-meta">Patient case</p>
+                <div class="ci-block-label">What was covered</div>
+                <ul>
+                  <li>Hypothetical case of an 83-year-old woman with chest pain, fatigue, CAD and CKD. TTE showed AVA 0.7 cm², Vmax 2 m/s, SV index 29 mL/m² and LVEF 55%, giving paradoxical low-flow low-gradient severe AS. TAVI was recommended.</li>
+                  <li>Low-flow low-gradient AS is defined by AVA <1 cm², mean gradient <40 mmHg and SV index ≤35 mL/m². It accounts for 5–10% of severe AS.</li>
+                  <li>AHA/ACC diagnostic parameters, stages D1 to D3.</li>
+                  <li>TAVI is safe for low-flow low-gradient AS, with symptom improvement and shorter stays.</li>
+                </ul>
+                <div class="ci-block-label">Discussion question</div>
+                <p class="ci-question">In your opinion, does echocardiography help in detecting low-flow, low-gradient AS?</p>
+                <div class="ci-block-label">Options</div>
+                <ol class="ci-options">
+                  <li>Yes, as it helps assess flow and gradients</li>
+                  <li>Yes, but confirmatory tests like cardiac catheterisation are also required</li>
+                  <li>No, I find it insufficient for the diagnosis</li>
+                  <li>Maybe, I need more information on using echocardiography for the diagnosis of low-flow, low-gradient AS</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="content-item" data-card>
+            <div class="ci-head" data-toggle>
+              <div class="ci-head-left">
+                <span class="ci-num">12</span>
+                <span class="ci-topic">Role of Root Enlargement in Lifetime Management of AS</span>
+              </div>
+              <span class="badge transcatheter">Video</span>
+              <span class="chevron">&#9660;</span>
+            </div>
+            <div class="card-body">
+              <div class="card-body-inner">
+                <p class="ci-meta">Video · 2:02</p>
+                <div class="ci-block-label">What was covered</div>
+                <ul>
+                  <li>Lifetime management in younger AS patients needs a durable first intervention that allows for future reinterventions.</li>
+                  <li>A small aortic annulus may force a smaller prosthetic valve, and root enlargement allows a larger one.</li>
+                  <li>Video by Dato Dr. Jeffrey Jeswant Dhillon on whether root enlargement is a proactive plan, and how younger patients react to lifetime management conversations.</li>
+                </ul>
+                <div class="ci-block-label">Discussion question</div>
+                <p class="ci-question">Have you recommended root enlargement for young patients with AS and why?</p>
+                <div class="ci-block-label">Options</div>
+                <ol class="ci-options">
+                  <li>Yes, to accommodate a larger prosthetic valve for durability.</li>
+                  <li>Yes, to improve hemodynamics and long-term outcomes.</li>
+                  <li>No, due to higher procedural risks.</li>
+                  <li>No, due to patient preference or clinical contraindications.</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="content-item" data-card>
+            <div class="ci-head" data-toggle>
+              <div class="ci-head-left">
+                <span class="ci-num">13</span>
+                <span class="ci-topic">Are You Correctly Diagnosing VHD in Your Patients?</span>
+              </div>
+              <span class="badge transcatheter">Video</span>
+              <span class="chevron">&#9660;</span>
+            </div>
+            <div class="card-body">
+              <div class="card-body-inner">
+                <p class="ci-meta">Video · 8:43</p>
+                <div class="ci-block-label">What was covered</div>
+                <ul>
+                  <li>VHD, particularly AS, is a global challenge. Diagnosis relies on classical signs like a heart murmur. A brief soft ejection systolic murmur with a clear second heart sound should prompt echocardiography.</li>
+                  <li>Video by Prof. Dr. Asri bin Said on not overlooking AS in routine check-ups, best practices for detecting and managing it, and why early detection matters.</li>
+                </ul>
+                <div class="ci-block-label">Discussion question</div>
+                <p class="ci-question">How do you initiate the diagnosis of AS in your patients?</p>
+                <div class="ci-block-label">Options</div>
+                <ol class="ci-options">
+                  <li>Conduct a detailed medical history and symptom review</li>
+                  <li>Perform auscultation to detect heart murmurs</li>
+                  <li>Suggest the patient to undergo echocardiography</li>
+                  <li>Refer to a cardiologist for further evaluation if necessary</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="content-item" data-card>
+            <div class="ci-head" data-toggle>
+              <div class="ci-head-left">
+                <span class="ci-num">14</span>
+                <span class="ci-topic">The Importance of Echocardiography in the Assessment of HVD</span>
+              </div>
+              <span class="badge transcatheter">Video</span>
+              <span class="chevron">&#9660;</span>
+            </div>
+            <div class="card-body">
+              <div class="card-body-inner">
+                <p class="ci-meta">Video · 10:19 (title as written in source)</p>
+                <div class="ci-block-label">What was covered</div>
+                <ul>
+                  <li>AHA recommends TTE as the standard initial tool in known or suspected VHD.</li>
+                  <li>With reduced LV function and low output, gradients can mislead. Low-dose dobutamine helps separate severe AS from pseudo-AS.</li>
+                  <li>Video by Prof. Ewe See Hooi on echo in VHD, defining severe AS, low-flow low-gradient and discordant low-gradient AS, treating severe AS after echo confirmation, and asymptomatic severe AS.</li>
+                </ul>
+                <div class="ci-block-label">Discussion question</div>
+                <p class="ci-question">What benefits of echocardiology (as written in the source) do you find in evaluating patients with suspected aortic stenosis? (Select Multiple)</p>
+                <div class="ci-block-label">Options</div>
+                <ol class="ci-options">
+                  <li>Non-invasive and safe</li>
+                  <li>Monitors AS progression</li>
+                  <li>Quantify AS severity</li>
+                  <li>Evaluate valve anatomy and hemodynamics</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="content-item" data-card>
+            <div class="ci-head" data-toggle>
+              <div class="ci-head-left">
+                <span class="ci-num">15</span>
+                <span class="ci-topic">Lifetime Management Strategies of AS</span>
+              </div>
+              <span class="badge note">Infographic</span>
+              <span class="chevron">&#9660;</span>
+            </div>
+            <div class="card-body">
+              <div class="card-body-inner">
+                <p class="ci-meta">Infographic</p>
+                <div class="ci-block-label">What was covered</div>
+                <ul>
+                  <li>Early diagnosis: classic symptoms, and echo for a soft ejection systolic murmur with a clear second heart sound. Undertreatment is addressed through multidisciplinary heart valve teams.</li>
+                  <li>Early interventions: AVR is the only effective treatment for severe AS. SAVR and TAVI aim for longer life, better quality of life and exercise capacity, and decisions are individualized.</li>
+                  <li>Lifetime management pathway by age: first intervention at 55–70 with SAVR, mechanical valve or TAVI; second at 65–80 with redo SAVR, TAV-in-SAV, TAVR explant/SAVR or TAV-in-TAV; third at 75–90.</li>
+                  <li>Conclusion: the initial choice affects future reintervention options.</li>
+                </ul>
+                <div class="ci-block-label">Discussion question</div>
+                <p class="ci-question">What factors are most important to you when prioritizing lifetime management for patients with AS? (Multiple Select)</p>
+                <div class="ci-block-label">Options</div>
+                <ol class="ci-options">
+                  <li>Focus on patient anatomy and valve durability.</li>
+                  <li>Prioritize shared decision-making with the patient.</li>
+                  <li>Balance surgical and transcatheter options.</li>
+                  <li>Emphasize long-term follow-up and monitoring.</li>
+                  <li>Consider age, comorbidities, and procedural risk.</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="content-item" data-card>
+            <div class="ci-head" data-toggle>
+              <div class="ci-head-left">
+                <span class="ci-num">16</span>
+                <span class="ci-topic">Minimalist TAVI for Severe AS in an 88-year-old</span>
+              </div>
+              <span class="badge surgical">Patient case</span>
+              <span class="chevron">&#9660;</span>
+            </div>
+            <div class="card-body">
+              <div class="card-body-inner">
+                <p class="ci-meta">Patient case</p>
+                <div class="ci-block-label">What was covered</div>
+                <ul>
+                  <li>Hypothetical case of an 88-year-old man with a renal transplant, dyspnoea and fluid overload. Echo: Vmax 5 m/s, mean gradient 45 mmHg, AVA 0.88 cm², LVEF 40%. The heart team recommended minimalist TAVI.</li>
+                  <li>Stepwise minimalist TAVI pathway (pre-, peri- and post-procedural): avoid general anaesthesia, minimal sedation, standardised care, short procedure, early discharge.</li>
+                  <li>The 3M study reported next-day discharge in 80.1% and discharge within 48 hours in 89.5%, with lower ICU days and stay.</li>
+                  <li>In this case, minimalist TAVI reduced the risk of permanent dialysis, and a left femoral approach protected blood flow to the transplanted kidney.</li>
+                </ul>
+                <div class="ci-block-label">Discussion question</div>
+                <p class="ci-question">In your opinion, what is the most important benefit of adopting a minimalist TAVI approach compared to conventional strategies in the above patient?</p>
+                <div class="ci-block-label">Options</div>
+                <ol class="ci-options">
+                  <li>Shorter procedural time and reduced complexity</li>
+                  <li>Avoidance of general anaesthesia, minimizing associated risks</li>
+                  <li>Shortened hospital stay and earlier discharge</li>
+                  <li>Lower overall healthcare costs without compromising procedural care and clinical outcomes</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="content-item" data-card>
+            <div class="ci-head" data-toggle>
+              <div class="ci-head-left">
+                <span class="ci-num">17</span>
+                <span class="ci-topic">Long-Term Outcomes of the RESILIA Tissue Valve: COMMENCE Aortic Trial</span>
+              </div>
+              <span class="badge note">Infographic</span>
+              <span class="chevron">&#9660;</span>
+            </div>
+            <div class="card-body">
+              <div class="card-body-inner">
+                <p class="ci-meta">Infographic</p>
+                <div class="ci-block-label">What was covered</div>
+                <ul>
+                  <li>Advances such as RESILIA tissue technology reduce calcification and structural valve deterioration (SVD).</li>
+                  <li>COMMENCE is an FDA trial across 27 sites in the US, Canada and Europe. Extended follow-up (years 6 to 10) covers 225 re-consented patients at 10 sites, mean age 65.1 and EuroSCORE II 2.1.</li>
+                  <li>Seven-year freedom from events: all-cause mortality 85.4%, stroke 94.0%, valve thrombosis 99.4%; bleeding 90.9%, SVD 99.3%, endocarditis 97.3%; major PVL 99.5%, reoperation 97.2%.</li>
+                  <li>Mean gradient and effective orifice area (EOA) were stable through 7 years. Mean follow-up was 7.7 years for the re-consented cohort.</li>
+                </ul>
+                <div class="ci-block-label">Discussion question</div>
+                <p class="ci-question">Do you consider RESILIA tissue valve as a reliable valve option for patients undergoing SAVR?</p>
+                <div class="ci-block-label">Options</div>
+                <ol class="ci-options">
+                  <li>Yes, due to its extended durability and reduced SVD rates</li>
+                  <li>Yes, due to its enhanced anti-calcification technology</li>
+                  <li>Yes, due to its feasibility for future valve-in-valve procedure</li>
+                  <li>Maybe, but the valve selection should be individualized</li>
+                  <li>No, I prefer conventional bioprosthetic valves</li>
+                  <li>I need more information on RESILIA tissue valve</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="content-item" data-card>
+            <div class="ci-head" data-toggle>
+              <div class="ci-head-left">
+                <span class="ci-num">18</span>
+                <span class="ci-topic">Minimalist TAVI: A New Era in AVR</span>
+              </div>
+              <span class="badge transcatheter">Video</span>
+              <span class="chevron">&#9660;</span>
+            </div>
+            <div class="card-body">
+              <div class="card-body-inner">
+                <p class="ci-meta">Video · 5:19</p>
+                <div class="ci-block-label">What was covered</div>
+                <ul>
+                  <li>TAVI has evolved, and minimalist TAVI (no general anaesthesia, minimal sedation, standardised care, early discharge) is safe and can reduce hospital costs.</li>
+                  <li>Video by Asst. Prof. Narathip Chunhamaneewat on the minimalist TAVI protocol, its clinical outcomes and suitable patients.</li>
+                </ul>
+                <div class="ci-block-label">Discussion question</div>
+                <p class="ci-question">In your clinical practice, how do you determine which patients are more suitable for minimalist TAVI?</p>
+                <div class="ci-block-label">Options</div>
+                <ol class="ci-options">
+                  <li>Patients with favorable vascular access</li>
+                  <li>Patients with medical conditions that would not impact recovery</li>
+                  <li>Patients with no high-risk anatomical features</li>
+                  <li>Patients with left ventricular ejection fraction >30%</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="content-item" data-card>
+            <div class="ci-head" data-toggle>
+              <div class="ci-head-left">
+                <span class="ci-num">19</span>
+                <span class="ci-topic">Treating Severe AS with INSPIRIS RESILIA: A Case Study</span>
+              </div>
+              <span class="badge note">Infographic</span>
+              <span class="chevron">&#9660;</span>
+            </div>
+            <div class="card-body">
+              <div class="card-body-inner">
+                <p class="ci-meta">Infographic</p>
+                <div class="ci-block-label">What was covered</div>
+                <ul>
+                  <li>SAVR with INSPIRIS RESILIA tissue valve aims to reduce SVD and offers durability.</li>
+                  <li>Case of Mr. X, a 72-year-old with progressive breathlessness and chest pain, type 2 diabetes, hypertension and hyperlipidaemia, and a CABG 5 years earlier.</li>
+                  <li>TTE showed severe AS (AVA 0.8 cm²) with LV hypertrophy. Differentials were heart failure and CAD. Medical management, TAVI vs SAVR and the heart team decision are covered.</li>
+                  <li>Heart team recommended SAVR with INSPIRIS RESILIA, in line with his preference for durability and avoiding lifelong anticoagulants.</li>
+                  <li>Outcome: symptom resolution, mild post-op AF managed with rate control, and continued echo surveillance.</li>
+                </ul>
+                <div class="ci-block-label">Discussion question</div>
+                <p class="ci-question">Why would you prefer INSPIRIS RESILIA valve for managing patients with severe symptomatic AS?</p>
+                <div class="ci-block-label">Options</div>
+                <ol class="ci-options">
+                  <li>The expandable frame allowing for future interventions</li>
+                  <li>The use of RESILIA tissue to resist calcification</li>
+                  <li>The reduced requirement for anticoagulation</li>
+                  <li>Enhanced hemodynamic performance with sustained valve function over time</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="content-item" data-card>
+            <div class="ci-head" data-toggle>
+              <div class="ci-head-left">
+                <span class="ci-num">20</span>
+                <span class="ci-topic">Managing Calcific AS in a 40-year-old Fitness Enthusiast with INSPIRIS RESILIA</span>
+              </div>
+              <span class="badge transcatheter">Video</span>
+              <span class="chevron">&#9660;</span>
+            </div>
+            <div class="card-body">
+              <div class="card-body-inner">
+                <p class="ci-meta">Video · 4:53</p>
+                <div class="ci-block-label">What was covered</div>
+                <ul>
+                  <li>AS is the most prevalent VHD. As AVR extends to younger patients, tissue durability matters, and RESILIA has shown stable hemodynamics at 7 years.</li>
+                  <li>Case of a 40-year-old fitness enthusiast with breathing difficulty, dizziness, severe calcific AS and LVEF 30%. The surgeon recommended INSPIRIS RESILIA, and he returned to an active lifestyle.</li>
+                  <li>Video by Dr. Bana (EHCC Network / Eternal Hospital, Jaipur).</li>
+                </ul>
+                <div class="ci-block-label">Discussion question</div>
+                <p class="ci-question">In your clinical practice, have you considered INSPIRIS RESILIA for AVR in younger patients?</p>
+                <div class="ci-block-label">Options</div>
+                <ol class="ci-options">
+                  <li>Yes, due to its increased durability and reduced calcification technology</li>
+                  <li>Yes, due to longer life expectancy in younger individuals</li>
+                  <li>Yes, for active patients who want to avoid lifelong anticoagulants</li>
+                  <li>No, I need more long-term durability data</li>
+                  <li>I need more information about INSPIRIS RESILIA in younger individuals</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="content-item" data-card>
+            <div class="ci-head" data-toggle>
+              <div class="ci-head-left">
+                <span class="ci-num">21</span>
+                <span class="ci-topic">Evaluating 5-Year Outcomes of Resilia Tissue in Mitral Position</span>
+              </div>
+              <span class="badge note">Infographic</span>
+              <span class="chevron">&#9660;</span>
+            </div>
+            <div class="card-body">
+              <div class="card-body-inner">
+                <p class="ci-meta">Infographic</p>
+                <div class="ci-block-label">What was covered</div>
+                <ul>
+                  <li>MVR guidelines allow mechanical or bioprosthetic valves. The COMMENCE mitral trial is a prospective, single-arm FDA IDE trial (83 enrolled, 82 implanted, 98.8% technical success).</li>
+                  <li>Median age 70, STS score 3.4%.</li>
+                  <li>Five-year freedom from all-cause mortality 79.9%, SVD 98.7% and reoperation 97.1%.</li>
+                  <li>Hemodynamics were stable. 94% stayed in NYHA class I or II, and paravalvular leak rates stayed low.</li>
+                </ul>
+                <div class="ci-block-label">Discussion question</div>
+                <p class="ci-question">Do you consider RESILIA tissue bioprosthesis a suitable option for MVR in your clinical practice?</p>
+                <div class="ci-block-label">Options</div>
+                <ol class="ci-options">
+                  <li>Yes, due to its promising durability and low SVD rates</li>
+                  <li>Yes, as it eliminates the need for lifelong anticoagulation</li>
+                  <li>No, as valve choice depends on patient preference and clinical factors</li>
+                  <li>No, I need more information before considering it</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="content-item" data-card>
+            <div class="ci-head" data-toggle>
+              <div class="ci-head-left">
+                <span class="ci-num">22</span>
+                <span class="ci-topic">Managing AS with TAVI in a 76-Year-Old Patient</span>
+              </div>
+              <span class="badge transcatheter">Video</span>
+              <span class="chevron">&#9660;</span>
+            </div>
+            <div class="card-body">
+              <div class="card-body-inner">
+                <p class="ci-meta">Video · 6:59</p>
+                <div class="ci-block-label">What was covered</div>
+                <ul>
+                  <li>AS is the most prevalent VHD in the elderly. TAVI is a minimally invasive alternative to SAVR, with low procedural risk and rapid recovery.</li>
+                  <li>Case of Mr. Guan, 76, active, with exertional shortness of breath, a murmur and severe aortic valve disease. He chose TAVI and returned to his active life.</li>
+                  <li>Video by Asst. Prof. Ho Kay Woon (National Heart Centre Singapore).</li>
+                </ul>
+                <div class="ci-block-label">Discussion question</div>
+                <p class="ci-question">What do you think are the key factors driving the growing use of TAVI in elderly patients?</p>
+                <div class="ci-block-label">Options</div>
+                <ol class="ci-options">
+                  <li>Minimally invasive and suitable for high-risk patients</li>
+                  <li>Faster recovery and shorter hospital stay</li>
+                  <li>Broader guideline support for wider patient groups</li>
+                  <li>Positive outcomes and increasing clinical confidence</li>
+                  <li>Minimal lifestyle restrictions post-procedure</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="content-item" data-card>
+            <div class="ci-head" data-toggle>
+              <div class="ci-head-left">
+                <span class="ci-num">23</span>
+                <span class="ci-topic">The Critical Need to Refer Your SAS Patients to a Heart Team</span>
+              </div>
+              <span class="badge transcatheter">Video</span>
+              <span class="chevron">&#9660;</span>
+            </div>
+            <div class="card-body">
+              <div class="card-body-inner">
+                <p class="ci-meta">Video · 1:42 (title says “SAS” in source)</p>
+                <div class="ci-block-label">What was covered</div>
+                <ul>
+                  <li>AS accounts for nearly 50% of VHD-related deaths globally, and symptoms appear late.</li>
+                  <li>Guidelines stress early multidisciplinary heart valve team evaluation, and referral to a Primary or Comprehensive Heart Valve Center.</li>
+                  <li>TAVR is well established, with outcomes comparable to SAVR in intermediate- and high-risk patients and even superior one-year outcomes in selected low-risk groups.</li>
+                  <li>Video by Dr. Vinod Thourani on early heart team referral.</li>
+                </ul>
+                <div class="ci-block-label">Discussion question</div>
+                <p class="ci-question">In your clinical practice, what directs your decision to refer severe AS patients to a Heart Valve Team?</p>
+                <div class="ci-block-label">Options</div>
+                <ol class="ci-options">
+                  <li>Surgical risk &amp; need for personalized care</li>
+                  <li>Evidence favoring TAVR across risk profiles</li>
+                  <li>Access to specialized valve centers</li>
+                  <li>Better outcomes via early team-based decisions</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="content-item" data-card>
+            <div class="ci-head" data-toggle>
+              <div class="ci-head-left">
+                <span class="ci-num">24</span>
+                <span class="ci-topic">Guiding AS Care with Evidence-Based APSC Recommendations</span>
+              </div>
+              <span class="badge note">Infographic</span>
+              <span class="chevron">&#9660;</span>
+            </div>
+            <div class="card-body">
+              <div class="card-body-inner">
+                <p class="ci-meta">Infographic</p>
+                <div class="ci-block-label">What was covered</div>
+                <ul>
+                  <li>APSC consensus on AS management and TAVI in the Asia-Pacific region, from a 32-expert panel using GRADE, with ≥80% agreement.</li>
+                  <li>AS severity thresholds: mild Vmax 2.0–2.9 m/s, moderate 3.0–3.9 m/s, severe ≥4.0 m/s, with matching mean gradient and AVA cut-offs.</li>
+                  <li>Echo surveillance: every 3–5 years for mild AS, and every 6 months to 1 year for moderate AS and asymptomatic severe AS.</li>
+                  <li>When to intervene in severe AS (asymptomatic and symptomatic), and the pathway of clinical profile, anatomy and risk, heart team, shared decision, then TAVI/SAVR.</li>
+                </ul>
+                <div class="ci-block-label">Discussion question</div>
+                <p class="ci-question">What are the most critical factors you consider when planning long-term management for aortic stenosis in your clinical setting?</p>
+                <div class="ci-block-label">Options</div>
+                <ol class="ci-options">
+                  <li>Patient's life expectancy and comorbidities</li>
+                  <li>Shared decision-making involving the patient and caregivers</li>
+                  <li>Anticipating future reintervention options</li>
+                  <li>Valve durability and long-term performance evidence</li>
+                  <li>Collaborative input from the multidisciplinary Heart Team</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="content-item" data-card>
+            <div class="ci-head" data-toggle>
+              <div class="ci-head-left">
+                <span class="ci-num">Pre</span>
+                <span class="ci-topic">Choosing the Right Diagnostic and Management Approach for Patients with VHD</span>
+              </div>
+              <span class="badge note">Survey</span>
+              <span class="chevron">&#9660;</span>
+            </div>
+            <div class="card-body">
+              <div class="card-body-inner">
+                <p class="ci-meta">Survey · Apr 2024 · 8,815 reached at time of capture (date/month needs to be confirmed)</p>
+                <div class="ci-block-label">What was covered</div>
+                <ul>
+                  <li>Intro covers the VHD burden: rheumatic heart disease 40.5 million people in 2019 with 2.8 million new cases per year and 306,000 deaths; AS about 9 million; degenerative mitral disease about 24 million.</li>
+                  <li>Notes aortic disease is more prevalent in high-income and upper-middle-income countries, annual mortality is 25% with mean survival of 2–3 years after diagnosis, and the disease is often undiagnosed.</li>
+                  <li>Asks HCPs to share their approach to diagnosing and managing aortic valve disease across 7 questions, with anonymous responses.</li>
+                </ul>
+                <div class="ci-block-label">Questions &amp; options</div>
+                <p class="ci-question">1. What are the common challenges that you experience while diagnosing aortic valve disease in a patient? (Select all that apply)</p>
+                <ol class="ci-options">
+                  <li>Limited understanding of VHD symptoms</li>
+                  <li>Non-specific symptoms in the early stages</li>
+                  <li>Lack of direct access to echocardiography</li>
+                  <li>Lack of auscultation at the point of diagnosis</li>
+                  <li>Limitations in interpreting echocardiography results</li>
+                  <li>The coexistence of multiple VHDs</li>
+                  <li>Variability in presentation factors</li>
+                  <li>I have faced different challenges in diagnosis of aortic valve disease</li>
+                </ol>
+                <p class="ci-question">2. How often do you recommend patients for valve replacement surgery for aortic valve disease? (single choice)</p>
+                <ol class="ci-options">
+                  <li>Very often</li>
+                  <li>Often</li>
+                  <li>Sometimes</li>
+                  <li>Rarely</li>
+                  <li>I do not refer patients for valve replacement surgery</li>
+                </ol>
+                <p class="ci-question">3. What are the common challenges that you face while managing aortic valve disease? (Select all that apply)</p>
+                <ol class="ci-options">
+                  <li>Delayed diagnosis and referral</li>
+                  <li>Complexity of the evaluation of patients</li>
+                  <li>Co-existing comorbidities complicating management</li>
+                  <li>Uncertainties regarding the choice of management approach for different patients</li>
+                  <li>Multivalvular complications in patients</li>
+                  <li>Achieving long-term benefits for patients</li>
+                  <li>I have faced other challenges in managing aortic valve disease</li>
+                </ol>
+                <p class="ci-question">4. Which of the following types of valves do you prefer for aortic valve replacement? (single choice)</p>
+                <ol class="ci-options">
+                  <li>Mechanical valves</li>
+                  <li>Bioprosthetic valves</li>
+                  <li>I refer patients to specialists for aortic valve replacement</li>
+                  <li>I need more information about aortic valve replacement</li>
+                </ol>
+                <p class="ci-question">5. In which patients do you prefer surgical aortic valve replacement (SAVR)? (Select all that apply)</p>
+                <ol class="ci-options">
+                  <li>Patients with rheumatic heart disease</li>
+                  <li>Patients with aortic root disease requiring treatment</li>
+                  <li>Elderly patients with severe aortic stenosis and low surgical risk</li>
+                  <li>Young patients with severe aortic stenosis and low surgical risk</li>
+                  <li>Patients with bicuspid aortic valve and severe stenosis</li>
+                  <li>Patients with endocarditis involving the aortic valve</li>
+                  <li>Patients with concomitant disease (mitral valve disease, tricuspid valve disease, etc.)</li>
+                  <li>Patients with coronary artery disease requiring CABG</li>
+                  <li>I prefer SAVR in patient profiles not specified above</li>
+                </ol>
+                <p class="ci-question">6. In which patients do you recommend transcatheter aortic valve replacement (TAVR)? (Select all that apply)</p>
+                <ol class="ci-options">
+                  <li>Frail or elderly patients with severe aortic stenosis and high surgical risk</li>
+                  <li>Patients with favourable femoral access for transcatheter valve deployment</li>
+                  <li>Patients with multiple comorbidities</li>
+                  <li>Patients with shorter life spans and terminal illness</li>
+                  <li>Patients with severe renal disease</li>
+                  <li>Patients with low or intermediate surgical risk</li>
+                  <li>Patients needing valve-in-valve replacement</li>
+                  <li>I prefer TAVR in patient profiles not specified above</li>
+                </ol>
+                <p class="ci-question">7. Do you benefit from HeartValve Hub content to help you improve diagnosing VHD?</p>
+                <ol class="ci-options">
+                  <li>Yes, the content is highly informative and practical</li>
+                  <li>Yes, it provides valuable updates and insights</li>
+                  <li>Somewhat useful, my knowledge has enhanced about VHD in someway</li>
+                  <li>Maybe, I need more information</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="content-item" data-card>
+            <div class="ci-head" data-toggle>
+              <div class="ci-head-left">
+                <span class="ci-num">Mid</span>
+                <span class="ci-topic">Choosing the Right Diagnostic and Management Approach for Patients with VHD (Mid Survey)</span>
+              </div>
+              <span class="badge note">Survey</span>
+              <span class="chevron">&#9660;</span>
+            </div>
+            <div class="card-body">
+              <div class="card-body-inner">
+                <p class="ci-meta">Survey · “1 y ago” · 16.7K reached at time of capture</p>
+                <div class="ci-block-label">What was covered</div>
+                <ul>
+                  <li>Same intro text as the Pre Survey (VHD burden figures, aortic disease prevalence, mortality and survival data, and the note that the disease is often undiagnosed).</li>
+                  <li>Same 7 questions and every option as the Pre Survey, in the same order. The only differences are the date label and the reach/engagement figures.</li>
+                </ul>
+                <p class="ci-note">Identical 7 questions and options to the Pre Survey — see Pre Survey above.</p>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-card">
+        <div class="phase-card-top"><h3>Phase II</h3></div>
+        <div class="phase-counts">
+          <div><div class="count-num">15</div><div class="count-label">Contents</div></div>
+          <div><div class="count-num">2</div><div class="count-label">Surveys</div></div>
+        </div>
+        <div class="phase-diseases">Diseases covered:
+          <button class="chip" data-goto="as">Aortic stenosis</button>
+          <button class="chip" data-goto="ar">Aortic regurgitation</button>
+        </div>
+        <button class="phase-toggle-btn" data-toggle-content="phase2">View content list ▾</button>
+        <div class="content-list" data-content-list>
+          <p class="pending-note">Content list not yet added — will populate once the Phase II content reference file is provided.</p>
+        </div>
+      </div>
+
+      <div class="phase-card current">
+        <div class="phase-card-top"><h3>Phase III</h3><span class="phase-status">Current</span></div>
+        <div class="phase-counts">
+          <div><div class="count-num">24</div><div class="count-label">Contents</div></div>
+          <div><div class="count-num">2</div><div class="count-label">Webinars</div></div>
+          <div><div class="count-num">2</div><div class="count-label">Surveys</div></div>
+        </div>
+        <div class="phase-diseases">Diseases covered:
+          <button class="chip" data-goto="as">Aortic stenosis</button>
+          <button class="chip" data-goto="ar">Aortic regurgitation</button>
+          <button class="chip" data-goto="mr">Mitral regurgitation</button>
+        </div>
+        <button class="phase-toggle-btn" data-toggle-content="phase3">View content list ▾</button>
+        <div class="content-list" data-content-list>
+          <p class="pending-note">Content list not yet added — will populate once the Phase III content reference file is provided.</p>
+        </div>
+      </div>
+    </div>
+    <p class="totals">Across all three phases: 63 contents, 2 webinars, and 6 surveys (24+2 in Phase I, 15+2 in Phase II, 24+2+2 in Phase III).</p>
+  </section>
+
+  <!-- AORTIC STENOSIS -->
+  <section class="panel" id="as">
+    <div class="disease-head">
+      <h2>Aortic stenosis (AS)</h2>
+      <span class="phase-tag">Phase I, II, III</span>
+    </div>
+    <div class="disease-body">
+      <p>The aortic valve leaflets thicken, calcify, and stiffen over time — most often degenerative calcific disease in older adults, or accelerated by an underlying bicuspid valve in younger patients. As the orifice narrows, the left ventricle has to generate much higher pressure to push blood through, so the ventricular wall thickens in response (concentric hypertrophy). Left untreated, this pressure overload eventually outpaces the heart's ability to compensate.</p>
+      <p>Classic symptoms follow a well-known triad — chest pain, fainting or near-fainting (syncope), and breathlessness — and once symptoms appear, prognosis worsens sharply without intervention. Severity is graded primarily by aortic valve area, mean pressure gradient, and jet velocity on echocardiography.</p>
+    </div>
+    <dl class="facts">
+      <div><dt>Mechanism</dt><dd>Leaflet calcification narrows the orifice</dd></div>
+      <div><dt>Ventricular effect</dt><dd>Pressure overload, concentric hypertrophy</dd></div>
+      <div><dt>Classic symptoms</dt><dd>Angina, syncope, dyspnea</dd></div>
+      <div><dt>Graded by</dt><dd>Valve area, gradient, jet velocity</dd></div>
+    </dl>
+
+    <h3 class="section-label">Edwards therapies for AS</h3>
+
+    <div class="card" data-card>
+      <div class="product-img-wrap">
+        <img src="https://assets-us-01.kc-usercontent.com/6239a81e-8f0f-0040-a1df-b4932a10f6ae/4c84538a-4cb7-4df6-b548-1fecf641c971/ClamShell.26mm_05.01_CamClam02_%28S3UR-resized-horizontal.png?q=75&w=800&auto=format&fm=webp" alt="SAPIEN 3 Ultra RESILIA valve" loading="lazy">
+      </div>
+      <div class="card-head" data-toggle>
+        <div class="card-title-wrap">
+          <span class="card-title">SAPIEN 3 / SAPIEN 3 Ultra RESILIA</span>
+          <span class="badge transcatheter">Transcatheter — TAVR</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p>Edwards' balloon-expandable transcatheter heart valve, delivered by catheter without open-heart surgery. It is the most extensively studied valve in TAVR, with the deepest base of randomized long-term evidence in the field.</p>
+          <ul>
+            <li>SAPIEN 3 Ultra adds a taller outer skirt over the base SAPIEN 3 design to further reduce paravalvular leak</li>
+            <li>RESILIA tissue treatment is applied to reduce calcification and extend durability</li>
+            <li>Approved across the surgical risk spectrum — inoperable through low-risk patients</li>
+          </ul>
+          <div class="evidence">
+            <div class="evidence-label">Clinical evidence — TAVR</div>
+            <ul class="trial-list">
+              <li><span class="trial-name">PARTNER 1</span> — the original landmark trial establishing TAVR as an alternative to surgery in high-risk and inoperable patients with severe AS.</li>
+              <li><span class="trial-name">PARTNER 2</span> — extended the TAVR evidence base to intermediate-risk patients using the SAPIEN XT and SAPIEN 3 platforms.</li>
+              <li><span class="trial-name">PARTNER 3</span> — the low-risk trial; SAPIEN 3 TAVR met its primary composite endpoint (death, stroke, rehospitalization) versus surgery at 1 year, with follow-up continuing through 10 years. <span class="trial-theme">Valve durability</span></li>
+              <li><span class="trial-name">EARLY TAVR</span> — tested earlier TAVR intervention in asymptomatic severe AS against clinical surveillance, supporting a shift toward earlier treatment. <span class="trial-theme">Early intervention</span></li>
+              <li><span class="trial-name">RHEIA</span> — the first all-female randomized trial comparing TAVR (SAPIEN 3/Ultra) with SAVR, showing TAVR superiority on the composite outcome in women with severe AS. <span class="trial-theme">Women's heart health</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-card>
+      <div class="product-img-wrap">
+        <img src="https://assets-us-01.kc-usercontent.com/6239a81e-8f0f-0040-a1df-b4932a10f6ae/94bf623b-8a4d-4390-89d9-8642a0c17d54/Banner-inspiris-resilia-desktop-01.jpg?q=75&w=800&auto=format&fm=webp" alt="INSPIRIS RESILIA aortic valve" loading="lazy">
+      </div>
+      <div class="card-head" data-toggle>
+        <div class="card-title-wrap">
+          <span class="card-title">INSPIRIS RESILIA aortic valve</span>
+          <span class="badge surgical">Surgical — SAVR</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p>Edwards' surgical bioprosthetic valve for open surgical aortic valve replacement (SAVR), built on the design lineage of the Carpentier-Edwards PERIMOUNT and Magna Ease platforms.</p>
+          <ul>
+            <li>RESILIA tissue treatment is designed to reduce structural valve deterioration versus earlier bioprosthetic tissue</li>
+            <li>VFit technology creates an expansion zone intended to ease a future transcatheter valve-in-valve procedure</li>
+            <li>Remains the guideline-preferred route for younger, lower-risk patients where durability over decades matters most</li>
+          </ul>
+          <div class="evidence">
+            <div class="evidence-label">Clinical evidence — SAVR (RESILIA platform)</div>
+            <ul class="trial-list">
+              <li><span class="trial-name">COMMENCE</span> — the pivotal IDE trial for RESILIA tissue in the aortic position; longer-term follow-up (5, 7, and ongoing 10-year data) underpins the durability claims for INSPIRIS RESILIA. <span class="trial-theme">Valve durability</span></li>
+              <li><span class="trial-name">INDURE Registry</span> — a prospective European/Canadian registry following patients under 60 who received INSPIRIS RESILIA in SAVR, tracking long-term durability specifically in younger patients.</li>
+              <li><span class="trial-name">8-year propensity-matched analysis</span> — real-world comparison of INSPIRIS RESILIA against conventional bioprosthetic tissue valves at extended follow-up.</li>
+              <li><span class="trial-name">5-year COMMENCE follow-up</span> — mid-term COMMENCE outcomes supporting sustained hemodynamic performance and low rates of structural valve deterioration.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AORTIC REGURGITATION -->
+  <section class="panel" id="ar">
+    <div class="disease-head">
+      <h2>Aortic regurgitation (AR)</h2>
+      <span class="phase-tag">Phase I, II, III</span>
+    </div>
+    <div class="disease-body">
+      <p>Here the mechanical problem is the opposite of stenosis: the valve fails to close fully, so blood leaks backward from the aorta into the left ventricle during diastole. Causes include a bicuspid valve, dilation of the aortic root, degenerative leaflet disease, or endocarditis. Because the ventricle is now handling a volume overload rather than a pressure overload, it responds by dilating (eccentric hypertrophy) rather than thickening.</p>
+      <p>AR can be chronic and silently compensated for years before decompensating, or acute and poorly tolerated (e.g. after endocarditis or aortic dissection). A key structural difference from AS: the leaflets are usually not calcified, which removes the anchoring surface that transcatheter aortic valves rely on — this is the central engineering challenge behind treating AR with catheter-based devices.</p>
+    </div>
+    <dl class="facts">
+      <div><dt>Mechanism</dt><dd>Incomplete leaflet closure, diastolic leak</dd></div>
+      <div><dt>Ventricular effect</dt><dd>Volume overload, eccentric dilation</dd></div>
+      <div><dt>Course</dt><dd>Often chronic/compensated; can be acute</dd></div>
+      <div><dt>Key challenge</dt><dd>Usually non-calcified — hard to anchor a valve</dd></div>
+    </dl>
+
+    <h3 class="section-label">Edwards therapies for AR</h3>
+
+    <div class="card" data-card>
+      <div class="product-img-wrap">
+        <img src="https://assets-us-01.kc-usercontent.com/6239a81e-8f0f-0040-a1df-b4932a10f6ae/94bf623b-8a4d-4390-89d9-8642a0c17d54/Banner-inspiris-resilia-desktop-01.jpg?q=75&w=800&auto=format&fm=webp" alt="INSPIRIS RESILIA aortic valve" loading="lazy">
+      </div>
+      <div class="card-head" data-toggle>
+        <div class="card-title-wrap">
+          <span class="card-title">INSPIRIS RESILIA aortic valve</span>
+          <span class="badge surgical">Surgical — SAVR</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p>The same surgical bioprosthesis used in AS is the mainstay for AR as well — the valve is indicated for replacement of native or prosthetic aortic valves generally, not for a specific disease mechanism. Surgery remains the standard of care for AR because it doesn't depend on calcium for anchoring the way a transcatheter valve does.</p>
+          <div class="evidence">
+            <div class="evidence-label">Clinical evidence — SAVR (RESILIA platform)</div>
+            <ul class="trial-list">
+              <li><span class="trial-name">COMMENCE</span> — pivotal IDE trial for RESILIA tissue in the aortic position, underpinning durability claims across aortic valve disease including AR. <span class="trial-theme">Valve durability</span></li>
+              <li><span class="trial-name">INDURE Registry</span> — long-term durability registry in patients under 60, relevant to younger AR patients who need decades of valve life.</li>
+              <li><span class="trial-name">8-year propensity-matched analysis</span> — real-world durability comparison at extended follow-up.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-card>
+      <div class="product-img-wrap">
+        <img src="https://assets-us-01.kc-usercontent.com/6239a81e-8f0f-0040-a1df-b4932a10f6ae/30d1d93d-c8df-4c21-b659-48317d9126ed/banner-konect-resilia-01.png?q=75&w=800&auto=format&fm=webp" alt="KONECT RESILIA aortic valved conduit" loading="lazy">
+      </div>
+      <div class="card-head" data-toggle>
+        <div class="card-title-wrap">
+          <span class="card-title">KONECT RESILIA aortic valved conduit</span>
+          <span class="badge surgical">Surgical — root replacement</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p>A combined valve-and-conduit graft used when AR is accompanied by disease of the aortic root or ascending aorta (for example annuloaortic ectasia) — the kind of case that needs a Bentall-style composite root replacement rather than an isolated valve swap.</p>
+          <ul>
+            <li>Pairs the RESILIA-treated tissue valve with a Valsalva-design vascular conduit in a single, pre-assembled device</li>
+            <li>Addresses both the incompetent valve and the diseased root in one procedure, reducing surgical steps versus a self-assembled conduit</li>
+          </ul>
+          <p style="margin-top:10px;font-size:13px;color:var(--muted);">Shares its RESILIA tissue evidence base with INSPIRIS RESILIA (COMMENCE and related RESILIA durability analyses); it is a newer platform with its own real-world registry (KONECTION) now recruiting.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-card>
+      <div class="card-head" data-toggle>
+        <div class="card-title-wrap">
+          <span class="card-title">Transcatheter option</span>
+          <span class="badge note">No dedicated Edwards device</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p>Edwards does not currently have a transcatheter valve specifically indicated for pure native AR. SAPIEN 3/Ultra is labeled for calcific AS, and its balloon-expandable frame relies on calcium contact for anchoring — implanting it off-label in non-calcified AR anatomy carries a materially higher risk of valve migration or embolization.</p>
+          <p>Purpose-built "dedicated" AR devices with leaflet-clipping anchoring mechanisms exist from other manufacturers and have recently picked up a conditional guideline recommendation — worth knowing about for competitive/landscape context, but they are not part of the Edwards portfolio.</p>
+        </div>
+      </div>
+    </div>
+    <div class="callout">Note for content accuracy: any AR asset referencing a "dedicated transcatheter AR valve" as an Edwards product should be flagged — that class of device is not currently Edwards-branded.</div>
+  </section>
+
+  <!-- MITRAL REGURGITATION -->
+  <section class="panel" id="mr">
+    <div class="disease-head">
+      <h2>Mitral regurgitation (MR)</h2>
+      <span class="phase-tag">Phase III</span>
+    </div>
+    <div class="disease-body">
+      <p>The mitral valve sits between the left atrium and left ventricle. When it fails to close properly, blood leaks backward into the atrium during systole. MR splits into two mechanistically distinct categories that drive different treatment choices:</p>
+      <p><strong>Primary (degenerative) MR</strong> is a problem with the valve apparatus itself — leaflet prolapse, a flail leaflet, or ruptured chordae. <strong>Secondary (functional) MR</strong> occurs when the valve is structurally normal but a dilated, poorly contracting left ventricle pulls the leaflets out of their normal coaptation position.</p>
+      <p>Either way, the leaking blood volume overloads the left atrium and pulmonary circulation, driving symptoms of congestion, atrial fibrillation, and heart failure. Severity is graded by regurgitant volume, regurgitant fraction, and effective regurgitant orifice area (EROA).</p>
+    </div>
+    <dl class="facts">
+      <div><dt>Mechanism</dt><dd>Incompetent mitral valve, systolic backflow</dd></div>
+      <div><dt>Two types</dt><dd>Primary (leaflet) vs secondary (ventricular)</dd></div>
+      <div><dt>Downstream effect</dt><dd>Atrial/pulmonary volume overload</dd></div>
+      <div><dt>Graded by</dt><dd>Regurgitant volume, fraction, EROA</dd></div>
+    </dl>
+
+    <h3 class="section-label">Edwards therapies for MR</h3>
+
+    <div class="card" data-card>
+      <div class="product-img-wrap">
+        <img src="https://assets-us-01.kc-usercontent.com/6239a81e-8f0f-0040-a1df-b4932a10f6ae/28c45794-fd3c-45f3-a8d5-6095458fdba9/pascal%20precision%20system%20product%20shot.jpg?q=75&w=800&auto=format&fm=webp" alt="PASCAL Precision system" loading="lazy">
+      </div>
+      <div class="card-head" data-toggle>
+        <div class="card-title-wrap">
+          <span class="card-title">PASCAL Precision system</span>
+          <span class="badge transcatheter">Transcatheter — TEER</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p>Edwards' transcatheter edge-to-edge repair (TEER) system. Delivered transfemorally and transseptally, it uses clip-and-pad elements to grasp and approximate the mitral leaflets, reducing the regurgitant gap without removing the native valve.</p>
+          <ul>
+            <li>FDA-approved for degenerative (primary) MR in patients at prohibitive surgical risk; also CE marked for both mitral and tricuspid regurgitation</li>
+            <li>Real-world registry data (STS/ACC Transcatheter Valve Therapy Registry) covering thousands of PASCAL patients support its sustained safety and effectiveness</li>
+            <li>A repair option, not a replacement — preserves the native valve architecture</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-card>
+      <div class="product-img-wrap">
+        <img src="https://assets-us-01.kc-usercontent.com/6239a81e-8f0f-0040-a1df-b4932a10f6ae/f22363fd-ab18-459c-94ba-f5942d2fb653/Banner-desktop-1B-2x.jpg?q=75&w=800&auto=format&fm=webp" alt="SAPIEN M3 system" loading="lazy">
+      </div>
+      <div class="card-head" data-toggle>
+        <div class="card-title-wrap">
+          <span class="card-title">SAPIEN M3 system</span>
+          <span class="badge transcatheter">Transcatheter — TMVR</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p>Built on the proven SAPIEN valve platform, SAPIEN M3 was the first transcatheter mitral valve replacement system approved via a fully transseptal, transfemoral approach — no surgical access point needed.</p>
+          <ul>
+            <li>Two-step delivery: an anchoring "dock" is placed first, then the valve itself</li>
+            <li>Indicated for patients unsuitable for surgery or TEER, including those with mitral annular calcification (MAC) where repair devices struggle to get a durable result</li>
+            <li>Supported by the ENCIRCLE pivotal trial data; a replacement option used when the valve anatomy isn't a good candidate for repair</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-card>
+      <div class="product-img-wrap">
+        <img src="https://assets-us-01.kc-usercontent.com/6239a81e-8f0f-0040-a1df-b4932a10f6ae/e3eb5dfd-2760-4159-a18e-fc8b27e8b9b8/built-for-mitral-mitris-product-image-desktop.png?q=75&w=800&auto=format&fm=webp" alt="MITRIS RESILIA mitral valve" loading="lazy">
+      </div>
+      <div class="card-head" data-toggle>
+        <div class="card-title-wrap">
+          <span class="card-title">MITRIS RESILIA mitral valve</span>
+          <span class="badge surgical">Surgical — replacement</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p>The surgical bioprosthetic option for mitral valve replacement, carrying the same RESILIA anti-calcification tissue treatment as the INSPIRIS aortic valve, adapted to the mitral position with a saddle-shaped sewing cuff designed to mimic the native annulus. Surgery — repair where feasible, replacement where not — remains the guideline-preferred route for lower-risk, younger patients.</p>
+          <div class="evidence">
+            <div class="evidence-label">Clinical evidence — SAVR (RESILIA platform)</div>
+            <ul class="trial-list">
+              <li><span class="trial-name">COMMENCE</span> — includes a dedicated mitral cohort; the pivotal evidence base for MITRIS RESILIA. <span class="trial-theme">Valve durability</span></li>
+              <li><span class="trial-name">5-year COMMENCE follow-up</span> — the mitral cohort's 5-year event-free rates were 79.9% for all-cause mortality, 98.7% for freedom from structural valve deterioration, and 97.1% for freedom from reoperation.</li>
+              <li><span class="trial-name">8-year RESILIA analyses</span> — pooled longer-term RESILIA tissue performance data spanning both aortic and mitral cohorts. <span class="trial-theme">Valve durability</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THV - DIGITAL BROCHURES (rendered from THV_ITEMS in the script below) -->
+  <section class="panel" id="thv">
+    <div class="disease-head">
+      <h2>THV - Digital Brochures</h2>
+    </div>
+    <div class="disease-body">
+      <p>Tracker of the Edwards THV digital brochures, with a summary of what each one covers. The brochures are not organised into phases.</p>
+    </div>
+    <div class="thv-stats" id="thv-stats"></div>
+    <p class="thv-source">Source: Medsynapse_Edwards_THV Digital Brochures_Tracker_V1.1 (tracker fields) and Edwards_THV_Brochures_Summary (topics and content).</p>
+
+    <h3 class="section-label">Tracker</h3>
+    <div class="content-table-wrap">
+      <table class="content-table thv-table">
+        <thead><tr><th>Sl No.</th><th>Content title</th><th>Status</th><th>First draft shared</th><th>Link</th><th>Remarks</th></tr></thead>
+        <tbody id="thv-rows"></tbody>
+      </table>
+    </div>
+
+    <h3 class="section-label thv-heading">Content summaries</h3>
+    <div class="content-items" id="thv-items"></div>
+    <p class="pending-note">THV 4 and THV 5 are two outlines that were created but not approved by the client; they were billed, which is why they carry their own numbers. THV 6 was also not approved by the client but was billed. THV 11 to THV 14 were approved, after which the Edwards team sent them ahead to their Australia team; there has been no further update.</p>
+  </section>
+
+  <!-- VERSION HISTORY -->
+  <section class="panel" id="history">
+    <div class="disease-head">
+      <h2>Version history</h2>
+    </div>
+    <div class="disease-body">
+      <p>Updates to this file, latest version first.</p>
+    </div>
+    <div class="vh-list" id="vh-list"></div>
+  </section>
+
+</main>
+
+<footer class="sans">
+  <p>Internal reference — Edwards project · v1.7. See the Version history tab for the full list of updates.</p>
+  <p>Product images are hotlinked directly from Edwards Lifesciences' own website (edwards.com) for reference use. If this file is used outside internal review, confirm current sourcing/licensing terms with Edwards before external distribution, and note that a hotlinked image can break if Edwards changes the asset path.</p>
+  <p>Product names, indications, trial summaries, and approval status reflect what's publicly disclosed at time of writing; verify against current labeling and regional approval status before use in any client-facing asset.</p>
+</footer>
+
+</div><!-- /.content -->
+</div><!-- /.layout -->
+
+<script>
+  const tabs = document.querySelectorAll('.sidebar button[data-panel]');
+  const panels = document.querySelectorAll('.panel');
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabs.forEach(b => b.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.panel).classList.add('active');
+    });
+  });
+
+
+  function showPanel(id){
+    tabs.forEach(b => b.classList.toggle('active', b.dataset.panel === id));
+    panels.forEach(p => p.classList.toggle('active', p.id === id));
+    window.scrollTo({top:0});
+  }
+  document.querySelectorAll('[data-goto]').forEach(c => {
+    c.addEventListener('click', () => showPanel(c.dataset.goto));
+  });
+
+  document.querySelectorAll('[data-toggle-content]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const list = btn.nextElementSibling;
+      list.classList.toggle('open');
+      btn.textContent = list.classList.contains('open') ? 'Hide content list ▴' : 'View content list ▾';
+    });
+  });
+
+  /* ---------- THV - Digital Brochures data ----------
+     sl, title, status, drafted, link, remark: from the tracker (V1.1).
+     ref, format, audience, topic, points, note: from the brochures summary file.
+     remarkSpan: number of tracker rows the remark covers (merged cells in the tracker). */
+  const THV_ITEMS = [
+    { sl:1, ref:'THV 1', title:'Understanding Aortic Stenosis', status:'Approved', drafted:'27 Mar 2025',
+      link:'https://medsynapseapps.sharepoint.com/:b:/s/Team3Placeholdername-EdwardsTHV/IQDxX-k6WOLlQYCW-UCVRiR_AffUD5y89MaqOnJUcFfvJc4?e=4VorNT', remark:'NA',
+      format:'Brochure (8 pp)', audience:'Clinicians',
+      topic:'Understanding Aortic Stenosis: Symptoms, Diagnosis, ACC/AHA Guideline Recommendations and Management with TAVR. Comprehensive AS overview, from disease burden to TAVR evidence.',
+      points:[
+        'AS as a common VHD causing LV outflow obstruction; third most frequent cardiovascular disorder in people above 60.',
+        'Survival without AVR after symptom onset: about 50% at 2 years and 20% at 5 years.',
+        'Progressive inflammation, fibrosis and calcification; often undiagnosed because of an asymptomatic phase. Symptoms (chest pain, angina, dyspnea, tiredness, syncope, murmur) typically start at age 50 to 70.',
+        'Prevalence by age: 0.2% (50-59), 1.3% (60-69), 3.9% (70-79), 9.8% (80-89).',
+        'Diagnosis by auscultation and TTE, with TTE as the widely accessible, non-invasive, reliable tool.',
+        '2020 ACC/AHA staging (C1, C2, D1, D2, D3) with AVA, Vmax, mean gradient and hemodynamic consequences.',
+        'ACC/AHA management algorithm: decision pathways to AVR (Class 1, 2a, 2b), with periodic monitoring where AVR is not yet indicated.',
+        'SAVR vs TAVR decision factors (patient characteristics and comorbidities, anatomy, life expectancy) and considerations in longer-life-expectancy patients (bicuspid morphology, valve longevity, secondary interventions, future coronary access).',
+        'PARTNER 3 (5-year): 1,000 low-risk patients, SAPIEN 3 vs SAVR. Composite of death, stroke or rehospitalization 22.8% (TAVR) vs 27.2% (SAVR) (HR 0.79, P=0.07). KCCQ-OS scores were similar.',
+        'EARLY TAVR: asymptomatic severe AS, TAVR vs clinical surveillance. Primary endpoint 26.8% vs 45.3% (HR 0.50, P<0.001). By 2 years, over 70% of the surveillance group had undergone AVR.'],
+      note:'THV 1 and THV 8 share a lot of core content. THV 8 is the later version, adding the mortality burden and the 2025 ESC/EACTS guidelines.' },
+
+    { sl:2, ref:'THV 2', title:'Pathophysiology of VHD', status:'Approved', drafted:'13 Mar 2025',
+      link:'https://medsynapseapps.sharepoint.com/:b:/s/Team3Placeholdername-EdwardsTHV/IQDiU11ASV5dSYKO0lSouWS1AU1p6fgyu5Xsx30wmLlIh5o?e=qNDepM', remark:'NA',
+      format:'Brochure (1 p)', audience:'Clinicians',
+      topic:'Pathophysiology, Causes and Symptoms of VHD. Foundation overview of valvular heart disease.',
+      points:[
+        'The four heart valves and their role in preventing backflow.',
+        'Types of VHD: stenosis, regurgitation and atresia, across the aortic, mitral, pulmonary and tricuspid valves.',
+        'Pathophysiology of AS: LV pressure overload, concentric hypertrophy, reduced compliance and abnormal relaxation, fibroblast proliferation and ECM activation, LV and LA fibrosis, LA adaptive remodeling, HF symptoms and arrhythmias.',
+        'Common symptoms: chest pain or palpitations, shortness of breath, light-headedness, fatigue, swollen ankles, feet or abdomen.',
+        'Risk factors and causes: older age, family history of CHD, lifestyle (smoking, obesity, inactivity), hypertension and diabetes.',
+        'Key takeaway: AS is the most prevalent VHD in the developed world, and each valve lesion needs a distinct evaluation.'] },
+
+    { sl:3, ref:'THV 3', title:'How Transthoracic Echocardiography Aids in Aortic Stenosis Detection', status:'Approved', drafted:'28 Apr 2025',
+      link:'https://medsynapseapps.sharepoint.com/:b:/s/Team3Placeholdername-EdwardsTHV/IQAQaCYEWZQrQpds5o4iUQN8AZ9ugS2Z7gPT4zvzU-FYZ9w?e=maKgw2', remark:'NA',
+      format:'Case-based brochure (4 pp)', audience:'Clinicians',
+      topic:'Case-based explanation of TTE\u2019s role in AS diagnosis (hypothetical Mrs. Fang).',
+      points:[
+        'Case: 80-year-old woman with hypertension and CKD, presenting with chest pain, dyspnea, syncope and fatigue. A subtle murmur was found at routine GP examination, followed by cardiologist referral for TTE.',
+        'Why TTE matters: indications (signs or symptoms of AS, or bicuspid valve), accurate diagnosis of cause, hemodynamic severity, and LV size and function to determine prognosis and timing of intervention.',
+        'Stage-wise AS definitions (C1 to D3).',
+        'Average annual progression: velocity +0.3 m/s, mean gradient +7 mmHg, valve area -0.1 cm\u00B2. Mortality while waiting for AVR was 11.6% at 6 months after the AVR recommendation.',
+        'Stage D2 deep-dive: classical low-flow, low-gradient AS with reduced LVEF (5-10% of severe AS), and low-dose dobutamine stress echo to separate true from pseudo-severe AS.',
+        'Role of TTE in TAVI: pre-procedural (severity, valve sizing, risk), intra-procedural guidance, and post-procedural assessment (paravalvular leak, EOA, gradients).',
+        'Outcome: TAVI recommended, with symptom relief, shorter hospital stay and quicker recovery.'] },
+
+    { sl:4, ref:'THV 4', title:'The Right Referral at the Right Time: A GP\u2019s Impact on Aortic Stenosis Outcomes (Outline)', status:'Not approved', drafted:'05 May 2025',
+      link:'https://medsynapseapps.sharepoint.com/:w:/s/Team3Placeholdername-EdwardsTHV/IQBJkutpZG5oQLVQ1iUnUqRzAY8OgIsDg2qV33sJ1IUJeVw?e=UEEzE8',
+      remark:'Two outlines were created (numbered THV 4 and THV 5) but were not approved by the client. They were billed.', remarkSpan:2,
+      format:'Outline with 2 cases', audience:'General physicians',
+      topic:'The GP\u2019s role in detecting AS and referring early, with two hypothetical cases (General Physician outline).',
+      points:[
+        'Disease overview and prevalence: AS in people over 65, about 4.9 million elderly patients aged 75+ with AS, 1 in 10 symptomatic patients die within 5 weeks without replacement.',
+        'Symptoms: many patients appear asymptomatic because they adapt; exercise testing can unmask symptoms in up to 37% of severe AS.',
+        'Survival after symptom onset: 50% at 2 years and 20% at 5 years.',
+        'Auscultation findings: harsh crescendo-decrescendo systolic murmur at the right 2nd intercostal space, radiation to the carotids, soft or single S2, grade \u22654 suggesting severe AS.',
+        'TTE as gold standard, and treatment awareness for GPs.',
+        'Case 1, Mr. Chen (67M, golfer): murmur and delayed carotid upstroke, urgent TTE (AVA 0.8 cm\u00B2), cardiology referral, elective TAVI.',
+        'Case 2, Mr. Lei (62M, hypertension and T2DM): diagnosis delayed because auscultation was not done initially; the murmur was found at follow-up, with a calcified bicuspid valve, and TAVI was recommended.',
+        'Takeaways: the stethoscope is the first diagnostic tool, classic symptoms come late, and routine auscultation is advised for patients over 60.'],
+      note:'Case 2: the patient is named \u201CMr. Lei\u201D in the profile but \u201CMr. Robin\u201D in the referral line, so the name needs aligning.' },
+
+    { sl:5, ref:'THV 5', title:'Early Diagnosis, Better Outcomes: The Aortic Stenosis Referral Pathway (Outline)', status:'Not approved', drafted:'05 May 2025',
+      link:'https://medsynapseapps.sharepoint.com/:w:/s/Team3Placeholdername-EdwardsTHV/IQBUKcRPY9SnTrybpFur6fZeAS-V7GM1pnL8eKBpgMoXpz0?e=LZGTn7', remark:null,
+      format:'Outline with 2 case studies', audience:'Cardiologists',
+      topic:'Referral pathway and treatment selection for cardiologists, with two hypothetical TAVI cases (General Cardiologist outline).',
+      points:[
+        'Why timely referral is critical: severe AS is life-threatening once symptomatic, with about 90% mortality within a few years if untreated; 50% of asymptomatic severe AS patients develop symptoms in 1-2 years; 1 in 10 symptomatic patients die within about 5 weeks without AVR.',
+        'Referral-to-treatment timeline: murmur or symptoms, then GP orders TTE or refers, then TTE confirms severity, then Heart Valve Team evaluation, then AVR decision (SAVR or TAVI).',
+        'Diagnostic workup: history and exam, ECG, TTE, chest X-ray; if unclear, TEE, CMR, PET-CT, stress testing and frailty score.',
+        'When AVR is recommended: seven groups, including symptomatic severe AS, EF <50%, and concomitant cardiac surgery.',
+        'Case Study 1, Mrs. Yuna (76F): frail, CKD stage III, STS about 10%, severe symptomatic AS. MDT chose TAVI and she was discharged by Day 3.',
+        'Case Study 2, Mr. Zhang (70M): paradoxical low-flow, low-gradient severe AS with preserved EF, confirmed on DSE. SAVR vs TAVI comparison, then transfemoral TAVI with excellent outcomes at 3 months.'] },
+
+    { sl:6, ref:'THV 6', title:'A Cardiac Auscultation Guide to Detect Aortic Stenosis', status:'Not approved', drafted:'30 Apr 2025',
+      link:'https://medsynapseapps.sharepoint.com/:b:/s/Team3Placeholdername-EdwardsTHV/IQDtBQoVam9STqiGjw_dkQA2AT1DQeaJwqYHCRIx3Ene_UQ?e=Dxl5gh', remark:'Not approved by the client, but billed.',
+      format:'Single-page guide with audio link', audience:'Clinicians / GPs',
+      topic:'Step-by-step bedside auscultation guide for clinicians (includes a \u201Cclick to listen\u201D audio element).',
+      points:[
+        'Characteristic AS murmur: harsh, medium-pitched, diamond-shaped on phonocardiogram, loudest in the aortic area (can be better heard at the apex in 15% of cases), radiating to both carotids, heard in the second right intercostal space.',
+        'Associated findings: soft and single S2, normal S1, aortic ejection click.',
+        'Differential diagnosis: hypertension or aortic sclerosis, hypertrophic obstructive cardiomyopathy, supravalvular AS, pulmonary stenosis.',
+        'Key takeaways: auscultation is one of the most valuable bedside tools for AS, and routine auscultation in primary care can improve early detection.'] },
+
+    { sl:7, ref:'THV 7', title:'Treating Severe AS with TAVI: The Story of Mr. Lim \u2013 A Case Based Approach to Identify Right Patients for TAVI', status:'Approved', drafted:'19 May 2025',
+      link:'https://medsynapseapps.sharepoint.com/:b:/s/Team3Placeholdername-EdwardsTHV/IQB2sZn1IY4-RrRkm8OXi8kTAYGrHBgunm_baskQKhOdBUc?e=cEj6HM', remark:'NA',
+      format:'Case-based brochure (4 pp)', audience:'Clinicians / Heart Team',
+      topic:'A Case Based Approach to Identify Right Patients for TAVI. TAVI patient selection through the case of Mr. Lim.',
+      points:[
+        'Case: 82-year-old man with long-standing severe AS, moderate tricuspid regurgitation, hypertension and CKD stage III. Emergency admission with dyspnea on minimal exertion, peripheral edema and fatigue.',
+        'Findings: AVA 0.5 cm\u00B2, mean gradient 48 mmHg, STS score 14.4%. SAVR was ruled out because of age and high surgical risk, and the anatomy suited transfemoral TAVI.',
+        'Table 1: clinical, anatomical and procedural factors favoring TAVI vs SAVR (age, surgical risk, frailty, prior cardiac surgery, endocarditis, PPM risk, bicuspid valve, annulus size, thrombus, porcelain aorta).',
+        'Patient selection for TAVI: confirmation of severe AS (mean gradient \u226540 mmHg or AVA \u22641.0 cm\u00B2); surgical risk eligibility (Class I recommendations by age and risk); contraindications (life expectancy <1 year, annulus <18 mm or >29 mm, LV thrombus, active endocarditis, coronary obstruction risk, inadequate access); anatomical assessment (vascular access, annulus sizing).',
+        'Outcome: significant improvement at 6 months. The central role of the Heart Team is emphasized.'] },
+
+    { sl:8, ref:'THV 8', title:'Understanding Aortic Stenosis: Mortality Burden, Global Guidelines, and Management with TAVR', status:'Approved', drafted:'09 Jul 2025',
+      link:'https://medsynapseapps.sharepoint.com/:b:/s/Team3Placeholdername-EdwardsTHV/IQDZkgt-1fpzR4POJnTbou8hAe8b9OxwaXZfwTvA32ear6M?e=zQyTki', remark:'NA',
+      format:'Brochure (5 pp)', audience:'Clinicians',
+      topic:'Updated AS overview emphasizing mortality burden, the treatment gap and the 2025 ESC/EACTS guidelines. A later version of the THV 1 theme.',
+      points:[
+        'Disease overview, prevalence by age and symptoms (same core stats as THV 1).',
+        'Causes of AS: calcific (degenerative), bicuspid and rheumatic.',
+        'Mortality and treatment gap: unadjusted mortality by AS severity over 48 months (severe AS about 45.7% in the graph).',
+        'SAVR vs TAVR decision factors and considerations for longer-life-expectancy patients.',
+        'EARLY TAVR trial: 901 asymptomatic severe AS patients across 75 sites (816 confirmed by treadmill test, 85 by history); HR 0.50.',
+        '2025 ESC/EACTS Guidelines: intervention for asymptomatic severe AS (LVEF \u226550%, high gradient, low surgical risk; IIa); TAVI \u226570 years (Class I); SAVR <70 years only if low surgical risk; lifetime management strategy; TAVI favored in severe bicuspid AS at increased surgical risk (IIb) and in women (RHEIA).',
+        'Clinical takeaways: early diagnosis and tailored TAVR/SAVR improve survival and help bridge the treatment gap.'] },
+
+    { sl:9, ref:'THV 9', title:'How Echocardiography Supports the Diagnosis of High-Gradient Aortic Stenosis?', status:'Approved', drafted:'09 Jul 2025',
+      link:'https://medsynapseapps.sharepoint.com/:b:/s/Team3Placeholdername-EdwardsTHV/IQDTW5juXW1aQaH_RSoW7kmBAV4wskwAyEq76EjxJ5q5sHc?e=jYFKkX', remark:'NA',
+      format:'Brochure (1 p)', audience:'Clinicians / Echo specialists',
+      topic:'Echocardiographic assessment of AS severity, with the underlying measurements. Titled \u201CHow Echocardiography Supports the Diagnosis of Severe Aortic Stenosis\u201D in the summary file.',
+      points:[
+        'Echo as the primary non-invasive tool: assesses valve anatomy and etiology, quantifies severity, and evaluates LV function and response.',
+        'Primary hemodynamic parameters: peak jet velocity (CW Doppler, multiple acoustic windows); mean pressure gradient (simplified Bernoulli equation, \u0394P = 4v\u00B2; \u226540 mmHg indicates severe AS); aortic valve area (continuity equation).',
+        'Flow dependence of Doppler velocity and gradient.',
+        'Stage-wise definitions: D1 (symptomatic severe high-gradient AS), C1 and C2 (asymptomatic severe AS), with very severe AS defined as Vmax \u22655 m/s or mean \u0394P \u226560 mmHg.',
+        'Stepwise echo algorithm: assess velocity/gradient, exclude high-flow status, and define whether high flow is reversible.',
+        'Key takeaways: echo is first-line imaging for known or suspected VHD, and the key measurements are Vmax, mean gradient and AVA.'] },
+
+    { sl:10, ref:'THV 10', title:'RESILIA-Powered Valves: Transforming Outcomes with Proven Performance', status:'Approved', drafted:'05 Aug 2025',
+      link:'https://medsynapseapps.sharepoint.com/:b:/s/Team3Placeholdername-EdwardsTHV/IQCMqRzEeJQdS7C9xlBy2XnPAbgtI0K3k0uMgQ4Be546_tc?e=fKe3iU', remark:'NA',
+      format:'Product-evidence brochure (1 p)', audience:'Clinicians / Heart Team',
+      topic:'SAPIEN 3 Ultra RESILIA THV design features and durability evidence.',
+      points:[
+        'Key design features: advanced calcium-blocking RESILIA tissue (potential to improve longevity and reduce reintervention); taller textured outer skirt, extended to the 29 mm valve, for PVL performance; the only THV with dry tissue storage, which minimizes glutaraldehyde residuals.',
+        'COMMENCE aortic trial vs Magna Ease: first long-term propensity-matched comparison of RESILIA vs non-RESILIA surgical valves at 8 years (n=689 vs n=258).',
+        'Freedom from reoperation 97.0% vs 90.5%; freedom from reoperation due to SVD 99.3% vs 90.5%; freedom from SVD 99.2% vs 93.9%; fewer SVD-related AS events in the RESILIA group.',
+        'Real-world SAPIEN 3 Ultra RESILIA outcomes (n=4,598), compared with SAPIEN 3 / SAPIEN 3 Ultra on mortality, stroke, life-threatening bleeding, mean gradient and PVL at 30 days and 1 year.',
+        'Indication: approved for symptomatic severe AS.'],
+      note:'The reference list is numbered 1 to 8, but the in-text numbering in the extracted text does not map cleanly to it. Verify the citations against the source file.' },
+
+    { sl:11, ref:'THV 11', title:'The GP\u2019s Referral Toolkit to Acting on Aortic Stenosis', status:'Approved', drafted:'25 Aug 2025',
+      link:'https://medsynapseapps.sharepoint.com/:w:/s/Team3Placeholdername-EdwardsTHV/IQDDwXYGno8iT6aAD31946sVATNo39fpcewvo71M5B3mAFo?e=PLs43M',
+      remark:'THV 11 initially had a scope of four brochures, later counted separately as THV 11, 12, 13 and 14. All four were approved; the Edwards team then sent them ahead to their Australia team, and there has been no further update.', remarkSpan:4,
+      format:'Toolkit (2 pp)', audience:'GPs',
+      topic:'Quick-reference referral toolkit for GPs.',
+      points:[
+        'The urgency of early detection and referral; AS defined as calcium buildup causing LV outflow obstruction.',
+        'Key symptoms suggesting symptomatic AS: exertional dyspnea, exertional syncope or presyncope, decreased exercise tolerance, exertional angina, heart failure. Asymptomatic patients still need close monitoring.',
+        'Diagnostic workup: history and exam, ECG, TTE, chest X-ray; if unclear, TEE, CMR, stress testing, frailty score, PET-CT.',
+        'Echo first: TTE as the cornerstone, with key measurements (Vmax, mean \u0394P, AVA).',
+        'Surgical or transcatheter? SAVR vs TAVR considerations (age and life expectancy, valve anatomy such as BAV and annulus size, goals of care and patient preferences), decided by shared decision-making with the Heart Team.',
+        '5-step referral checklist: auscultate, ask about symptoms, order TTE, review results, then decide.',
+        'Post-intervention follow-up: annual clinical history and exam, with more frequent follow-up if new symptoms or comorbidities appear.'] },
+
+    { sl:12, ref:'THV 12', title:'From Identifying A Murmur to Managing Severe Aortic Stenosis in Primary Care', status:'Approved', drafted:'25 Aug 2025',
+      link:'https://medsynapseapps.sharepoint.com/:b:/s/Team3Placeholdername-EdwardsTHV/IQDmQMBy1ubJRI8KDhVz667CAU8kF84rznbfyjW01NgG0aA?e=cMoeYZ', remark:null,
+      format:'Social media carousel (6 posts)', audience:'GPs / Primary care',
+      topic:'Six-slide social media carousel for primary care physicians.',
+      points:[
+        'The Murmur That Matters: hallmark murmur (harsh, late-peaking, second right intercostal space, radiating to the carotids), with a \u201Cclick to listen\u201D element. Many patients with severe AS are asymptomatic until it is too late.',
+        'From Murmur to TAVI, A Case Study: 74-year-old man with a systolic murmur and no obvious symptoms; GP echo revealed severe AS, cardiology referral, and he was deemed suitable for TAVI.',
+        'AS Progression Timeline: four stages (subclinical/mild, moderate, severe, critical/decompensated), each with AVA, symptoms, murmur and referral guidance.',
+        'No Symptoms = No Problem? (Myth vs Fact): asymptomatic severe AS still carries high risk, and early TAVR improves survival and preserves function. Message: shift from \u201Cwait and watch\u201D to \u201Clisten, refer, and intervene.\u201D',
+        'Your AS Referral Toolkit: promotes the downloadable guide (key symptoms, referral checklist, echo red flags).',
+        'How Confident Are You in Managing AS?: audience engagement poll pointing to ready resources.'],
+      note:'Slide 3: the progression timeline uses its own four-stage scheme (AVA >1.5, 1.0-1.5, <1.0 cm\u00B2) and says \u201C50% mortality within 1 year if untreated\u201D, whereas THV 1, 4 and 8 cite the ACC/AHA staging and 50% survival at 2 years. The two framings may need to be reconciled. Content was read from the visuals (image-based).' },
+
+    { sl:13, ref:'THV 13', title:'The TTE Parameters to AS You Can\u2019t Ignore', status:'Approved', drafted:'25 Aug 2025',
+      link:'https://medsynapseapps.sharepoint.com/:b:/s/Team3Placeholdername-EdwardsTHV/IQCwKg59aQ7NQrszsz9G4HFFAe4D8_sUSiMEVPY6ONbj9d0?e=TyVpny', remark:null,
+      format:'Infographic (1 p)', audience:'Clinicians / GPs',
+      topic:'One-page infographic on TTE\u2019s role in AS evaluation.',
+      points:[
+        'AS overview: common, third most frequent CVD in people over 60, LV outflow obstruction.',
+        'Why evaluate patients with known or suspected AS: history and physical examination; ECG; TTE (chamber size and function, valve morphology and severity, impact on circulation).',
+        'TTE as the first-line diagnostic tool: identifies cause, measures hemodynamic severity, evaluates LV size and function, and determines prognosis and timing of intervention.',
+        'Three primary hemodynamic parameters: peak jet velocity, aortic valve area (Doppler and continuity equation), mean pressure gradient.',
+        'Results are collated for MDT review to determine the optimal intervention.'],
+      note:'Content was read from the visuals (image-based).' },
+
+    { sl:14, ref:'THV 14', title:'Recognizing Key Risk Factors in Aortic Stenosis (AS) Referrals', status:'Approved', drafted:'25 Aug 2025',
+      link:'https://medsynapseapps.sharepoint.com/:b:/s/Team3Placeholdername-EdwardsTHV/IQBKkBI8SgvuTpK-Siau-TjZAa3mU7NSTOBmgmZYp08TMgY?e=5SUB73', remark:null,
+      format:'Infographic (1 p)', audience:'GPs / Referring physicians',
+      topic:'One-page infographic on who to refer for AS and why timing matters.',
+      points:[
+        'Risk factors that drive progression: AS is common and serious, with rising prevalence and silent progression; timely referral is essential.',
+        'Who requires closer attention: age (over 3% of adults \u226565); gender differences (concentric LV hypertrophy in women vs eccentric remodeling in men); genetic risk (bicuspid valve in 20-30% of the population, earlier onset); frailty and functional decline.',
+        'Comorbidities that accelerate AS: hypertension and diabetes, CKD (especially with dialysis), and rheumatic fever.',
+        'Critical hemodynamic parameters in referral: severe AS criteria (valve area <1.0 cm\u00B2, mean gradient \u226540 mmHg, Vmax \u22654.0 m/s), symptoms, rapid progression (>0.3 m/s per year) and LVEF <50%.',
+        'Risks of late referral: poor survival, irreversible LV dysfunction, pulmonary hypertension, stroke and atrial fibrillation.'],
+      note:'Content was read from the visuals (image-based).' },
+
+    { sl:15, ref:'THV 15', title:'PARTNER 3: 7-Year Evidence Supporting Valve Durability in Low-Risk Aortic Stenosis', status:'Approved', drafted:'23 Dec 2025',
+      link:'https://medsynapseapps.sharepoint.com/:b:/s/Team3Placeholdername-EdwardsTHV/IQAQNbyN1-cyTYlHAVV466oZAWJu0E0mEaa82YfnmLqHFCs?e=l6A4O0', remark:'NA',
+      format:'Trial brochure (2 pp)', audience:'Clinicians / Heart Team',
+      topic:'7-year results of the PARTNER 3 trial (TAVR with a balloon-expandable valve vs SAVR in low-risk patients).',
+      points:[
+        'Background: evidence in younger, low-risk patients, lifelong durability, long-term hemodynamic stability, and low reintervention risk.',
+        'Study design: 1,000 low-surgical-risk patients (STS-PROM <4%) with severe symptomatic AS, randomized 1:1 to TAVR or SAVR, in a prospective, multicenter, open-label trial with follow-up planned to 10 years.',
+        'Primary endpoint (death, stroke, rehospitalization): 34.6% (TAVR) vs 37.2% (SAVR), HR 0.87 (95% CI 0.70-1.08).',
+        'Valve durability: aortic-valve reintervention 6.0% vs 6.7% (HR 1.11); bioprosthetic valve failure 6.9% vs 7.3% (HR 0.93).',
+        'Other 7-year outcomes: new-onset atrial fibrillation 17.7% (TAVR) vs 43.5% (SAVR); valve thrombosis 2.8% vs 0.5%; new permanent pacemaker 17.3% vs 12.8%.',
+        'Health status: KCCQ-OS 84.9 (TAVR) vs 86.2 (SAVR).',
+        'Conclusion: no significant differences in composite endpoints, comparable durability, and favorable patient-reported outcomes.'] },
+
+    { sl:16, ref:'THV 16', title:'2025 ESC/EACTS Guidelines: Key Shifts Redefining TAVI in AS', status:'Approved', drafted:'28 Jan 2026',
+      link:'https://medsynapseapps.sharepoint.com/:b:/r/sites/Team3Placeholdername-EdwardsTHV/Shared%20Documents/Edwards%20THV/THV%20ESC%20guideline%202025/Client%20sharing/Medsynapse_Edwards_THV%2016_%20ESC-EACTS%202025%20Guidelines_Brochure_V1.1.pdf?csf=1&web=1&e=kSgahT', remark:'NA',
+      format:'Guideline brochure (3 pp)', audience:'Clinicians / Heart Team',
+      topic:'Comparison of the 2021 and 2025 ESC/EACTS guidelines for TAVI in AS.',
+      points:[
+        'Background: guidelines from 2021 to 2025 have shifted toward broader and earlier TAVI use, supported by Heart Team decision-making.',
+        'Asymptomatic severe AS: intervention considered for LVEF \u226550%, high gradient (>40 mmHg) and low surgical risk (EARLY TAVR).',
+        'Symptomatic severe AS: age threshold lowered, with Class I(A) TAVI at \u226570 years, and SAVR <70 years recommended only in low-risk patients.',
+        'Lifetime management strategy (new): integrate expected valve durability and future reintervention risk.',
+        'Anatomical characteristics: non-transfemoral TAVI for patients unsuitable for surgery and transfemoral access; TAVI favored for severe bicuspid AS at increased surgical risk (IIb).',
+        'Sex-specific considerations (new): TAVI favored for women based on the RHEIA trial.',
+        'Valve-in-valve: transcatheter ViV for high-risk and intermediate-risk patients (IIa). SAVR or TAVI for remaining patients according to Heart Team assessment.',
+        'Key takeaways: patient preference is central alongside objective assessment, and future interventions (ViV, coronary access) should be planned at the index procedure.'] },
+
+    { sl:17, ref:'THV 17', title:'The RHEIA Trial: Redefining Valve Therapy in Women with Aortic Stenosis', status:'Approved', drafted:'13 Feb 2026',
+      link:'https://medsynapseapps.sharepoint.com/:b:/s/Team3Placeholdername-EdwardsTHV/IQAZefdpOMwNQL_yF-neeLA3ATs4hXVmfXjcgX2P0vomke4?e=2dqiGx', remark:'NA',
+      format:'Trial brochure (3 pp)', audience:'Clinicians / Heart Team',
+      topic:'RHEIA, the first all-women randomized trial of TAVI vs SAVR.',
+      points:[
+        'Background: AS prevalence rises with age (up to 10% in adults \u226580). Women\u2019s AS is often underrecognized, with delayed referral, greater frailty at presentation, lower intervention rates, a higher fibrocalcific ratio, and more adverse surgical outcomes.',
+        'Study design: 443 women randomized (420 treated as randomized: TAVI n=215, SAVR n=205), mean age 73, 1:1, balloon-expandable valve, 1-year follow-up. Objective: non-inferiority and then superiority of TAVI vs SAVR.',
+        'Primary outcome (death, stroke or rehospitalization at 1 year): 8.9% (TAVI) vs 15.6% (SAVR).',
+        'Secondary endpoints at 1 year: permanent pacemaker 8.8% vs 2.9%; new-onset AF 3.3% vs 28.8%; disabling stroke 0.9% vs 1.5%; myocardial infarction 0.0% vs 1.0%; bleeding complications 6.0% vs 10.7%.',
+        'Hospital metrics: median index stay 4.0 vs 9.0 days; discharged home 90.2% vs 49.8%; rehospitalization at 1 year 4.8% vs 11.4%.'] }
+  ];
+
+  /* ---------- Version history data (latest first) ---------- */
+  const VERSIONS = [
+    { v:'v1.7', date:'1 Oct 2026', items:[
+      'Moved the top navigation bar to a left sidebar (collapses to a top bar on narrow screens).',
+      'Added the THV - Digital Brochures tab: all 17 tracker items (status, first draft shared date, link, remarks) from the THV Digital Brochures tracker V1.1, with a summary of each brochure from the THV brochures summary file. No phases are used for THV.',
+      'Added this Version history tab, placed at the bottom of the sidebar.',
+      'THV references now match the tracker Sl No. (THV 1 to THV 17). THV 4, 5 and 6 show as Not approved (billed), THV 11 to 14 are noted as sent to the Edwards Australia team, and the THV 7 pending note was replaced.' ] },
+    { v:'v1.6', items:['Recoloured the content-list toggle, added Phase I format counts, and flagged unconfirmed dates on Phase I items.'] },
+    { v:'v1.5', items:['Added full what-was-covered, question and options detail to the Phase I content list.'] },
+    { v:'v1.4', items:['Added the Phase I content list and corrected Phase III scope.'] },
+    { v:'v1.3', items:['Added the project phase overview.'] },
+    { v:'v1.2', items:['Added clinical trial evidence and product imagery.'] },
+    { v:'v1.1', items:['Disease and product overview only.'] }
+  ];
+
+  const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  const badgeCls = s => s === 'Approved' ? 'approved' : 'na';
+
+  (function renderThv(){
+    const approved = THV_ITEMS.filter(i => i.status === 'Approved').length;
+    document.getElementById('thv-stats').innerHTML =
+      `<div><div class="count-num">${THV_ITEMS.length}</div><div class="count-label">Tracker items</div></div>` +
+      `<div><div class="count-num">${approved}</div><div class="count-label">Approved</div></div>` +
+      `<div><div class="count-num">${THV_ITEMS.length - approved}</div><div class="count-label">Not approved</div></div>`;
+
+    document.getElementById('thv-rows').innerHTML = THV_ITEMS.map(i => {
+      let remarkCell = '';
+      if (i.remark !== null) {
+        const span = i.remarkSpan ? ` rowspan="${i.remarkSpan}"` : '';
+        remarkCell = `<td class="remark"${span}>${esc(i.remark)}</td>`;
+      }
+      return `<tr><td class="num">${i.sl}</td>` +
+        `<td class="title">${esc(i.title)}</td>` +
+        `<td><span class="badge ${badgeCls(i.status)}">${esc(i.status)}</span></td>` +
+        `<td class="fmt">${esc(i.drafted)}</td>` +
+        `<td class="link"><a href="${esc(i.link)}" target="_blank" rel="noopener noreferrer">Open</a></td>` +
+        remarkCell + `</tr>`;
+    }).join('');
+
+    document.getElementById('thv-items').innerHTML = THV_ITEMS.map(i =>
+      `<div class="content-item" data-card>
+        <div class="ci-head" data-toggle>
+          <div class="ci-head-left">
+            <span class="ci-num">${i.sl}</span>
+            <span class="ci-topic">${esc(i.title)}</span>
+          </div>
+          <span class="thv-ref">${esc(i.ref)}</span>
+          <span class="badge ${badgeCls(i.status)}">${esc(i.status)}</span>
+          <span class="chevron">&#9660;</span>
+        </div>
+        <div class="card-body">
+          <div class="card-body-inner">
+            <p class="ci-meta">${esc(i.format)} &middot; ${esc(i.audience)} &middot; First draft shared ${esc(i.drafted)}</p>
+            <div class="ci-block-label">Topic</div>
+            <p>${esc(i.topic)}</p>
+            <div class="ci-block-label">What was covered</div>
+            <ul>${i.points.map(p => `<li>${esc(p)}</li>`).join('')}</ul>
+            ${i.note ? `<p class="ci-note">Review note: ${esc(i.note)}</p>` : ''}
+            <p class="ci-links"><a href="${esc(i.link)}" target="_blank" rel="noopener noreferrer">Open document &#8599;</a></p>
+          </div>
+        </div>
+      </div>`).join('');
+  })();
+
+  document.getElementById('vh-list').innerHTML = VERSIONS.map((v, n) =>
+    `<div class="vh-item${n === 0 ? ' latest' : ''}">
+      <div class="vh-top"><span class="vh-ver">${v.v}</span>${v.date ? `<span class="vh-date">${v.date}</span>` : ''}${n === 0 ? '<span class="phase-tag">Latest</span>' : ''}</div>
+      <ul>${v.items.map(t => `<li>${esc(t)}</li>`).join('')}</ul>
+    </div>`).join('');
+
+  document.querySelectorAll('[data-toggle]').forEach(head => {
+    head.addEventListener('click', () => {
+      head.closest('[data-card]').classList.toggle('open');
+    });
+  });
+</script>
+
+</body>
+</html>
