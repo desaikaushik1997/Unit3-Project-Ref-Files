@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -54,21 +54,49 @@
   .count{font-size:12px; color:var(--purple); background:var(--purple-light); padding:3px 9px; border-radius:20px;}
   .lede{font-size:16.5px; color:var(--ink-soft); margin:12px 0 22px; max-width:72ch;}
 
-  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:14px;}
-  .card{
-    display:flex; flex-direction:column; background:var(--card); border:1px solid var(--line);
-    border-radius:10px; padding:18px 20px; transition:border-color .15s, box-shadow .15s;
+  /* Bento layout */
+  .bento{display:grid; grid-template-columns:repeat(6,1fr); grid-auto-rows:minmax(230px,auto); gap:16px;}
+  .tile{
+    position:relative; overflow:hidden; display:flex; flex-direction:column; justify-content:flex-end;
+    border-radius:28px; padding:68px 30px 28px; background:var(--bg); color:var(--fg);
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+    transition:transform .18s ease, box-shadow .18s ease;
   }
-  .card:hover{border-color:var(--purple); box-shadow:inset 3px 0 0 var(--purple);}
-  .card-top{display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;}
-  .badge{font-size:12px; color:var(--purple); background:var(--purple-light); padding:2px 9px; border-radius:20px;}
-  .badge.ref{color:var(--teal); background:var(--teal-light);}
-  .version{font-size:12px; color:var(--muted); border:1px solid var(--line); padding:2px 9px; border-radius:20px;}
-  .card h3{margin:0 0 6px; font-size:17px; font-weight:600;}
-  .card p{margin:0 0 14px; font-size:13.5px; color:var(--ink-soft);}
-  .open{margin-top:auto; font-size:12.5px; font-weight:600; color:var(--purple);}
-  .card:hover .open{text-decoration:underline;}
+  .tile:hover{transform:translateY(-3px); box-shadow:0 10px 28px rgba(31,26,54,.14);}
+  .tile.span-3{grid-column:span 3;} .tile.span-6{grid-column:span 6;}
+  .tile.tall{grid-row:span 2;}
+  .tile-meta{position:absolute; top:24px; left:30px; right:30px; display:flex; justify-content:space-between; align-items:center; gap:8px;}
+  .pill{font-size:12px; font-weight:600; padding:4px 12px; border-radius:20px; background:var(--pill); color:var(--fg);}
+  .tile h3{
+    position:relative; z-index:1; margin:0 0 8px; font-family:Charter,Georgia,"Iowan Old Style",serif;
+    font-size:25px; line-height:1.15; font-weight:700; letter-spacing:-.01em; color:var(--head);
+  }
+  .tile.tall h3{font-size:32px;}
+  .tile p{position:relative; z-index:1; margin:0 0 14px; font-size:14px; max-width:38ch; color:var(--fg);}
+  .open{position:relative; z-index:1; font-size:13px; font-weight:600; color:var(--head);}
+  .tile:hover .open{text-decoration:underline;}
+  /* decorative shapes */
+  .tile::before,.tile::after{content:""; position:absolute; border-radius:50%; background:var(--shape); pointer-events:none;}
+  .tile::before{width:190px; height:190px; right:-50px; top:46px;}
+  .tile::after{width:90px; height:90px; right:110px; top:150px; opacity:.6;}
+  .tile.tall::before{width:260px; height:260px; right:-70px; top:70px;}
+  .tile.tall::after{width:120px; height:120px; right:150px; top:240px;}
+  .tile.span-6::before{width:240px; height:240px; right:-40px; top:-60px;}
+  .tile.span-6::after{width:110px; height:110px; right:230px; top:30px;}
 
+  /* Colors echo each project's own file */
+  .t-edwards{--bg:#CFE9DD; --fg:#2B4A3E; --head:#0F6E56; --pill:#E8F6EF; --shape:#B3DBC9;}   /* Edwards: teal/green */
+  .t-seretide{--bg:#D9C8F0; --fg:#463F63; --head:#5A2D82; --pill:#EEE6F7; --shape:#C7B0E6;}  /* Seretide: purple */
+  .t-servier{--bg:#C7DAF3; --fg:#2F4466; --head:#1B3F7A; --pill:#E4ECF8; --shape:#AFC8EA;}   /* Servier: navy blue */
+  .t-gsk{--bg:#FBD3B5; --fg:#5C3A22; --head:#B9431A; --pill:#FCEBE2; --shape:#F6BE95;}       /* GSK knowledge: orange */
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .t-edwards{--bg:#173A30; --fg:#BFE3D4; --head:#7FD8C1; --pill:#0F2A23; --shape:#1F4A3D;}
+    :root:not([data-theme="light"]) .t-seretide{--bg:#33264A; --fg:#D8CCEC; --head:#C7A6EE; --pill:#261B38; --shape:#43335F;}
+    :root:not([data-theme="light"]) .t-servier{--bg:#1B2C42; --fg:#C5D6EE; --head:#9CC4F0; --pill:#132033; --shape:#263B57;}
+    :root:not([data-theme="light"]) .t-gsk{--bg:#3B2419; --fg:#F2D3BE; --head:#F0A07E; --pill:#2B1A12; --shape:#4F3123;}
+  }
+
+  @media (max-width:900px){ .tile.span-3{grid-column:span 6;} .tile.tall{grid-row:auto; min-height:230px;} }
   footer{max-width:920px; margin:0 auto; padding:0 28px 40px; font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif; font-size:12.5px; color:var(--muted);}
 
   @media (max-width:760px){
@@ -104,30 +132,29 @@
     </div>
     <p class="lede">Reference pages for individual client projects: disease overview, product landscape, content plan and workflow.</p>
 
-    <div class="grid">
-      <a class="card" href="Edwards-reference-HTML_V1.7.html">
-        <div class="card-top"><span class="badge">Edwards</span><span class="version">v1.7</span></div>
+    <div class="bento">
+      <a class="tile t-edwards span-3 tall" href="Edwards-reference-HTML_V1.7.html">
+        <div class="tile-meta"><span class="pill">Edwards</span><span class="pill">v1.7</span></div>
         <h3>Valvular heart disease — therapy reference</h3>
         <p>Disease overview and Edwards Lifesciences product landscape. Current phase: III.</p>
         <span class="open">Open reference →</span>
       </a>
 
-      <a class="card" href="GSK-Seretide-reference-HTML_V1.1.html">
-        <div class="card-top"><span class="badge">GSK</span><span class="version">v1.1</span></div>
-        <h3>Asthma — Seretide project reference</h3>
+      <a class="tile t-seretide span-3" href="GSK-Seretide-reference-HTML_V1.1.html">
+        <div class="tile-meta"><span class="pill">GSK</span><span class="pill">v1.1</span></div>
+        <h3>Asthma — Seretide</h3>
         <p>Asthma overview, product landscape and content plan. Current phase: I.</p>
         <span class="open">Open reference →</span>
       </a>
 
-      <a class="card" href="Servier-Daflon-reference-HTML_V1.0.html">
-        <div class="card-top"><span class="badge">Servier</span><span class="version">v1.0</span></div>
+      <a class="tile t-servier span-3" href="Servier-Daflon-reference-HTML_V1.0.html">
+        <div class="tile-meta"><span class="pill">Servier</span><span class="pill">v1.0</span></div>
         <h3>Haemorrhoids &amp; venous disease — Daflon</h3>
         <p>Haemorrhoidal disease, chronic venous disease and content plan for Daflon (MPFF). Current phase: I.</p>
         <span class="open">Open reference →</span>
       </a>
-      <!-- Add new project cards above this line -->
-    </div>
-  </section>
+      <!-- Add new project tiles above this line -->
+    </div>  </section>
 
   <!-- ============ SECTION 2: KNOWLEDGE FILES ============ -->
   <section id="knowledge">
@@ -137,16 +164,15 @@
     </div>
     <p class="lede">Background files for understanding a disease area or a company portfolio. These are not tied to a single project.</p>
 
-    <div class="grid">
-      <a class="card" href="GSK-respiratory-treatment-pathway-complete_V1.4.html">
-        <div class="card-top"><span class="badge ref">GSK · Respiratory</span><span class="version">v1.4</span></div>
+    <div class="bento">
+      <a class="tile t-gsk span-6" href="GSK-respiratory-treatment-pathway-complete_V1.4.html">
+        <div class="tile-meta"><span class="pill">GSK · Respiratory</span><span class="pill">v1.4</span></div>
         <h3>GSK respiratory treatment pathway</h3>
         <p>Asthma and COPD treatment pathways, GSK brand positioning and the final escalation summary.</p>
         <span class="open">Open reference →</span>
       </a>
-      <!-- Add new knowledge-file cards above this line -->
-    </div>
-  </section>
+      <!-- Add new knowledge-file tiles above this line -->
+    </div>  </section>
 
 </main>
 
@@ -168,3 +194,5 @@
 </script>
 </body>
 </html>
+
+
